@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowDown, CheckCircle2, Loader2, CheckCircle, ClipboardList, Package, Layers, ShieldCheck, Factory, BarChart3 } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { useGoogleInquiry } from '../hooks/useGoogleInquiry';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ManufacturingERP from './animations/ManufacturingERP';
@@ -10,24 +9,12 @@ import InventoryBoard from './animations/InventoryBoard';
 import ScaledPreview from './ScaledPreview';
 
 export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen: () => void }) {
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  const [googleError, setGoogleError] = useState('');
-  const { user } = useAuth();
-
-  const handleGoogleSignIn = async () => {
-    setGoogleError('');
-    setIsGoogleLoading(true);
-    try {
-      const { auth } = await import('../lib/firebase');
-      const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth');
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
-    } catch (err: any) {
-      setGoogleError(err.message || 'Google sign-in failed. Please try again.');
-    } finally {
-      setIsGoogleLoading(false);
-    }
-  };
+  const {
+    isLoading: isGoogleLoading,
+    error: googleError,
+    submitted,
+    submit: handleGoogleSignIn,
+  } = useGoogleInquiry();
   return (
     <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
       <div className="relative z-10">
@@ -74,11 +61,13 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               transition={{ duration: 0.8, delay: 0.3 }}
               className="mt-12 md:mt-16 flex flex-col items-center justify-center"
             >
-              {!user ? (
+              {!submitted ? (
                 <div className="flex flex-col items-center gap-2 relative">
                   <div className="flex items-center gap-4">
                     <a
                       href="https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Requesting a Demo for ietech ERP"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="group relative inline-flex items-center gap-3 overflow-hidden rounded-none bg-black text-white dark:bg-white dark:text-black px-7 py-3.5  font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:shadow-[0_14px_36px_rgba(250,250,250,0.2)]"
                     >
                       <span className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-gradient-to-r from-transparent via-black/10 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />

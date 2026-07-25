@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Phone, MessageCircle, ChevronDown, BookOpen, Target, History, Users, Utensils, Factory, GraduationCap, ArrowRight, Menu, X } from 'lucide-react';
 import Logo from './Logo';
+import { useContact } from '../context/ContactContext';
 
 const ABOUT_ITEMS = [
   {
@@ -79,6 +80,7 @@ export default function Navbar() {
   
   const contactDropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const { openContact } = useContact();
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -462,7 +464,7 @@ export default function Navbar() {
                 className="text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:text-neutral-300 transition-colors text-left" 
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  window.open("https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Inquiry+about+your+services&body=Hey,+we+would+like+to+inquire+about+your+services.", "_blank", "noopener,noreferrer");
+                  openContact();
                 }}
               >
                 Contact Us

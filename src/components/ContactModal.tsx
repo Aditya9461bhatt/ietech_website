@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, Mail, Phone, Loader2, CheckCircle, ArrowRight } from 'lucide-react';
+import { useGoogleInquiry } from '../hooks/useGoogleInquiry';
 
 interface ContactModalProps {
     isOpen: boolean;
@@ -11,15 +12,14 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isGoogleLoading, setIsGoogleLoading] = useState(false);
     const [error, setError] = useState('');
     const [submitted, setSubmitted] = useState(false);
-    const hasFirebaseConfig = Boolean(
-        import.meta.env.VITE_FIREBASE_API_KEY &&
-        import.meta.env.VITE_FIREBASE_AUTH_DOMAIN &&
-        import.meta.env.VITE_FIREBASE_PROJECT_ID &&
-        import.meta.env.VITE_FIREBASE_APP_ID,
-    );
+    const {
+        isLoading: isGoogleLoading,
+        error: googleError,
+        submit: submitGoogle,
+        reset: resetGoogle,
+    } = useGoogleInquiry();
 
     const handleClose = () => {
         setEmail('');
@@ -27,7 +27,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         setError('');
         setSubmitted(false);
         setIsLoading(false);
-        setIsGoogleLoading(false);
+        resetGoogle();
         onClose();
     };
 
@@ -60,39 +60,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
     const handleGoogle = async () => {
         setError('');
-        setIsGoogleLoading(true);
-        try {
-            if (!hasFirebaseConfig) {
-                setError('Google sign-in is not configured for this environment yet.');
-                return;
-            }
-
-            const [{ GoogleAuthProvider, signInWithPopup }, { auth }] = await Promise.all([
-                import('firebase/auth'),
-                import('../lib/firebase'),
-            ]);
-            const provider = new GoogleAuthProvider();
-            provider.setCustomParameters({ prompt: 'select_account' });
-            const result = await signInWithPopup(auth, provider);
-            if (result.user.email) setEmail(result.user.email);
-            if (result.user.phoneNumber) setPhone(result.user.phoneNumber);
-            setSubmitted(true);
-        } catch (err) {
-            const code = typeof err === 'object' && err !== null && 'code' in err
-                ? String((err as { code?: string }).code ?? '')
-                : '';
-            if (code === 'auth/popup-blocked') {
-                setError('Google popup was blocked by your browser. Please allow popups and try again.');
-            } else if (code === 'auth/popup-closed-by-user') {
-                setError('Google sign-in was closed before completion.');
-            } else if (code === 'auth/unauthorized-domain') {
-                setError('This domain is not authorized for Google sign-in in Firebase.');
-            } else {
-                setError('Google sign-in failed. Please try again.');
-            }
-        } finally {
-            setIsGoogleLoading(false);
-        }
+        if (await submitGoogle()) setSubmitted(true);
     };
 
     return (
@@ -249,9 +217,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                             </div>
                                         </div>
 
-                                        {error ? (
+                                        {error || googleError ? (
                                             <p className="rounded-sm bg-red-50 px-3 py-2 text-[13px] text-red-600 dark:bg-red-500/10 dark:text-red-400">
-                                                {error}
+                                                {error || googleError}
                                             </p>
                                         ) : null}
 

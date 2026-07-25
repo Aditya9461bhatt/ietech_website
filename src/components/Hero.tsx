@@ -1,27 +1,14 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2, CheckCircle } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { useGoogleInquiry } from '../hooks/useGoogleInquiry';
 
 export default function Hero() {
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  const [googleError, setGoogleError] = useState('');
-  const { user } = useAuth();
-
-  const handleGoogleSignIn = async () => {
-    setGoogleError('');
-    setIsGoogleLoading(true);
-    try {
-      const { auth } = await import('../lib/firebase');
-      const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth');
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
-    } catch (err: any) {
-      setGoogleError(err.message || 'Google sign-in failed. Please try again.');
-    } finally {
-      setIsGoogleLoading(false);
-    }
-  };
+  const {
+    isLoading: isGoogleLoading,
+    error: googleError,
+    submitted,
+    submit: handleGoogleSignIn,
+  } = useGoogleInquiry();
 
   return (
     <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden pt-32 md:pt-40 pb-12 transition-colors duration-300">
@@ -76,7 +63,7 @@ export default function Hero() {
           className="mt-12 md:mt-16 flex flex-col items-center justify-center"
         >
           {/* Google Sign-In CTA */}
-          {!user ? (
+          {!submitted ? (
             <div className="flex flex-col items-center gap-2 relative">
               <span className="pointer-events-none absolute inset-0 -z-10 rounded-none bg-black/10 dark:bg-white/10 blur-xl" />
               <button
