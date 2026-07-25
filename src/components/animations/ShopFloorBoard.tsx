@@ -8,11 +8,11 @@ export default function ShopFloorBoard() {
       <div className="flex items-center h-[52px] border-b border-neutral-200 dark:border-[#30363d] bg-white dark:bg-[#161b22] px-4 shrink-0 justify-between">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 cursor-pointer">
-            <FileText className="h-4 w-4 text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e]" />
+            <FileText className="h-4 w-4 text-neutral-600 dark:text-[#8b949e]" />
             <span className="text-[14px] font-medium text-neutral-900 dark:text-[#c9d1d9]">Manufacturing</span>
-            <ChevronRight className="h-3 w-3 text-neutral-600 dark:text-neutral-500 dark:text-[#8d99a6] mx-0.5" />
+            <ChevronRight className="h-3 w-3 text-neutral-600 dark:text-[#8d99a6] mx-0.5" />
             <span className="text-[14px] font-medium text-neutral-900 dark:text-[#c9d1d9]">Work Order</span>
-            <ChevronRight className="h-3 w-3 text-neutral-600 dark:text-neutral-500 dark:text-[#8d99a6] mx-0.5" />
+            <ChevronRight className="h-3 w-3 text-neutral-600 dark:text-[#8d99a6] mx-0.5" />
             <span className="text-[14px] font-bold text-neutral-900 dark:text-white">MFG-WO-2026-00041</span>
           </div>
         </div>
@@ -32,7 +32,7 @@ export default function ShopFloorBoard() {
           {/* Action Bar */}
           <div className="flex items-center justify-between px-6 py-3 border-b border-neutral-200 dark:border-[#30363d]">
             <div className="flex gap-2">
-              <Settings className="h-4 w-4 text-neutral-600 dark:text-neutral-400 cursor-pointer hover:text-neutral-900 dark:text-white transition-colors" />
+              <Settings className="h-4 w-4 text-neutral-600 dark:text-neutral-400 cursor-pointer hover:text-neutral-900 dark:hover:text-white transition-colors" />
             </div>
             <div className="flex gap-2">
               <button className="flex items-center gap-1 px-3 py-1 text-[13px] font-medium bg-neutral-50 dark:bg-[#21262d] text-neutral-900 dark:text-[#c9d1d9] border border-neutral-200 dark:border-[#30363d] rounded-sm hover:bg-neutral-800 dark:hover:bg-neutral-200 dark:bg-[#30363d] transition-colors">
@@ -52,7 +52,7 @@ export default function ShopFloorBoard() {
             <div className="mb-8 flex items-center justify-between bg-neutral-100 dark:bg-[#0d1117] border border-neutral-200 dark:border-[#30363d] p-4 rounded-sm">
               <div className="flex items-center gap-4 w-full">
                 <div className="flex flex-col gap-1 w-1/2">
-                  <span className="text-[11px] font-medium text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e]">Produced Qty / Qty to Manufacture</span>
+                  <span className="text-[11px] font-medium text-neutral-600 dark:text-[#8b949e]">Produced Qty / Qty to Manufacture</span>
                   <div className="flex items-center gap-2">
                     <div className="h-2 w-full rounded-full overflow-hidden bg-neutral-200 dark:bg-[#30363d]">
                       <motion.div 
@@ -66,7 +66,7 @@ export default function ShopFloorBoard() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-1 w-1/4">
-                  <span className="text-[11px] font-medium text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e]">Material Transferred</span>
+                  <span className="text-[11px] font-medium text-neutral-600 dark:text-[#8b949e]">Material Transferred</span>
                   <span className="text-[13px] font-medium text-[#4ade80]">100%</span>
                 </div>
               </div>
@@ -75,25 +75,25 @@ export default function ShopFloorBoard() {
             {/* Inputs Grid */}
             <div className="grid grid-cols-2 gap-x-12 gap-y-6 mb-8">
               <div className="relative">
-                <label className="block text-[12px] mb-1 font-medium text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e]">Item to Manufacture</label>
+                <label className="block text-[12px] mb-1 font-medium text-neutral-600 dark:text-[#8b949e]">Item to Manufacture</label>
                 <input disabled value="ITEM-GEARBOX-001" className="w-full bg-transparent border-b border-neutral-200 dark:border-[#30363d] py-1 text-[13px] font-medium cursor-pointer disabled:opacity-100 text-[#58a6ff]" />
                 <span className="text-[11px] text-neutral-600 dark:text-neutral-500 mt-1 block">Precision Gearbox Assembly</span>
               </div>
               <div className="relative">
-                <label className="block text-[12px] mb-1 font-medium text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e]">BOM No</label>
+                <label className="block text-[12px] mb-1 font-medium text-neutral-600 dark:text-[#8b949e]">BOM No</label>
                 <input disabled value="BOM-GEARBOX-001" className="w-full bg-transparent border-b border-neutral-200 dark:border-[#30363d] py-1 text-[13px] font-medium cursor-pointer disabled:opacity-100 text-[#58a6ff]" />
               </div>
               <div className="relative">
-                <label className="block text-[12px] mb-1 font-medium text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e]">Sales Order</label>
+                <label className="block text-[12px] mb-1 font-medium text-neutral-600 dark:text-[#8b949e]">Sales Order</label>
                 <input disabled value="SO-2026-0089" className="w-full bg-transparent border-b border-neutral-200 dark:border-[#30363d] py-1 text-[13px] font-medium cursor-pointer disabled:opacity-100 text-[#58a6ff]" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="relative">
-                  <label className="block text-[12px] mb-1 font-medium text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e]">Qty</label>
+                  <label className="block text-[12px] mb-1 font-medium text-neutral-600 dark:text-[#8b949e]">Qty</label>
                   <input disabled value="50.00" className="w-full bg-transparent border-b border-neutral-200 dark:border-[#30363d] py-1 text-[13px] text-right font-mono disabled:opacity-100 text-neutral-900 dark:text-[#c9d1d9]" />
                 </div>
                 <div className="relative">
-                  <label className="block text-[12px] mb-1 font-medium text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e]">Produced</label>
+                  <label className="block text-[12px] mb-1 font-medium text-neutral-600 dark:text-[#8b949e]">Produced</label>
                   <input disabled value="25.00" className="w-full bg-transparent border-b border-neutral-200 dark:border-[#30363d] py-1 text-[13px] text-right font-mono disabled:opacity-100 text-neutral-900 dark:text-[#c9d1d9]" />
                 </div>
               </div>
@@ -102,15 +102,15 @@ export default function ShopFloorBoard() {
             {/* Tabs */}
             <div className="flex border-b gap-6 mb-6 border-neutral-200 dark:border-[#30363d]">
               <h3 className="text-[13px] font-bold pb-2 text-neutral-900 dark:text-white border-b-[3px] border-[#58a6ff]">Operations</h3>
-              <h3 className="text-[13px] font-medium pb-2 cursor-pointer text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e] hover:text-neutral-900 dark:text-[#c9d1d9] transition-colors">Required Items</h3>
-              <h3 className="text-[13px] font-medium pb-2 cursor-pointer text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e] hover:text-neutral-900 dark:text-[#c9d1d9] transition-colors">Time Logs</h3>
+              <h3 className="text-[13px] font-medium pb-2 cursor-pointer text-neutral-600 dark:text-[#8b949e] hover:text-neutral-900 dark:text-[#c9d1d9] transition-colors">Required Items</h3>
+              <h3 className="text-[13px] font-medium pb-2 cursor-pointer text-neutral-600 dark:text-[#8b949e] hover:text-neutral-900 dark:text-[#c9d1d9] transition-colors">Time Logs</h3>
             </div>
 
             {/* Table */}
             <div className="rounded-sm border overflow-hidden border-neutral-200 dark:border-[#30363d]">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="text-[12px] font-medium bg-white dark:bg-[#161b22] text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e]">
+                  <tr className="text-[12px] font-medium bg-white dark:bg-[#161b22] text-neutral-600 dark:text-[#8b949e]">
                     <th className="px-3 py-2 border-b border-r w-8 font-normal text-center border-neutral-200 dark:border-[#30363d]">
                       <input type="checkbox" className="rounded-sm bg-neutral-100 dark:bg-[#0d1117] border-neutral-200 dark:border-[#30363d]" disabled />
                     </th>

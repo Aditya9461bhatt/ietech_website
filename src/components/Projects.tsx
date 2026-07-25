@@ -97,7 +97,7 @@ export default function Projects() {
 
         {/* Empty State */}
         {!isLoading && projectsData.length === 0 && (
-          <div className="text-center py-20 border border-black/10 dark:border-white/10 bg-black">
+          <div className="text-center py-20 border border-black/10 dark:border-white/10 bg-white dark:bg-black">
             <h3 className="text-xl text-neutral-900 dark:text-white font-bold mb-2">{loadFailed ? "Couldn't load case studies" : 'No Case Studies Yet'}</h3>
             <p className="text-neutral-600 dark:text-neutral-500 text-sm">{loadFailed ? 'Something went wrong on our end. Please refresh or try again later.' : 'Our latest customer stories are on the way — check back soon.'}</p>
           </div>

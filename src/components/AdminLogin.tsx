@@ -37,7 +37,7 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-8">
       <div className="w-full max-w-sm">
         <h2 className="text-2xl font-bold mb-2 tracking-tighter text-center">Admin Login</h2>
-        <p className="text-neutral-600 dark:text-neutral-400 mb-8 text-center text-sm">Please sign in to access the CMS.</p>
+        <p className="text-neutral-400 mb-8 text-center text-sm">Please sign in to access the CMS.</p>
         
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <div>

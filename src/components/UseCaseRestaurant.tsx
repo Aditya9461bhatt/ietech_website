@@ -142,7 +142,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] mb-6 text-neutral-900 dark:text-[#f5f5f5] tracking-tight text-balance">
                 The complete software to run your entire restaurant and hotel operations
               </h2>
-              <p className="text-[17px] lg:text-[19px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] mb-8 leading-relaxed text-balance">
+              <p className="text-[17px] lg:text-[19px] text-neutral-600 dark:text-[#a1a1aa] mb-8 leading-relaxed text-balance">
                 Whether you are managing a bustling cafe, a busy bar, or a multi-location restaurant chain, fragmentation kills margins. Our ERP unifies your POS, kitchen displays, inventory tracking, and staff management into one intelligent platform.
               </p>
               <ul className="flex flex-col gap-4">
@@ -211,10 +211,10 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
               Point of Sale
             </h2>
-            <p className="text-[15px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] leading-relaxed mb-4">
+            <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
               Watch a live order flow — from menu browsing to payment, all in one screen. The POS handles item groups, add-to-cart, discounts, walk-in customers, automatic subtotal calculation, and checkout.
             </p>
-            <div className="flex items-center gap-2 text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa]">
+            <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
               <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
             </div>
@@ -268,7 +268,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
             <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] text-neutral-900 dark:text-[#f5f5f5] tracking-tight mb-4">
               Before vs. After
             </h2>
-            <p className="text-[17px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa]">See how every pain point transforms into a competitive advantage.</p>
+            <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa]">See how every pain point transforms into a competitive advantage.</p>
           </motion.div>
 
           <div className="flex flex-col gap-px">
@@ -306,10 +306,10 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
               Restaurant Desk
             </h2>
-            <p className="text-[15px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] leading-relaxed mb-4">
+            <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
               Visual table management, instant reservation updates, and KOT generation directly from the desk. The board spans multiple outlets and seating areas across properties.
             </p>
-            <div className="flex items-center gap-2 text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa]">
+            <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
               <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
             </div>
@@ -358,10 +358,10 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
               Hotel Front Desk
             </h2>
-            <p className="text-[15px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] leading-relaxed mb-4">
+            <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
               Track room occupancies, manage check-ins, and monitor housekeeping seamlessly. Guest data follows the guest across properties — preferences, stay history, and loyalty points build a unified profile.
             </p>
-            <div className="flex items-center gap-2 text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa]">
+            <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
               <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
             </div>
@@ -422,7 +422,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
             <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] text-neutral-900 dark:text-[#f5f5f5] tracking-tight mb-4">
               Six modules. One platform.
             </h2>
-            <p className="text-[17px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] max-w-2xl mx-auto">
+            <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa] max-w-2xl mx-auto">
               Everything your restaurant needs — six tightly integrated modules that replace spreadsheets, sticky notes, and disconnected apps.
             </p>
           </motion.div>

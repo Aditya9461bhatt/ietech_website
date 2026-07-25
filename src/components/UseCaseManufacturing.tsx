@@ -142,7 +142,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] mb-6 text-neutral-900 dark:text-[#f5f5f5] tracking-tight text-balance">
                 Everything you need to run your factory
               </h2>
-              <p className="text-[17px] lg:text-[19px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] mb-8 leading-relaxed text-balance">
+              <p className="text-[17px] lg:text-[19px] text-neutral-600 dark:text-[#a1a1aa] mb-8 leading-relaxed text-balance">
                 Stop relying on messy spreadsheets, paper notes, and disconnected software. Our system brings your whole factory onto one simple platform to automate the hard work for you.
               </p>
               <ul className="flex flex-col gap-4">
@@ -211,10 +211,10 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
               Command Center for Production
             </h2>
-            <p className="text-[15px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] leading-relaxed mb-4">
+            <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
               A single screen to see exactly what's happening on your shop floor. Instantly check live production numbers and ongoing work orders.
             </p>
-            <div className="flex items-center gap-2 text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa]">
+            <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
               <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
             </div>
@@ -268,7 +268,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
             <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] text-neutral-900 dark:text-[#f5f5f5] tracking-tight mb-4">
               Stop the chaos on the shop floor
             </h2>
-            <p className="text-[17px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa]">See how everyday headaches transform into a smooth-running factory.</p>
+            <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa]">See how everyday headaches transform into a smooth-running factory.</p>
           </motion.div>
 
           <div className="flex flex-col gap-px">
@@ -306,10 +306,10 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
               Real-time Job Tracking
             </h2>
-            <p className="text-[15px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] leading-relaxed mb-4">
+            <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
               Follow every job step-by-step. See exactly what materials were used and how much time it took at each workstation.
             </p>
-            <div className="flex items-center gap-2 text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa]">
+            <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
               <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
             </div>
@@ -358,10 +358,10 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
               Exact Product Costing
             </h2>
-            <p className="text-[15px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] leading-relaxed mb-4">
+            <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
               Create accurate Bills of Materials (BOMs). We calculate the exact cost of raw materials, labor, and scrap so you know your true profit margins.
             </p>
-            <div className="flex items-center gap-2 text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa]">
+            <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
               <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
             </div>
@@ -422,7 +422,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
             <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] text-neutral-900 dark:text-[#f5f5f5] tracking-tight mb-4">
               Everything you need to grow your factory.
             </h2>
-            <p className="text-[17px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] max-w-2xl mx-auto">
+            <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa] max-w-2xl mx-auto">
               Stop switching between different apps. Our ERP brings your entire manufacturing business into one place.
             </p>
           </motion.div>
@@ -479,7 +479,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
             <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] text-neutral-900 dark:text-[#f5f5f5] tracking-tight mb-4 text-balance">
               Comprehensive Team Training
             </h2>
-            <p className="text-[17px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] leading-relaxed">
+            <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed">
               We ensure your staff is fully equipped to leverage the ERP system from day one.
             </p>
           </div>

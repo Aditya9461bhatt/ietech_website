@@ -125,7 +125,7 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:text-white transition-colors"
+            className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-500 hover:text-white transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back</span>
@@ -143,11 +143,11 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-bold text-neutral-900 dark:text-white tracking-tight leading-tight mb-6 text-center max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight mb-6 text-center max-w-4xl mx-auto">
             {project.title}
           </h1>
 
-          <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 font-medium mb-12 text-center">
+          <p className="text-sm md:text-base text-neutral-400 font-medium mb-12 text-center">
             {project.date}
           </p>
 
@@ -167,14 +167,14 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
             {/* Left Sidebar: Writer Info */}
             <div className="md:col-span-1">
               <div className="sticky top-32">
-                <p className="text-xs font-bold uppercase tracking-widest text-neutral-600 dark:text-neutral-500 mb-1">Written by</p>
-                <p className="text-sm font-bold text-neutral-900 dark:text-white mb-4">{project.authorName}</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-neutral-500 mb-1">Written by</p>
+                <p className="text-sm font-bold text-white mb-4">{project.authorName}</p>
                 
                 <a 
                   href={`https://mail.google.com/mail/?view=cm&fs=1&to=${project.authorEmail}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-[#3F618C] hover:text-neutral-900 dark:text-white transition-colors uppercase tracking-wider font-bold inline-block border-b border-[#3F618C] pb-0.5 hover:border-white"
+                  className="text-xs text-[#3F618C] hover:text-white transition-colors uppercase tracking-wider font-bold inline-block border-b border-[#3F618C] pb-0.5 hover:border-white"
                 >
                   Reach out to writer
                 </a>
@@ -184,11 +184,11 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
             {/* Right Content Area */}
             <div className="md:col-span-3 space-y-8">
               <div className="prose prose-invert max-w-none 
-                prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-neutral-900 dark:text-white
+                prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-white
                 prose-h1:text-xl prose-h1:uppercase prose-h1:tracking-widest prose-h1:text-[#3F618C] prose-h1:mt-12 prose-h1:mb-4
-                prose-p:text-neutral-600 dark:text-neutral-400 prose-p:leading-relaxed prose-p:text-[15px]
-                prose-li:text-neutral-600 dark:text-neutral-400 prose-li:text-[15px]
-                prose-strong:text-neutral-900 dark:text-white
+                prose-p:text-neutral-400 prose-p:leading-relaxed prose-p:text-[15px]
+                prose-li:text-neutral-400 prose-li:text-[15px]
+                prose-strong:text-white
                 [&>p:first-of-type]:text-xl [&>p:first-of-type]:md:text-[22px] [&>p:first-of-type]:text-neutral-200 [&>p:first-of-type]:font-medium
               ">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -202,13 +202,13 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
       </div>
 
       {/* Footer: Other Case Studies */}
-      <div className="border-t border-neutral-800 bg-white dark:bg-[#0a0a0a] pt-20 pb-24 mt-10">
+      <div className="border-t border-neutral-800 bg-[#0a0a0a] pt-20 pb-24 mt-10">
         <div className="container mx-auto px-4 max-w-5xl">
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-2">More Case Studies</h2>
-              <p className="text-sm text-neutral-600 dark:text-neutral-500">Explore how we've solved problems for other clients.</p>
+              <h2 className="text-3xl font-bold text-white mb-2">More Case Studies</h2>
+              <p className="text-sm text-neutral-500">Explore how we've solved problems for other clients.</p>
             </div>
             <button 
               onClick={onBack}
@@ -231,7 +231,7 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
                 </div>
                 <div className="p-6">
                   <span className="text-[10px] text-[#3F618C] uppercase tracking-widest font-bold mb-3 block">Case Study</span>
-                  <h3 className="text-lg font-bold text-neutral-900 dark:text-white leading-snug group-hover:text-[#3F618C] transition-colors">{p.title}</h3>
+                  <h3 className="text-lg font-bold text-white leading-snug group-hover:text-[#3F618C] transition-colors">{p.title}</h3>
                 </div>
               </Link>
             ))}

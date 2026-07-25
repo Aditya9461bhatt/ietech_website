@@ -66,7 +66,7 @@ export default function TableBoard() {
           <span className="text-neutral-900 dark:text-white/40 text-xs">□</span>
           <span className="text-neutral-700 dark:text-neutral-300 text-sm font-medium">/ Table Board</span>
         </div>
-        <button onClick={handleRefresh} className="flex items-center gap-1.5 text-xs text-neutral-600 dark:text-neutral-400 hover:text-white border border-black/10 dark:border-white/10 px-3 py-1.5 hover:bg-black/5 dark:bg-white/5 transition-colors">
+        <button onClick={handleRefresh} className="flex items-center gap-1.5 text-xs text-neutral-600 dark:text-neutral-400 hover:text-white border border-black/10 dark:border-white/10 px-3 py-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
           <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />
           Refresh
         </button>

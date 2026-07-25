@@ -61,7 +61,7 @@ export default function ManufacturingERP() {
               className={`flex items-center gap-3 px-3 py-2 rounded-sm text-[13px] transition-all duration-200 ${
                 activeItem === item.name 
                   ? 'bg-blue-500/10 text-blue-400 font-medium' 
-                  : 'text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:bg-white/5 hover:text-neutral-200'
+                  : 'text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-neutral-200'
               }`}
             >
               <div className={activeItem === item.name ? 'text-blue-500' : 'text-neutral-600 dark:text-neutral-500'}>
@@ -73,7 +73,7 @@ export default function ManufacturingERP() {
         </div>
 
         {/* User Footer */}
-        <div className="p-3 border-t border-black/5 dark:border-white/5 flex items-center gap-3 cursor-pointer hover:bg-black/5 dark:bg-white/5 transition-colors">
+        <div className="p-3 border-t border-black/5 dark:border-white/5 flex items-center gap-3 cursor-pointer hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
           <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-blue-500 flex items-center justify-center text-neutral-900 dark:text-white text-xs font-bold">
             AD
           </div>
@@ -95,7 +95,7 @@ export default function ManufacturingERP() {
           </div>
           <div className="flex items-center gap-4">
             <div className="relative cursor-pointer group">
-              <Bell className="w-4 h-4 text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:text-white transition-colors" />
+              <Bell className="w-4 h-4 text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:hover:text-white transition-colors" />
               <span className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full border border-neutral-200 dark:border-[#161b22]" />
             </div>
           </div>

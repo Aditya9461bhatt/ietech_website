@@ -815,7 +815,7 @@ export function ErpReplicaPreview() {
           className="absolute -translate-x-1/2 -translate-y-1/2"
         >
           <div className="relative">
-            <MousePointer2 className="h-4 w-4 text-[#161d29] drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)] dark:text-neutral-900 dark:text-white" />
+            <MousePointer2 className="h-4 w-4 text-[#161d29] drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)] dark:text-white" />
             {cursorPoint.click ? (
               <motion.span
                 key={`${activeScene.id}-${cursorIndex}`}
@@ -907,7 +907,7 @@ export function CadWorkspaceScene() {
       </div>
 
       {/* Main viewport */}
-      <div className="relative flex-1 bg-[#1a1d23] dark:bg-white dark:bg-[#0a0d12]">
+      <div className="relative flex-1 bg-[#1a1d23] dark:bg-[#0a0d12]">
         {/* Grid background */}
         <svg className="absolute inset-0 h-full w-full opacity-20" aria-hidden>
           <defs>
@@ -1076,7 +1076,7 @@ function CadSimulationScene() {
       </div>
 
       {/* Main simulation viewport */}
-      <div className="relative flex-1 bg-[#1a1d23] dark:bg-white dark:bg-[#0a0d12]">
+      <div className="relative flex-1 bg-[#1a1d23] dark:bg-[#0a0d12]">
         {/* Heat map gradient on the bracket shape */}
         <svg
           className="absolute inset-0 h-full w-full"
@@ -1244,7 +1244,7 @@ function CadReplicaPreview() {
           className="absolute -translate-x-1/2 -translate-y-1/2"
         >
           <div className="relative">
-            <MousePointer2 className="h-4 w-4 text-[#161d29] drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)] dark:text-neutral-900 dark:text-white" />
+            <MousePointer2 className="h-4 w-4 text-[#161d29] drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)] dark:text-white" />
             {cursorPoint.click ? (
               <motion.span
                 key={`cad-${activeScene.id}-${cursorIndex}`}
@@ -1360,7 +1360,7 @@ function ServiceDescriptions() {
                           href={tab.secondaryCtaHref} 
                           target={tab.secondaryCtaHref.startsWith('http') ? "_blank" : "_self"}
                           rel={tab.secondaryCtaHref.startsWith('http') ? "noopener noreferrer" : ""}
-                          className="bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/10 text-neutral-700 dark:text-neutral-300 px-6 py-3 rounded-sm text-[14px] font-semibold transition-colors"
+                          className="bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/10 text-neutral-700 dark:text-neutral-300 px-6 py-3 rounded-sm text-[14px] font-semibold transition-colors"
                         >
                           {tab.secondaryCtaLabel}
                         </a>
@@ -1482,7 +1482,7 @@ export default function Products({ onContactOpen }: { onContactOpen: () => void 
               Adaptable across all industries
             </h2>
             
-            <p className="text-[17px] lg:text-[19px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] mb-8 leading-relaxed text-balance">
+            <p className="text-[17px] lg:text-[19px] text-neutral-600 dark:text-[#a1a1aa] mb-8 leading-relaxed text-balance">
               Whether managing a high-volume restaurant or a precision manufacturing floor, our adaptable software fits your exact needs. Accelerate operations by offloading complex workflows to intelligent systems, freeing you to focus on critical decisions.
             </p>
             

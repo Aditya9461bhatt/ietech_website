@@ -154,7 +154,7 @@ export default function Navbar() {
             aria-haspopup="true"
             aria-expanded={activeMenu === 'about'}
             onClick={() => setActiveMenu(activeMenu === 'about' ? null : 'about')}
-            className={`inline-flex items-center gap-1 text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 ${activeMenu === 'about' ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:text-white/70 dark:hover:text-white'}`}>
+            className={`inline-flex items-center gap-1 text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 ${activeMenu === 'about' ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}>
             ABOUT
             <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeMenu === 'about' ? 'rotate-180' : ''}`} />
           </button>
@@ -175,10 +175,10 @@ export default function Navbar() {
                     <Link
                       key={item.title}
                       to={item.href}
-                      className="flex items-start gap-4 p-3 rounded-sm hover:bg-black/5 dark:bg-white/5 transition-colors group/item"
+                      className="flex items-start gap-4 p-3 rounded-sm hover:bg-black/5 dark:hover:bg-white/5 transition-colors group/item"
                       onClick={() => setActiveMenu(null)}
                     >
-                      <div className="mt-1 bg-black/5 dark:bg-white/5 p-2 rounded-sm group-hover/item:bg-black/10 dark:bg-white/10 transition-colors">
+                      <div className="mt-1 bg-black/5 dark:bg-white/5 p-2 rounded-sm group-hover/item:bg-black/10 dark:group-hover/item:bg-white/10 transition-colors">
                         {item.icon}
                       </div>
                       <div>
@@ -202,7 +202,7 @@ export default function Navbar() {
                      </div>
                    </Link>
                    <div className="mt-3 flex items-center gap-2">
-                     <Link to="/projects" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors">
+                     <Link to="/projects" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
                        Click to view the full case study <ArrowRight className="w-3.5 h-3.5" />
                      </Link>
                    </div>
@@ -222,7 +222,7 @@ export default function Navbar() {
             aria-haspopup="true"
             aria-expanded={activeMenu === 'services'}
             onClick={() => setActiveMenu(activeMenu === 'services' ? null : 'services')}
-            className={`inline-flex items-center gap-1 text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 ${activeMenu === 'services' ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:text-white/70 dark:hover:text-white'}`}>
+            className={`inline-flex items-center gap-1 text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 ${activeMenu === 'services' ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}>
             SERVICES
             <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeMenu === 'services' ? 'rotate-180' : ''}`} />
           </button>
@@ -243,10 +243,10 @@ export default function Navbar() {
                     <Link
                       key={item.title}
                       to={item.href}
-                      className="flex items-start gap-4 p-3 rounded-sm hover:bg-black/5 dark:bg-white/5 transition-colors group/item"
+                      className="flex items-start gap-4 p-3 rounded-sm hover:bg-black/5 dark:hover:bg-white/5 transition-colors group/item"
                       onClick={() => setActiveMenu(null)}
                     >
-                      <div className="mt-1 bg-black/5 dark:bg-white/5 p-2 rounded-sm group-hover/item:bg-black/10 dark:bg-white/10 transition-colors">
+                      <div className="mt-1 bg-black/5 dark:bg-white/5 p-2 rounded-sm group-hover/item:bg-black/10 dark:group-hover/item:bg-white/10 transition-colors">
                         {item.icon}
                       </div>
                       <div>
@@ -270,7 +270,7 @@ export default function Navbar() {
                      </div>
                    </Link>
                    <div className="mt-3 flex items-center gap-2">
-                     <Link to="/blogs" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors">
+                     <Link to="/blogs" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
                        Click to read the full blog <ArrowRight className="w-3.5 h-3.5" />
                      </Link>
                    </div>
@@ -282,7 +282,7 @@ export default function Navbar() {
 
         <Link
           to="/projects"
-          className="inline-flex items-center text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:text-white/70 dark:hover:text-white"
+          className="inline-flex items-center text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white"
           onMouseEnter={() => setActiveMenu(null)}
         >
           CASE STUDIES
@@ -290,7 +290,7 @@ export default function Navbar() {
         
         <Link
           to="/blogs"
-          className="inline-flex items-center text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:text-white/70 dark:hover:text-white"
+          className="inline-flex items-center text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white"
           onMouseEnter={() => setActiveMenu(null)}
         >
           BLOGS
@@ -320,7 +320,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 8, scale: 0.96 }}
                 transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute right-0 top-full mt-3 w-72 border border-black/10 dark:border-white/10 bg-black shadow-2xl overflow-hidden rounded-none"
+                className="absolute right-0 top-full mt-3 w-72 border border-black/10 dark:border-white/10 bg-white dark:bg-black shadow-2xl overflow-hidden rounded-none"
               >
                 <div className="px-4 pt-4 pb-2 border-b border-black/10 dark:border-white/10">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-600 dark:text-neutral-500">
@@ -331,7 +331,7 @@ export default function Navbar() {
                 {contacts.map((contact, idx) => (
                   <div key={contact.name}>
                     {idx > 0 && <div className="mx-4 h-px bg-black/5 dark:bg-white/5" />}
-                    <div className="px-4 py-4 hover:bg-black/5 dark:bg-white/5 transition-colors">
+                    <div className="px-4 py-4 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                       <p className="text-xs font-bold text-neutral-900 dark:text-white mb-3">
                         {contact.name} <span className="text-neutral-600 dark:text-neutral-500 font-medium">· {contact.role}</span>
                       </p>
@@ -346,7 +346,7 @@ export default function Navbar() {
                                 setTimeout(() => { el.innerText = contact.email; }, 2000);
                               }
                             }}
-                            className="inline-flex items-center gap-3 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors"
+                            className="inline-flex items-center gap-3 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                           >
                             <Mail className="h-4 w-4 text-[#4A72A4]" />
                             <span id={`copy-text-${contact.email}`}>{contact.email}</span>
@@ -370,7 +370,7 @@ export default function Navbar() {
                         </div>
                         <a
                           href={`tel:${contact.phone}`}
-                          className="inline-flex items-center gap-3 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors"
+                          className="inline-flex items-center gap-3 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                           onClick={() => setDropdownOpen(false)}
                         >
                           <Phone className="h-4 w-4 text-[#4A72A4]" />
@@ -380,7 +380,7 @@ export default function Navbar() {
                           href={`https://wa.me/${contact.whatsapp}?text=Hi%20${contact.name},%20I'm%20interested%20in%20IETech's%20services.`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-3 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors"
+                          className="inline-flex items-center gap-3 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                           onClick={() => setDropdownOpen(false)}
                         >
                           <MessageCircle className="h-4 w-4 text-[#25D366]" />
@@ -410,7 +410,7 @@ export default function Navbar() {
               {/* ABOUT Accordion */}
               <div className="flex flex-col">
                 <button 
-                  className="flex items-center justify-between text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:text-neutral-300 transition-colors text-left"
+                  className="flex items-center justify-between text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors text-left"
                   onClick={() => setExpandedMobileMenu(expandedMobileMenu === 'about' ? null : 'about')}
                 >
                   About
@@ -428,7 +428,7 @@ export default function Navbar() {
                         <Link
                           key={item.title}
                           to={item.href}
-                          className="text-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors"
+                          className="text-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {item.title}
@@ -442,7 +442,7 @@ export default function Navbar() {
               {/* SERVICES Accordion */}
               <div className="flex flex-col">
                 <button 
-                  className="flex items-center justify-between text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:text-neutral-300 transition-colors text-left"
+                  className="flex items-center justify-between text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors text-left"
                   onClick={() => setExpandedMobileMenu(expandedMobileMenu === 'services' ? null : 'services')}
                 >
                   Services
@@ -460,7 +460,7 @@ export default function Navbar() {
                         <Link
                           key={item.title}
                           to={item.href}
-                          className="text-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors"
+                          className="text-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {item.title}
@@ -474,7 +474,7 @@ export default function Navbar() {
               {/* Direct Links */}
               <Link
                 to="/projects"
-                className="text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:text-neutral-300 transition-colors" 
+                className="text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors" 
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Case Studies
@@ -482,14 +482,14 @@ export default function Navbar() {
               
               <Link
                 to="/blogs"
-                className="text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:text-neutral-300 transition-colors" 
+                className="text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors" 
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Blog
               </Link>
 
               <button 
-                className="text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:text-neutral-300 transition-colors text-left" 
+                className="text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors text-left" 
                 onClick={() => {
                   setMobileMenuOpen(false);
                   openContact();

@@ -100,7 +100,7 @@ export default function Hero() {
           ) : (
             <div className="flex flex-col items-center gap-2">
               <div
-                className="inline-flex items-center justify-center gap-3 rounded-none border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-6 py-3 text-sm font-semibold text-neutral-200 backdrop-blur-sm transition-all cursor-default"
+                className="inline-flex items-center justify-center gap-3 rounded-none border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-6 py-3 text-sm font-semibold text-neutral-900 dark:text-neutral-200 backdrop-blur-sm transition-all cursor-default"
               >
                 <CheckCircle className="h-4 w-4 text-neutral-900 dark:text-white" />
                 Inquiry received. We will contact soon.

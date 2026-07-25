@@ -27,7 +27,7 @@ export default function InventoryBoard() {
         </div>
 
         <div className="flex-1 overflow-y-auto px-2 py-1 flex flex-col gap-0.5">
-          <div className="flex items-center gap-2 px-2 py-1.5 text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d] rounded-sm cursor-pointer transition-colors">
+          <div className="flex items-center gap-2 px-2 py-1.5 text-neutral-600 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d] rounded-sm cursor-pointer transition-colors">
             <Bell className="h-4 w-4" /> <span className="text-[13px]">Notification</span>
           </div>
           <div className="mt-2 mb-1 border-b mx-2 border-neutral-200 dark:border-[#30363d]" />
@@ -40,21 +40,21 @@ export default function InventoryBoard() {
             { icon: <ClipboardList className="h-4 w-4" />, name: 'Job Card' },
             { icon: <PackageSearch className="h-4 w-4" />, name: 'Stock Entry' },
           ].map(t => (
-            <div key={t.name} className={`flex items-center gap-3 px-2 py-1.5 rounded-sm cursor-pointer transition-colors ${t.active ? "bg-white dark:bg-[#161b22] shadow-sm font-medium text-neutral-900 dark:text-[#c9d1d9]" : "text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d]"}`}>
+            <div key={t.name} className={`flex items-center gap-3 px-2 py-1.5 rounded-sm cursor-pointer transition-colors ${t.active ? "bg-white dark:bg-[#161b22] shadow-sm font-medium text-neutral-900 dark:text-[#c9d1d9]" : "text-neutral-600 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d]"}`}>
               {t.icon} <span className="text-[13px]">{t.name}</span>
             </div>
           ))}
 
-          <div className="flex items-center gap-3 px-2 py-1.5 rounded-sm text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d] cursor-pointer transition-colors">
+          <div className="flex items-center gap-3 px-2 py-1.5 rounded-sm text-neutral-600 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d] cursor-pointer transition-colors">
             <CalendarClock className="h-4 w-4" /> <span className="text-[13px] flex-1">Material Planning</span> <ChevronRight className="h-3 w-3" />
           </div>
-          <div className="flex items-center gap-3 px-2 py-1.5 rounded-sm text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d] cursor-pointer transition-colors">
+          <div className="flex items-center gap-3 px-2 py-1.5 rounded-sm text-neutral-600 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d] cursor-pointer transition-colors">
             <Wrench className="h-4 w-4" /> <span className="text-[13px] flex-1">Tools</span> <ChevronRight className="h-3 w-3" />
           </div>
-          <div className="flex items-center gap-3 px-2 py-1.5 rounded-sm text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d] cursor-pointer transition-colors">
+          <div className="flex items-center gap-3 px-2 py-1.5 rounded-sm text-neutral-600 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d] cursor-pointer transition-colors">
             <FileBarChart className="h-4 w-4" /> <span className="text-[13px] flex-1">Reports</span> <ChevronRight className="h-3 w-3" />
           </div>
-          <div className="flex items-center gap-3 px-2 py-1.5 rounded-sm text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d] cursor-pointer transition-colors">
+          <div className="flex items-center gap-3 px-2 py-1.5 rounded-sm text-neutral-600 dark:text-[#8b949e] hover:bg-neutral-50 dark:bg-[#21262d] cursor-pointer transition-colors">
             <Settings className="h-4 w-4" /> <span className="text-[13px] flex-1">Setup</span> <ChevronRight className="h-3 w-3" />
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function InventoryBoard() {
                   <div className="text-[11px] text-neutral-600 dark:text-neutral-500">Last synced: just now</div>
                 </div>
                 <div className="flex gap-2">
-                  <button className="flex items-center gap-1 px-2 py-1 rounded-sm text-[12px] font-medium bg-neutral-50 dark:bg-[#21262d] text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e]">
+                  <button className="flex items-center gap-1 px-2 py-1 rounded-sm text-[12px] font-medium bg-neutral-50 dark:bg-[#21262d] text-neutral-600 dark:text-[#8b949e]">
                     <BarChart3 className="h-3 w-3" /> Last Year <ChevronDown className="h-3 w-3" />
                   </button>
                 </div>
@@ -116,7 +116,7 @@ export default function InventoryBoard() {
               ].map(t => (
                 <div key={t.title} className="border border-neutral-200 dark:border-[#30363d] rounded-sm p-4 shadow-[0_2px_6px_rgba(0,0,0,0.02)] bg-white dark:bg-[#161b22]">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-[13px] font-medium text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e]">{t.title}</span>
+                    <span className="text-[13px] font-medium text-neutral-600 dark:text-[#8b949e]">{t.title}</span>
                     <Menu className="h-3 w-3 text-neutral-600 dark:text-neutral-400" />
                   </div>
                   <div className="text-[22px] font-semibold text-neutral-900 dark:text-white">{t.value}</div>
@@ -164,7 +164,7 @@ export default function InventoryBoard() {
                 <h4 className="text-[14px] font-semibold text-neutral-900 dark:text-white mb-3">{col.title}</h4>
                 <div className="flex flex-col gap-2.5">
                   {col.items.map(item => (
-                    <span key={item} className="text-[13px] text-neutral-600 dark:text-neutral-500 dark:text-[#8b949e] hover:text-[#58a6ff] cursor-pointer flex items-center justify-between group transition-colors">
+                    <span key={item} className="text-[13px] text-neutral-600 dark:text-[#8b949e] hover:text-[#58a6ff] cursor-pointer flex items-center justify-between group transition-colors">
                       <span className="line-clamp-1">{item}</span>
                       <ChevronRight className="h-3 w-3 hidden group-hover:block text-[#58a6ff]" />
                     </span>

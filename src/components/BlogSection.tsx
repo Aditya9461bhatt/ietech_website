@@ -70,7 +70,7 @@ export default function BlogSection() {
               <h2 className="text-5xl md:text-6xl font-black tracking-tight mb-6 leading-[1.1]">
                 Our<br />Blogs
               </h2>
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base leading-relaxed max-w-sm mb-12">
+              <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-sm mb-12">
                 Stay updated with our latest insights on AI integration, ERP systems, and modern manufacturing workflows.
               </p>
               
@@ -95,9 +95,9 @@ export default function BlogSection() {
                 <Loader2 className="w-8 h-8 text-[#3F618C] animate-spin" />
               </div>
             ) : posts.length === 0 ? (
-              <div className="text-center py-20 border border-black/10 dark:border-white/10 bg-black/50 rounded-sm">
-                <h3 className="text-xl text-neutral-900 dark:text-white font-bold mb-2">{loadFailed ? "Couldn't load blogs" : 'No Blogs Yet'}</h3>
-                <p className="text-neutral-600 dark:text-neutral-500 text-sm">{loadFailed ? 'Something went wrong on our end. Please refresh or try again later.' : 'New articles are on the way — check back soon.'}</p>
+              <div className="text-center py-20 border border-white/10 bg-black/50 rounded-sm">
+                <h3 className="text-xl text-white font-bold mb-2">{loadFailed ? "Couldn't load blogs" : 'No Blogs Yet'}</h3>
+                <p className="text-neutral-500 text-sm">{loadFailed ? 'Something went wrong on our end. Please refresh or try again later.' : 'New articles are on the way — check back soon.'}</p>
               </div>
             ) : (
               posts.map((post, index) => (
@@ -109,20 +109,20 @@ export default function BlogSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: false }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group flex items-start justify-between p-6 md:p-8 rounded-sm bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 hover:bg-black/10 dark:bg-white/10 transition-all duration-300"
+                  className="group flex items-start justify-between p-6 md:p-8 rounded-sm bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
                 >
                   <div className="flex flex-col">
                     <div className="flex items-center gap-3 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-3">
                       <span className="text-[#3F618C]">{post.category || 'Tech'}</span>
                       <span className="w-1 h-1 rounded-full bg-neutral-600" />
-                      <span className="text-neutral-600 dark:text-neutral-500">{post.date}</span>
+                      <span className="text-neutral-500">{post.date}</span>
                     </div>
-                    <h3 className="text-lg md:text-2xl font-bold tracking-tight text-neutral-900 dark:text-white group-hover:text-blue-400 transition-colors duration-300 max-w-xl">
+                    <h3 className="text-lg md:text-2xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors duration-300 max-w-xl">
                       {post.title}
                     </h3>
                   </div>
                   <div className="shrink-0 ml-4 mt-2">
-                    <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6 text-neutral-600 dark:text-neutral-500 group-hover:text-[#3F618C] transition-colors duration-300" />
+                    <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6 text-neutral-500 group-hover:text-[#3F618C] transition-colors duration-300" />
                   </div>
                 </motion.a>
               ))

@@ -76,12 +76,12 @@ export default function HotelRoomBoard() {
         </div>
 
         <div className="px-2 py-2 flex flex-col gap-0.5">
-          <div className="flex items-center gap-2 px-2 py-1.5 text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:bg-white/5 cursor-pointer">
+          <div className="flex items-center gap-2 px-2 py-1.5 text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer">
             <Search className="w-3 h-3" />
             <span className="text-[12px]">Search</span>
             <span className="ml-auto text-[9px] text-neutral-600">Ctrl+K</span>
           </div>
-          <div className="flex items-center gap-2 px-2 py-1.5 text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:bg-white/5 cursor-pointer">
+          <div className="flex items-center gap-2 px-2 py-1.5 text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer">
             <Bell className="w-3 h-3" />
             <span className="text-[12px]">Notification</span>
           </div>
@@ -92,7 +92,7 @@ export default function HotelRoomBoard() {
             <button
               key={item}
               onClick={() => setActiveNav(item)}
-              className={`w-full text-left flex items-center px-2 py-1.5 text-[12px] transition-colors ${activeNav === item ? 'bg-black/10 dark:bg-white/10 text-white font-medium' : 'text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:bg-white/5 hover:text-neutral-200'}`}
+              className={`w-full text-left flex items-center px-2 py-1.5 text-[12px] transition-colors ${activeNav === item ? 'bg-black/10 dark:bg-white/10 text-white font-medium' : 'text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-neutral-200'}`}
             >
               {item}
             </button>
@@ -103,7 +103,7 @@ export default function HotelRoomBoard() {
           <div className="text-[10px] text-neutral-600 uppercase tracking-wider mb-1 px-2">Reports</div>
           <button
             onClick={() => setActiveNav('Room Board')}
-            className={`w-full text-left flex items-center gap-2 px-2 py-1.5 text-[12px] transition-colors ${activeNav === 'Room Board' ? 'bg-black/10 dark:bg-white/10 text-white font-semibold' : 'text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:bg-white/5'}`}
+            className={`w-full text-left flex items-center gap-2 px-2 py-1.5 text-[12px] transition-colors ${activeNav === 'Room Board' ? 'bg-black/10 dark:bg-white/10 text-white font-semibold' : 'text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5'}`}
           >
             <span className="w-3 h-3 text-neutral-600 dark:text-neutral-500">⊞</span>
             Room Board
@@ -121,7 +121,7 @@ export default function HotelRoomBoard() {
           </div>
           <div className="flex items-center gap-2">
             <button className="text-neutral-600 dark:text-neutral-400 hover:text-white p-1"><MoreHorizontal className="w-4 h-4" /></button>
-            <button className="flex items-center gap-1.5 text-xs text-neutral-700 dark:text-neutral-300 border border-black/10 dark:border-white/10 px-2.5 py-1.5 hover:bg-black/5 dark:bg-white/5 transition-colors">
+            <button className="flex items-center gap-1.5 text-xs text-neutral-700 dark:text-neutral-300 border border-black/10 dark:border-white/10 px-2.5 py-1.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
               ☰ Room List
             </button>
             <button className="flex items-center gap-1.5 text-xs text-white bg-black/10 dark:bg-white/10 hover:bg-white/20 px-2.5 py-1.5 transition-colors border border-black/10 dark:border-white/10">

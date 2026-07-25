@@ -26,7 +26,7 @@ const TrainingService = lazy(() => import('./components/TrainingService'));
 const UseCaseRestaurant = lazy(() => import('./components/UseCaseRestaurant'));
 const UseCaseManufacturing = lazy(() => import('./components/UseCaseManufacturing'));
 
-const RouteFallback = () => <div className="min-h-screen bg-black" aria-busy="true" />;
+const RouteFallback = () => <div className="min-h-screen bg-white dark:bg-[#0a0a0a]" aria-busy="true" />;
 
 const ORG_JSONLD = {
   '@context': 'https://schema.org',
@@ -92,7 +92,7 @@ function useVCardDownload() {
 function HomePage() {
   const { openContact } = useContact();
   return (
-    <div className="bg-black min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
+    <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
       <Seo title="i.e tech | Industry 4.0 Solutions" path="/" jsonLd={ORG_JSONLD} />
       <div className="relative z-10">
         <Navbar />
@@ -111,7 +111,7 @@ function HomePage() {
 function BlogsPage() {
   const { openContact } = useContact();
   return (
-    <div className="bg-black min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
+    <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
       <Seo
         title="Blogs & Insights"
         path="/blogs"
@@ -131,7 +131,7 @@ function BlogsPage() {
 function ProjectsPage() {
   const { openContact } = useContact();
   return (
-    <div className="bg-black min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
+    <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
       <Seo
         title="Customers & Case Studies"
         path="/projects"
@@ -152,7 +152,7 @@ function ProjectDetailPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   return (
-    <div className="bg-black min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
+    <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
       <Navbar />
       <Suspense fallback={<RouteFallback />}>
         <ProjectDetail projectId={slug || ''} onBack={() => navigate('/projects')} />
@@ -165,7 +165,7 @@ function BlogDetailPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   return (
-    <div className="bg-black min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
+    <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
       <Navbar />
       <Suspense fallback={<RouteFallback />}>
         <BlogDetail slug={slug || ''} onBack={() => navigate('/blogs')} />

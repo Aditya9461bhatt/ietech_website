@@ -63,10 +63,10 @@ export default function RestaurantPOS() {
           </div>
         </div>
         <div className="flex items-center gap-4 text-neutral-600 dark:text-neutral-400">
-          <Bell className="w-4 h-4 hover:text-neutral-900 dark:text-white cursor-pointer transition-colors" />
-          <User className="w-4 h-4 hover:text-neutral-900 dark:text-white cursor-pointer transition-colors" />
+          <Bell className="w-4 h-4 hover:text-neutral-900 dark:hover:text-white cursor-pointer transition-colors" />
+          <User className="w-4 h-4 hover:text-neutral-900 dark:hover:text-white cursor-pointer transition-colors" />
           <div className="w-px h-4 bg-black/10 dark:bg-white/10" />
-          <Menu className="w-4 h-4 hover:text-neutral-900 dark:text-white cursor-pointer transition-colors" />
+          <Menu className="w-4 h-4 hover:text-neutral-900 dark:hover:text-white cursor-pointer transition-colors" />
         </div>
       </div>
 
@@ -87,8 +87,8 @@ export default function RestaurantPOS() {
             </div>
             <div className="flex gap-2 mt-3">
               <button className="px-3 py-1 rounded-sm bg-black/10 dark:bg-white/10 text-white text-xs font-medium">All Items</button>
-              <button className="px-3 py-1 rounded-sm bg-transparent hover:bg-black/5 dark:bg-white/5 text-neutral-600 dark:text-neutral-400 text-xs font-medium transition-colors">Food</button>
-              <button className="px-3 py-1 rounded-sm bg-transparent hover:bg-black/5 dark:bg-white/5 text-neutral-600 dark:text-neutral-400 text-xs font-medium transition-colors">Drinks</button>
+              <button className="px-3 py-1 rounded-sm bg-transparent hover:bg-black/5 dark:hover:bg-white/5 text-neutral-600 dark:text-neutral-400 text-xs font-medium transition-colors">Food</button>
+              <button className="px-3 py-1 rounded-sm bg-transparent hover:bg-black/5 dark:hover:bg-white/5 text-neutral-600 dark:text-neutral-400 text-xs font-medium transition-colors">Drinks</button>
             </div>
           </div>
 
@@ -113,7 +113,7 @@ export default function RestaurantPOS() {
                       <span className="text-neutral-900 dark:text-white/40 text-[10px] uppercase font-bold tracking-wider">{item.cat}</span>
                     </div>
                     <div>
-                      <h4 className="text-neutral-200 text-sm font-medium leading-tight group-hover:text-neutral-900 dark:text-white transition-colors">{item.name}</h4>
+                      <h4 className="text-neutral-200 text-sm font-medium leading-tight group-hover:text-neutral-900 dark:hover:text-white transition-colors">{item.name}</h4>
                       <p className="text-orange-400 font-semibold text-sm mt-1">₹{item.price}</p>
                     </div>
                   </motion.div>
@@ -186,7 +186,7 @@ export default function RestaurantPOS() {
               <span className="text-xl text-neutral-900 dark:text-white font-bold">₹{(total + tax).toFixed(2)}</span>
             </div>
             <div className="flex gap-2">
-              <button className="flex-1 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 text-white font-medium py-2 rounded-sm transition-colors text-sm border border-black/10 dark:border-white/10">Save Order</button>
+              <button className="flex-1 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-white font-medium py-2 rounded-sm transition-colors text-sm border border-black/10 dark:border-white/10">Save Order</button>
               <button className="flex-[2] bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-400 hover:to-amber-500 text-white font-bold py-2 rounded-sm transition-colors text-sm shadow-[0_0_15px_rgba(249,115,22,0.3)]">Checkout</button>
             </div>
           </div>
