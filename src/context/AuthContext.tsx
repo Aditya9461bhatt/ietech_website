@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged, signOut as firebaseSignOut, type User } from 'firebase/auth';
-import { auth, isFirebaseConfigured } from '../lib/firebase';
+import type { User } from 'firebase/auth';
 
 type AuthContextType = {
   user: User | null;
@@ -14,21 +13,35 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Firebase is imported lazily so the ~150KB gz vendor chunk stays off the
+  // landing page's critical path — only admin routes and lead capture need it.
   useEffect(() => {
-    if (!isFirebaseConfigured) {
-      setIsLoading(false);
-      return;
-    }
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setIsLoading(false);
-    });
+    let unsubscribe: (() => void) | undefined;
+    let cancelled = false;
+    (async () => {
+      const { auth, isFirebaseConfigured } = await import('../lib/firebase');
+      if (!isFirebaseConfigured) {
+        setIsLoading(false);
+        return;
+      }
+      const { onAuthStateChanged } = await import('firebase/auth');
+      if (cancelled) return;
+      unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+        setIsLoading(false);
+      });
+    })();
 
-    return () => unsubscribe();
+    return () => {
+      cancelled = true;
+      unsubscribe?.();
+    };
   }, []);
 
   const signOut = async () => {
+    const { auth, isFirebaseConfigured } = await import('../lib/firebase');
     if (!isFirebaseConfigured) return;
+    const { signOut: firebaseSignOut } = await import('firebase/auth');
     await firebaseSignOut(auth);
   };
 

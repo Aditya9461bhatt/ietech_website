@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { MotionConfig } from 'framer-motion'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import { ThemeProvider } from './hooks/useTheme.tsx'
@@ -34,7 +35,9 @@ createRoot(document.getElementById('root')!).render(
       <ThemeProvider>
         <AuthProvider>
           <ContactProvider>
-            <App />
+            <MotionConfig reducedMotion="user">
+              <App />
+            </MotionConfig>
           </ContactProvider>
         </AuthProvider>
       </ThemeProvider>

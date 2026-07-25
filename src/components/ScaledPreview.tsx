@@ -29,6 +29,8 @@ export default function ScaledPreview({ children, width, height }: ScaledPreview
       <div 
         className="origin-top-left absolute top-0 left-0 transition-transform duration-300 ease-out" 
         style={{ width: `${width}px`, height: `${height}px`, transform: `scale(${scale})` }}
+        aria-hidden="true"
+        inert
       >
         {children}
       </div>
