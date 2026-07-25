@@ -68,11 +68,11 @@ export default function Projects() {
                 </span>
                 <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-white leading-[1.1] mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-neutral-900 dark:text-white leading-[1.1] mb-4">
               Operational Impact.<br/>
-              <span className="text-neutral-500">Built for scale.</span>
+              <span className="text-neutral-600 dark:text-neutral-500">Built for scale.</span>
             </h2>
-            <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
+            <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
               Welcome to our central repository for all case studies and success stories. Here you can explore in-depth technical analyses of the custom software, integrations, and automation pipelines we've built to solve complex industrial problems.
             </p>
           </motion.div>
@@ -87,9 +87,9 @@ export default function Projects() {
 
         {/* Empty State */}
         {!isLoading && projectsData.length === 0 && (
-          <div className="text-center py-20 border border-white/10 bg-black">
-            <h3 className="text-xl text-white font-bold mb-2">No Case Studies Found</h3>
-            <p className="text-neutral-500 text-sm">Please log in to the CMS (#/admin) to publish your first case study.</p>
+          <div className="text-center py-20 border border-black/10 dark:border-white/10 bg-black">
+            <h3 className="text-xl text-neutral-900 dark:text-white font-bold mb-2">No Case Studies Found</h3>
+            <p className="text-neutral-600 dark:text-neutral-500 text-sm">Please log in to the CMS (#/admin) to publish your first case study.</p>
           </div>
         )}
 
@@ -100,10 +100,10 @@ export default function Projects() {
               return (
                 <div
                   key={project.id}
-                  className="bg-transparent border border-white/10 flex flex-col group hover:border-white/30 transition-colors duration-300 relative"
+                  className="bg-transparent border border-black/10 dark:border-white/10 flex flex-col group hover:border-white/30 transition-colors duration-300 relative"
                 >
                   {/* Visual Graphic Representation */}
-                  <div className="w-full aspect-[4/3] bg-[#0a0a0a] border-b border-white/10 overflow-hidden relative">
+                  <div className="w-full aspect-[4/3] bg-white dark:bg-[#0a0a0a] border-b border-black/10 dark:border-white/10 overflow-hidden relative">
                     <img 
                       src={project.image} 
                       alt={`${project.client} Facility`}
@@ -115,19 +115,19 @@ export default function Projects() {
                   {/* Content */}
                   <div className="p-6 flex flex-col flex-1">
                     <div className="mb-6">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500 mb-2 block">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-500 mb-2 block">
                         {project.client}
                       </span>
-                      <h3 className="text-lg md:text-xl font-bold text-white mb-3">
+                      <h3 className="text-lg md:text-xl font-bold text-neutral-900 dark:text-white mb-3">
                         {project.title}
                       </h3>
-                      <p className="text-sm text-neutral-400 leading-relaxed">
+                      <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
                         {project.shortDescription || project.content.substring(0, 100) + '...'}
                       </p>
                     </div>
 
                     {/* Explore More */}
-                    <div className="mt-auto pt-4 border-t border-white/5">
+                    <div className="mt-auto pt-4 border-t border-black/5 dark:border-white/5">
                       <a
                         href={`#/project/${project.id}`}
                         className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-[#3F618C] transition-colors group/btn"

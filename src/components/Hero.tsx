@@ -33,7 +33,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl md:text-6xl lg:text-[4rem] font-medium tracking-tight text-white/95 max-w-4xl mx-auto leading-[1.1] text-balance transition-colors"
+          className="text-5xl md:text-6xl lg:text-[4rem] font-medium tracking-tight text-neutral-900 dark:text-white/95 max-w-4xl mx-auto leading-[1.1] text-balance transition-colors"
         >
           Manage your business operations with
           <span className="block mt-2 font-semibold bg-gradient-to-br from-[#4A72A4] to-[#2C4566] bg-clip-text text-transparent">
@@ -45,7 +45,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-6 text-base md:text-lg lg:text-xl text-neutral-500 max-w-2xl mx-auto leading-relaxed transition-colors text-balance"
+          className="mt-6 text-base md:text-lg lg:text-xl text-neutral-600 dark:text-neutral-500 max-w-2xl mx-auto leading-relaxed transition-colors text-balance"
         >
           We build and manage fully customized ERP and CAD ecosystems. Get the exact workflows and 3D engineering tools you need as a seamless service.
         </motion.p>
@@ -56,15 +56,15 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mt-12 md:mt-16 flex flex-col items-center justify-center gap-5 w-full max-w-4xl mx-auto"
         >
-          <span className="text-[10px] md:text-xs font-semibold text-neutral-500 uppercase tracking-[0.2em]">
+          <span className="text-[10px] md:text-xs font-semibold text-neutral-600 dark:text-neutral-500 uppercase tracking-[0.2em]">
             Trusted by leading companies
           </span>
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-4 sm:gap-x-10 opacity-60 hover:opacity-100 transition-opacity duration-500">
             <img src="/logos/clients/tirupatiforge.png" alt="Tirupati Forge" className="h-[40px] md:h-[52px] w-auto object-contain mix-blend-screen invert grayscale" />
             <img src="/logos/clients/gautamcasting.png" alt="Gautam Casting" className="h-[46px] md:h-[60px] w-auto object-contain mix-blend-screen invert grayscale" />
-            <div className="bg-white text-black font-bold tracking-widest px-2 py-0.5 rounded-sm text-[10px] md:text-xs uppercase">SANSIDHI CASTING</div>
-            <span className="text-sm md:text-base font-bold tracking-[0.2em] text-white uppercase mt-1">INVESTCO CASTING</span>
-            <span className="text-xl md:text-2xl font-serif italic font-bold text-white tracking-tight mt-1">PARV METALS</span>
+            <div className="bg-black text-white dark:bg-white dark:text-black  font-bold tracking-widest px-2 py-0.5 rounded-sm text-[10px] md:text-xs uppercase">SANSIDHI CASTING</div>
+            <span className="text-sm md:text-base font-bold tracking-[0.2em] text-neutral-900 dark:text-white uppercase mt-1">INVESTCO CASTING</span>
+            <span className="text-xl md:text-2xl font-serif italic font-bold text-neutral-900 dark:text-white tracking-tight mt-1">PARV METALS</span>
           </div>
         </motion.div>
 
@@ -78,12 +78,12 @@ export default function Hero() {
           {/* Google Sign-In CTA */}
           {!user ? (
             <div className="flex flex-col items-center gap-2 relative">
-              <span className="pointer-events-none absolute inset-0 -z-10 rounded-none bg-white/10 blur-xl" />
+              <span className="pointer-events-none absolute inset-0 -z-10 rounded-none bg-black/10 dark:bg-white/10 blur-xl" />
               <button
                 type="button"
                 onClick={handleGoogleSignIn}
                 disabled={isGoogleLoading}
-                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-none bg-white px-7 py-3.5 text-black font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-200 hover:shadow-[0_14px_36px_rgba(250,250,250,0.2)] disabled:pointer-events-none disabled:opacity-60"
+                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-none bg-black text-white dark:bg-white dark:text-black px-7 py-3.5  font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:shadow-[0_14px_36px_rgba(250,250,250,0.2)] disabled:pointer-events-none disabled:opacity-60"
               >
                 <span className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-gradient-to-r from-transparent via-black/10 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />
                 {isGoogleLoading ? (
@@ -106,16 +106,16 @@ export default function Hero() {
               {googleError && (
                 <p className="text-xs text-red-400 mt-1">{googleError}</p>
               )}
-              <p className="text-xs text-neutral-500 mt-3 font-medium">
+              <p className="text-xs text-neutral-600 dark:text-neutral-500 mt-3 font-medium">
                 Share your email and we'll reach out within 24 hours
               </p>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2">
               <div
-                className="inline-flex items-center justify-center gap-3 rounded-none border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-neutral-200 backdrop-blur-sm transition-all cursor-default"
+                className="inline-flex items-center justify-center gap-3 rounded-none border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-6 py-3 text-sm font-semibold text-neutral-200 backdrop-blur-sm transition-all cursor-default"
               >
-                <CheckCircle className="h-4 w-4 text-white" />
+                <CheckCircle className="h-4 w-4 text-neutral-900 dark:text-white" />
                 Inquiry received. We will contact soon.
               </div>
             </div>

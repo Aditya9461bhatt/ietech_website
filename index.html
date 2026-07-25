@@ -17,17 +17,28 @@
   <script>
     (() => {
       try {
-        const savedMode = localStorage.getItem('theme-mode');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const mode = savedMode === 'light' || savedMode === 'dark' || savedMode === 'system'
-          ? savedMode
-          : 'system';
-        const isDark = mode === 'system' ? prefersDark : mode === 'dark';
-        document.documentElement.classList.toggle('dark', isDark);
-        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-        document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        const applyTheme = (isDark) => {
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.style.colorScheme = 'dark';
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.style.colorScheme = 'light';
+          }
+        };
+
+        applyTheme(mediaQuery.matches);
+
+        // Listen for OS theme changes
+        mediaQuery.addEventListener('change', (e) => {
+          applyTheme(e.matches);
+        });
       } catch {
-        // No-op: fallback to CSS defaults.
+        // No-op
       }
     })();
   </script>

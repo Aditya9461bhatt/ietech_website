@@ -6,12 +6,7 @@ import { AuthProvider } from './context/AuthContext';
 import AdminDashboard from './components/AdminDashboard';
 import AdminCMS from './components/AdminCMS';
 
-// Add a simple URL parser helper
-function parseQueryParams(url: string) {
-  const parts = url.split('?');
-  if (parts.length < 2) return new URLSearchParams();
-  return new URLSearchParams(parts[1]);
-}
+
 import Products from './components/Products';
 import Projects from './components/Projects';
 import ProjectDetail from './components/ProjectDetail';
@@ -20,12 +15,26 @@ import ContactModal from './components/ContactModal';
 import HowWeThink from './components/HowWeThink';
 import BlogSection from './components/BlogSection';
 import BlogDetail from './components/BlogDetail';
+import CompanyHistory from './components/CompanyHistory';
+import FoundersAndTeam from './components/FoundersAndTeam';
+import TrainingService from './components/TrainingService';
+import UseCaseRestaurant from './components/UseCaseRestaurant';
+import UseCaseManufacturing from './components/UseCaseManufacturing';
 import './index.css';
+
+// Add a simple URL parser helper
+function parseQueryParams(url: string) {
+  const parts = url.split('?');
+  if (parts.length < 2) return new URLSearchParams();
+  return new URLSearchParams(parts[1]);
+}
 
 export default function App() {
   const [contactOpen, setContactOpen] = useState(false);
   const [route, setRoute] = useState(() => window.location.hash);
-  const openContact = () => setContactOpen(true);
+  const openContact = () => {
+    window.open("https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Inquiry+about+your+services&body=Hey,+we+would+like+to+inquire+about+your+services.", "_blank", "noopener,noreferrer");
+  };
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -67,7 +76,7 @@ export default function App() {
 
   if (isProjectRoute && activeProjectId) {
     return (
-      <div className="bg-black min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
+      <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
         <Navbar />
         <ProjectDetail 
           projectId={activeProjectId} 
@@ -82,7 +91,7 @@ export default function App() {
 
   if (isBlogRoute && activeBlogSlug) {
     return (
-      <div className="bg-black min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
+      <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
         <Navbar />
         <BlogDetail 
           slug={activeBlogSlug} 
@@ -119,9 +128,9 @@ export default function App() {
     );
   }
 
-  if (route === '#/projects') {
+  if (route === '#/case-studies') {
     return (
-      <div className="bg-black min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
+      <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
         <div className="relative z-10 pt-20">
           <Navbar />
           <Projects />
@@ -132,9 +141,15 @@ export default function App() {
     );
   }
 
+  if (route === '#/about/history') return <CompanyHistory onContactOpen={openContact} />;
+  if (route === '#/about/team') return <FoundersAndTeam onContactOpen={openContact} />;
+  if (route === '#/services/training') return <TrainingService onContactOpen={openContact} />;
+  if (route === '#/use-cases/restaurant') return <UseCaseRestaurant onContactOpen={openContact} />;
+  if (route === '#/use-cases/manufacturing') return <UseCaseManufacturing onContactOpen={openContact} />;
+
   if (route === '#/blogs') {
     return (
-      <div className="bg-black min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
+      <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
         <div className="relative z-10 pt-20">
           <Navbar />
           <BlogSection />
@@ -146,7 +161,7 @@ export default function App() {
   }
 
   return (
-    <div className="bg-black min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
+    <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
       <div className="relative z-10">
         <Navbar />
         <main>

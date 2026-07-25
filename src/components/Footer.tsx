@@ -51,7 +51,7 @@ export default function Footer({ onContactOpen }: { onContactOpen?: () => void }
         <div className="flex flex-col items-start justify-between gap-5 md:flex-row md:items-center">
           <div className="flex items-center gap-3">
             <Logo className="h-9 w-auto opacity-90" />
-            <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
               Ready to transform operations? Contact leadership for demos, partnerships, and deployment planning.
             </p>
           </div>
@@ -59,7 +59,7 @@ export default function Footer({ onContactOpen }: { onContactOpen?: () => void }
           <button
             type="button"
             onClick={onContactOpen}
-            className="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold tracking-[0.1em] text-black bg-white uppercase rounded-none transition-all duration-300 hover:bg-neutral-200"
+            className="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold tracking-[0.1em] text-white bg-black dark:text-black dark:bg-white  uppercase rounded-none transition-all duration-300 hover:bg-neutral-800 dark:hover:bg-neutral-200"
           >
             CONTACT US
           </button>
@@ -75,7 +75,7 @@ export default function Footer({ onContactOpen }: { onContactOpen?: () => void }
 
               <div className="flex flex-col gap-3">
                 <a
-                  href={`mailto:${contact.email}`}
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${contact.email}`}
                   className="inline-flex items-center gap-3 text-xs font-medium text-neutral-400 transition-colors hover:text-white"
                 >
                   <Mail className="h-4 w-4 text-[#3F618C]" />
@@ -94,7 +94,7 @@ export default function Footer({ onContactOpen }: { onContactOpen?: () => void }
           ))}
         </div>
 
-        <p className="text-sm text-neutral-400 dark:text-neutral-600">
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
           &copy; {new Date().getFullYear()} i.e tech. All rights reserved.
         </p>
       </div>

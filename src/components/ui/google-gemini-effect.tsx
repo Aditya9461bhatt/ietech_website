@@ -58,7 +58,7 @@ export function GoogleGeminiEffect({
   return (
     <div
       className={cn(
-        'relative h-full min-h-[340px] overflow-hidden rounded-xl border border-[#cad4e4] bg-gradient-to-br from-[#edf4ff] via-[#f7faff] to-[#ffffff] shadow-[0_20px_42px_rgba(24,54,93,0.15)] dark:border-white/10 dark:bg-gradient-to-br dark:from-[#040a15] dark:via-[#050d19] dark:to-[#02060d] dark:shadow-[0_28px_60px_rgba(6,15,32,0.42)]',
+        'relative h-full min-h-[340px] overflow-hidden rounded-sm border border-[#cad4e4] bg-gradient-to-br from-[#edf4ff] via-[#f7faff] to-[#ffffff] shadow-[0_20px_42px_rgba(24,54,93,0.15)] dark:border-black/10 dark:border-white/10 dark:bg-gradient-to-br dark:from-[#040a15] dark:via-[#050d19] dark:to-[#02060d] dark:shadow-[0_28px_60px_rgba(6,15,32,0.42)]',
         className,
       )}
     >
@@ -184,7 +184,7 @@ export function GoogleGeminiEffect({
         <div className="absolute inset-0 flex items-center justify-center px-3">
           <button
             type="button"
-            className="max-w-[78%] rounded-full border border-[#bad0ea] bg-white/90 px-4 py-2 text-center text-[10px] font-semibold leading-tight tracking-[0.02em] text-[#122742] shadow-[0_8px_24px_rgba(36,80,131,0.22)] backdrop-blur-sm transition-transform hover:scale-[1.02] dark:border-white/20 dark:bg-white/10 dark:text-white dark:shadow-[0_8px_24px_rgba(6,15,32,0.5)] sm:max-w-[54%] sm:px-6 sm:py-2.5 sm:text-sm"
+            className="max-w-[78%] rounded-full border border-[#bad0ea] bg-white/90 px-4 py-2 text-center text-[10px] font-semibold leading-tight tracking-[0.02em] text-[#122742] shadow-[0_8px_24px_rgba(36,80,131,0.22)] backdrop-blur-sm transition-transform hover:scale-[1.02] dark:border-white/20 dark:bg-black/10 dark:bg-white/10 dark:text-white dark:shadow-[0_8px_24px_rgba(6,15,32,0.5)] sm:max-w-[54%] sm:px-6 sm:py-2.5 sm:text-sm"
           >
             {ctaText}
           </button>

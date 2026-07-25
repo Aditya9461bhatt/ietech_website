@@ -77,7 +77,7 @@ function CodePane({ productKey }: { productKey: ProductKey }) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="ml-2 text-[9px] font-mono text-neutral-500"
+                        className="ml-2 text-[9px] font-mono text-neutral-600 dark:text-neutral-500"
                     >
                         {filename}
                     </motion.span>
@@ -628,11 +628,11 @@ export default function About() {
                         </span>
                         <div className="h-[1px] w-12 md:w-20 bg-neutral-300 dark:bg-neutral-800" />
                     </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-black dark:text-white leading-[1.1] mb-6 md:mb-8">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-black dark:text-neutral-900 dark:text-white leading-[1.1] mb-6 md:mb-8">
                         Two engineers.<br />
-                        <span className="text-neutral-400 dark:text-neutral-500">One obsession.</span>
+                        <span className="text-neutral-600 dark:text-neutral-400 dark:text-neutral-500">One obsession.</span>
                     </h2>
-                    <p className="text-base md:text-lg lg:text-xl leading-relaxed text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl">
+                    <p className="text-base md:text-lg lg:text-xl leading-relaxed text-neutral-600 dark:text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl">
                         A software engineer and a mechanical engineer — both shaped by
                         demanding corporate environments — who decided the industrial tools
                         that manufacturers actually need don't exist yet. So we're building them.
@@ -655,11 +655,11 @@ export default function About() {
                                         <div className="flex h-8 w-8 shrink-0 items-center justify-center bg-[#274060]/10 dark:bg-[#3F618C]/10 rounded-none">
                                             <Icon className="h-4 w-4 text-[#274060] dark:text-[#3F618C]" />
                                         </div>
-                                        <h3 className="text-xl md:text-2xl font-bold tracking-tight text-black dark:text-white uppercase">
+                                        <h3 className="text-xl md:text-2xl font-bold tracking-tight text-black dark:text-neutral-900 dark:text-white uppercase">
                                             {disc.domain}
                                         </h3>
                                     </div>
-                                    <p className={`${isEven ? 'ml-11' : 'mr-11'} text-base md:text-lg font-medium text-neutral-500 dark:text-neutral-400 tracking-wide md:tracking-widest`}>
+                                    <p className={`${isEven ? 'ml-11' : 'mr-11'} text-base md:text-lg font-medium text-neutral-600 dark:text-neutral-500 dark:text-neutral-600 dark:text-neutral-400 tracking-wide md:tracking-widest`}>
                                         {disc.tagline}
                                     </p>
                                     
@@ -678,17 +678,17 @@ export default function About() {
                                     
                                     {/* Text side */}
                                     <div className="w-full md:w-1/2 flex flex-col justify-center py-2 md:py-4">
-                                        <p className="text-[14px] md:text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-400 mb-8">
+                                        <p className="text-[14px] md:text-[15px] leading-relaxed text-neutral-600 dark:text-neutral-600 dark:text-neutral-400 mb-8">
                                             {disc.description}
                                         </p>
                                         
                                         {/* Tags like nav bar with | */}
-                                        <div className="flex flex-wrap items-center gap-3 mt-auto text-[12px] md:text-[13px] font-medium tracking-wide uppercase text-neutral-500 dark:text-neutral-500">
+                                        <div className="flex flex-wrap items-center gap-3 mt-auto text-[12px] md:text-[13px] font-medium tracking-wide uppercase text-neutral-600 dark:text-neutral-500 dark:text-neutral-500">
                                             {disc.tags.map((tag, idx) => (
                                                 <div key={tag} className="flex items-center gap-3">
                                                     <span>{tag}</span>
                                                     {idx < disc.tags.length - 1 && (
-                                                        <span className="text-neutral-300 dark:text-neutral-700 select-none">|</span>
+                                                        <span className="text-neutral-700 dark:text-neutral-300 dark:text-neutral-700 select-none">|</span>
                                                     )}
                                                 </div>
                                             ))}
@@ -703,10 +703,10 @@ export default function About() {
 
                 {/* ── Credibility strip ── */}
                 <motion.div {...fadeUp(0.1)} className="w-full mt-24 mb-10">
-                    <h3 className="text-lg text-gray-700 dark:text-neutral-300 text-center font-medium">
+                    <h3 className="text-lg text-gray-700 dark:text-neutral-700 dark:text-neutral-300 text-center font-medium">
                         Where we have worked
                     </h3>
-                    <div className="flex flex-wrap items-center justify-center gap-12 mt-14 max-md:px-2 text-black dark:text-white opacity-60 hover:opacity-100 transition-opacity duration-500">
+                    <div className="flex flex-wrap items-center justify-center gap-12 mt-14 max-md:px-2 text-black dark:text-neutral-900 dark:text-white opacity-60 hover:opacity-100 transition-opacity duration-500">
                         {credStats.map((item, i) => (
                             <motion.div
                                 key={item.id}
@@ -716,7 +716,7 @@ export default function About() {
                                 <div className="h-[34px] flex items-center justify-center mb-3">
                                     {item.value}
                                 </div>
-                                <div className="text-xs font-medium tracking-wide text-neutral-500 dark:text-neutral-400 max-w-[140px] leading-relaxed">
+                                <div className="text-xs font-medium tracking-wide text-neutral-600 dark:text-neutral-500 dark:text-neutral-600 dark:text-neutral-400 max-w-[140px] leading-relaxed">
                                     {item.label}
                                 </div>
                             </motion.div>

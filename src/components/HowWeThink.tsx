@@ -22,7 +22,7 @@ const steps = [
 
 export default function HowWeThink() {
   return (
-    <section className="relative w-full py-16 md:py-24 bg-transparent overflow-hidden flex flex-col items-center justify-center">
+    <section id="how-we-work" className="relative w-full py-16 md:py-24 bg-transparent overflow-hidden flex flex-col items-center justify-center">
       {/* Signature Blue Spotlight */}
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
@@ -48,15 +48,15 @@ export default function HowWeThink() {
               </span>
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight leading-[1.1] mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-neutral-900 dark:text-white tracking-tight leading-[1.1] mb-4">
             Your exact bottlenecks.<br/>
-            <span className="text-neutral-400">Solved by custom systems.</span>
+            <span className="text-neutral-600 dark:text-neutral-400">Solved by custom systems.</span>
           </h2>
         </motion.div>
 
         <div className="relative w-full max-w-6xl mx-auto mt-12 md:mt-24">
           {/* Horizontal Line for Desktop */}
-          <div className="absolute top-[20px] left-[20px] right-[20px] h-px bg-white/10 hidden md:block z-0"></div>
+          <div className="absolute top-[20px] left-[20px] right-[20px] h-px bg-black/10 dark:bg-white/10 hidden md:block z-0"></div>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-6 relative z-10">
             {steps.map((item, index) => {
@@ -72,21 +72,21 @@ export default function HowWeThink() {
                   
                   {/* Timeline Square Node */}
                   <div className="relative z-10 flex items-center justify-center w-10 h-10 bg-black md:bg-transparent border border-white/20 shrink-0">
-                    <span className="text-white text-sm font-semibold">0{index + 1}</span>
+                    <span className="text-neutral-900 dark:text-white text-sm font-semibold">0{index + 1}</span>
                   </div>
 
                   {/* Mobile Line segment */}
                   {index !== steps.length - 1 && (
-                    <div className="absolute left-[19px] top-10 bottom-[-3rem] w-px bg-white/10 md:hidden z-0"></div>
+                    <div className="absolute left-[19px] top-10 bottom-[-3rem] w-px bg-black/10 dark:bg-white/10 md:hidden z-0"></div>
                   )}
 
                   {/* Content Box */}
                   <div className="ml-6 md:ml-0 md:mt-6 w-full">
                     <div className="flex flex-col">
-                      <h3 className="text-lg md:text-xl font-bold mb-2 text-white">
+                      <h3 className="text-lg md:text-xl font-bold mb-2 text-neutral-900 dark:text-white">
                         {item.title}
                       </h3>
-                      <p className="text-neutral-400 text-sm md:text-base leading-relaxed">
+                      <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base leading-relaxed">
                         {item.description}
                       </p>
                     </div>

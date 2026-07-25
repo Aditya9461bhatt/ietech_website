@@ -80,7 +80,7 @@ export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
           onClick={onBack}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-neutral-400 hover:text-white transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           Back
@@ -92,7 +92,7 @@ export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
           transition={{ duration: 0.6 }}
         >
           {post.image && (
-            <div className="w-full aspect-[2/1] md:aspect-[21/9] rounded-2xl md:rounded-[2rem] overflow-hidden mb-12 relative border border-neutral-800">
+            <div className="w-full aspect-[2/1] md:aspect-[21/9] rounded-sm md:rounded-[2rem] overflow-hidden mb-12 relative border border-neutral-800">
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10" />
               <img 
                 src={post.image} 
@@ -102,7 +102,7 @@ export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
             </div>
           )}
 
-          <div className="flex items-center gap-4 text-xs md:text-sm font-bold tracking-widest uppercase text-neutral-400 mb-6">
+          <div className="flex items-center gap-4 text-xs md:text-sm font-bold tracking-widest uppercase text-neutral-600 dark:text-neutral-400 mb-6">
             <span className="text-[#3F618C]">{post.category || 'Tech'}</span>
             <span className="w-1 h-1 rounded-full bg-neutral-600" />
             <span>{post.date}</span>
@@ -122,15 +122,15 @@ export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
 
           {/* Markdown Content */}
           <div className="prose prose-invert max-w-none 
-            prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-white
+            prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-neutral-900 dark:text-white
             prose-h1:text-2xl prose-h1:md:text-3xl prose-h1:mb-6
             prose-h2:text-xl prose-h2:md:text-2xl prose-h2:mt-10
             prose-h3:text-lg prose-h3:md:text-xl
             prose-a:text-blue-400 hover:prose-a:text-blue-300
-            prose-p:text-neutral-300 prose-p:leading-relaxed prose-p:text-base
-            prose-li:text-neutral-300 prose-li:text-base
-            prose-strong:text-white prose-strong:font-bold
-            prose-blockquote:border-l-[#3F618C] prose-blockquote:bg-white/5 prose-blockquote:py-1 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:text-neutral-200"
+            prose-p:text-neutral-700 dark:text-neutral-300 prose-p:leading-relaxed prose-p:text-base
+            prose-li:text-neutral-700 dark:text-neutral-300 prose-li:text-base
+            prose-strong:text-neutral-900 dark:text-white prose-strong:font-bold
+            prose-blockquote:border-l-[#3F618C] prose-blockquote:bg-black/5 dark:bg-white/5 prose-blockquote:py-1 prose-blockquote:px-6 prose-blockquote:rounded-sm prose-blockquote:not-italic prose-blockquote:text-neutral-200"
           >
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {post.content}

@@ -31,7 +31,7 @@ export function CardSpotlight({
             onMouseEnter={() => setVisible(true)}
             onMouseLeave={() => setVisible(false)}
             className={cn(
-                'group relative rounded-2xl border border-black/[0.07] bg-neutral-50 overflow-hidden dark:border-white/[0.07] dark:bg-white/[0.03]',
+                'group relative rounded-sm border border-black/[0.07] bg-neutral-50 overflow-hidden dark:border-white/[0.07] dark:bg-white/[0.03]',
                 className,
             )}
         >

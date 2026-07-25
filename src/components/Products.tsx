@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import {
   ArrowRight,
   BarChart3,
@@ -24,10 +24,12 @@ import {
   Settings,
   Users,
   Wallet,
+  ArrowDown,
   type LucideIcon,
 } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { showcaseTabs } from '../config/whatWeDoShowcase';
+import RestaurantReplicaPreview from './animations/RestaurantReplicaPreview';
 
 const ERP_AUTOPLAY_MS = 6200;
 
@@ -141,7 +143,7 @@ function MiniField({ label, value, onChange, options, placeholder, inputType = '
         <select
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          className="mt-1 h-5 w-full rounded border border-[#dfe4ec] bg-[#eceef2] px-2 text-[10px] leading-5 text-[#49556b] outline-none focus:border-[#7c90ac] focus:ring-1 focus:ring-[#b8c8dc] dark:border-[#2d3340] dark:bg-[#1a1d24] dark:text-[#c0cade] dark:focus:border-[#4a5670] dark:focus:ring-[#3a4560]"
+          className="mt-1 h-5 w-full rounded-sm border border-[#dfe4ec] bg-[#eceef2] px-2 text-[10px] leading-5 text-[#49556b] outline-none focus:border-[#7c90ac] focus:ring-1 focus:ring-[#b8c8dc] dark:border-[#2d3340] dark:bg-[#1a1d24] dark:text-[#c0cade] dark:focus:border-[#4a5670] dark:focus:ring-[#3a4560]"
         >
           {options.map((option) => (
             <option key={`${label}-${option}`} value={option}>
@@ -155,7 +157,7 @@ function MiniField({ label, value, onChange, options, placeholder, inputType = '
           type={inputType}
           placeholder={placeholder}
           onChange={(event) => onChange(event.target.value)}
-          className="mt-1 h-5 w-full rounded border border-[#dfe4ec] bg-[#eceef2] px-2 text-[10px] leading-5 text-[#49556b] outline-none placeholder:text-[#9ca7b7] focus:border-[#7c90ac] focus:ring-1 focus:ring-[#b8c8dc] dark:border-[#2d3340] dark:bg-[#1a1d24] dark:text-[#c0cade] dark:placeholder:text-[#5a6578] dark:focus:border-[#4a5670] dark:focus:ring-[#3a4560]"
+          className="mt-1 h-5 w-full rounded-sm border border-[#dfe4ec] bg-[#eceef2] px-2 text-[10px] leading-5 text-[#49556b] outline-none placeholder:text-[#9ca7b7] focus:border-[#7c90ac] focus:ring-1 focus:ring-[#b8c8dc] dark:border-[#2d3340] dark:bg-[#1a1d24] dark:text-[#c0cade] dark:placeholder:text-[#5a6578] dark:focus:border-[#4a5670] dark:focus:ring-[#3a4560]"
         />
       )}
     </div>
@@ -176,7 +178,7 @@ function ErpAccountsScene() {
     <div className="grid h-full grid-cols-[34px_minmax(0,1fr)] bg-[#f7f8fa] dark:bg-[#0d1117]">
       <aside className="flex flex-col border-r border-[#e0e4ea] bg-[#f4f5f8] px-1 py-2 dark:border-[#21262d] dark:bg-[#161b22]">
         <div className="grid place-items-center">
-          <div className="grid h-5 w-5 place-items-center rounded bg-[#1284eb] text-white dark:bg-[#3F618C]">
+          <div className="grid h-5 w-5 place-items-center rounded-sm bg-[#1284eb] text-white dark:bg-[#3F618C]">
             <Receipt className="h-3 w-3" />
           </div>
         </div>
@@ -188,7 +190,7 @@ function ErpAccountsScene() {
               type="button"
               onClick={() => setActiveRail(index)}
               title={index === 0 ? 'Search' : index === 1 ? 'Notification' : 'Navigation'}
-              className={`grid w-full place-items-center rounded p-1 ${activeRail === index
+              className={`grid w-full place-items-center rounded-sm p-1 ${activeRail === index
                 ? 'bg-[#e6ebf3] text-[#3f4f66] dark:bg-[#1c2333] dark:text-[#c9d1d9]'
                 : 'text-[#7a8597] transition-colors hover:bg-[#eceff5] hover:text-[#59687e] dark:text-[#8b949e] dark:hover:bg-[#1c2333] dark:hover:text-[#c9d1d9]'
                 }`}
@@ -205,7 +207,7 @@ function ErpAccountsScene() {
               type="button"
               onClick={() => setActiveMenu(label)}
               title={label}
-              className={`grid w-full place-items-center rounded p-1 ${activeMenu === label
+              className={`grid w-full place-items-center rounded-sm p-1 ${activeMenu === label
                 ? 'bg-[#dfe8f6] font-semibold text-[#3f4f66] dark:bg-[#1c2333] dark:text-[#c9d1d9]'
                 : 'text-[#606d83] transition-colors hover:bg-[#eceff5] hover:text-[#4f6078] dark:text-[#8b949e] dark:hover:bg-[#1c2333] dark:hover:text-[#c9d1d9]'
                 }`}
@@ -233,7 +235,7 @@ function ErpAccountsScene() {
             <button
               type="button"
               onClick={() => setChartMode('monthly')}
-              className={`rounded px-1.5 py-0.5 text-[8px] ${chartMode === 'monthly' ? 'bg-[#e7edf7] text-[#30435e] dark:bg-[#1c2333] dark:text-[#c9d1d9]' : 'text-[#7787a0] hover:bg-[#ecf1f8] dark:text-[#8b949e] dark:hover:bg-[#1c2333]'
+              className={`rounded-sm px-1.5 py-0.5 text-[8px] ${chartMode === 'monthly' ? 'bg-[#e7edf7] text-[#30435e] dark:bg-[#1c2333] dark:text-[#c9d1d9]' : 'text-[#7787a0] hover:bg-[#ecf1f8] dark:text-[#8b949e] dark:hover:bg-[#1c2333]'
                 }`}
             >
               Monthly
@@ -241,12 +243,12 @@ function ErpAccountsScene() {
             <button
               type="button"
               onClick={() => setChartMode('yearly')}
-              className={`rounded px-1.5 py-0.5 text-[8px] ${chartMode === 'yearly' ? 'bg-[#e7edf7] text-[#30435e] dark:bg-[#1c2333] dark:text-[#c9d1d9]' : 'text-[#7787a0] hover:bg-[#ecf1f8] dark:text-[#8b949e] dark:hover:bg-[#1c2333]'
+              className={`rounded-sm px-1.5 py-0.5 text-[8px] ${chartMode === 'yearly' ? 'bg-[#e7edf7] text-[#30435e] dark:bg-[#1c2333] dark:text-[#c9d1d9]' : 'text-[#7787a0] hover:bg-[#ecf1f8] dark:text-[#8b949e] dark:hover:bg-[#1c2333]'
                 }`}
             >
               Yearly
             </button>
-            <button type="button" className="rounded p-0.5 text-[#71829a] hover:bg-[#ecf1f8] dark:text-[#8b949e] dark:hover:bg-[#1c2333]">
+            <button type="button" className="rounded-sm p-0.5 text-[#71829a] hover:bg-[#ecf1f8] dark:text-[#8b949e] dark:hover:bg-[#1c2333]">
               <MoreHorizontal className="h-3 w-3" />
             </button>
           </div>
@@ -259,14 +261,14 @@ function ErpAccountsScene() {
             'Total Incoming Payment',
             'Total Outgoing Payment',
           ].map((label) => (
-            <div key={label} className="rounded border border-[#dce2ec] bg-white px-2 py-1.5 dark:border-[#21262d] dark:bg-[#161b22]">
+            <div key={label} className="rounded-sm border border-[#dce2ec] bg-white px-2 py-1.5 dark:border-[#21262d] dark:bg-[#161b22]">
               <p className="text-[8px] text-[#77849a] dark:text-[#8b949e]">{label}</p>
               <p className="mt-0.5 text-[11px] font-semibold text-[#2e3645] dark:text-[#e6edf3]">₹ 890724.57</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-2 rounded border border-[#dce2ec] bg-white p-2 dark:border-[#21262d] dark:bg-[#161b22]">
+        <div className="mt-2 rounded-sm border border-[#dce2ec] bg-white p-2 dark:border-[#21262d] dark:bg-[#161b22]">
           <p className="text-[10px] font-semibold text-[#5e6b80] dark:text-[#c9d1d9]">Profit and Loss</p>
           <div className="mt-1 grid grid-cols-3 text-center text-[8px] text-[#7d889b] dark:text-[#8b949e]">
             <div>
@@ -283,7 +285,7 @@ function ErpAccountsScene() {
             </div>
           </div>
 
-          <div className="mt-2 rounded border border-[#e3e8ef] bg-[#fcfdff] p-1.5 dark:border-[#21262d] dark:bg-[#0d1117]">
+          <div className="mt-2 rounded-sm border border-[#e3e8ef] bg-[#fcfdff] p-1.5 dark:border-[#21262d] dark:bg-[#0d1117]">
             <svg viewBox="0 0 100 100" className="h-20 w-full" aria-hidden>
               {[18, 34, 50, 66, 82].map((line) => (
                 <line key={`line-${line}`} x1="0" y1={line} x2="100" y2={line} stroke="currentColor" strokeWidth="0.8" className="text-[#e9edf3] dark:text-[#21262d]" />
@@ -316,9 +318,9 @@ function ErpAccountsScene() {
         </div>
 
         <div className="mt-2 grid gap-2 lg:grid-cols-2">
-          <div className="rounded border border-[#dce2ec] bg-white p-2 dark:border-[#21262d] dark:bg-[#161b22]">
+          <div className="rounded-sm border border-[#dce2ec] bg-white p-2 dark:border-[#21262d] dark:bg-[#161b22]">
             <p className="text-[9px] font-semibold text-[#66768c] dark:text-[#c9d1d9]">Incoming Bills (Purchase Invoice)</p>
-            <div className="mt-1 flex h-14 items-end gap-1 rounded border border-[#e4e9f0] bg-[#fcfdff] px-1.5 py-1.5 dark:border-[#21262d] dark:bg-[#0d1117]">
+            <div className="mt-1 flex h-14 items-end gap-1 rounded-sm border border-[#e4e9f0] bg-[#fcfdff] px-1.5 py-1.5 dark:border-[#21262d] dark:bg-[#0d1117]">
               {incoming.map((value, index) => (
                 <span
                   key={`in-${index}`}
@@ -329,9 +331,9 @@ function ErpAccountsScene() {
             </div>
           </div>
 
-          <div className="rounded border border-[#dce2ec] bg-white p-2 dark:border-[#21262d] dark:bg-[#161b22]">
+          <div className="rounded-sm border border-[#dce2ec] bg-white p-2 dark:border-[#21262d] dark:bg-[#161b22]">
             <p className="text-[9px] font-semibold text-[#66768c] dark:text-[#c9d1d9]">Outgoing Bills (Sales Invoice)</p>
-            <div className="mt-1 flex h-14 items-end gap-1 rounded border border-[#e4e9f0] bg-[#fcfdff] px-1.5 py-1.5 dark:border-[#21262d] dark:bg-[#0d1117]">
+            <div className="mt-1 flex h-14 items-end gap-1 rounded-sm border border-[#e4e9f0] bg-[#fcfdff] px-1.5 py-1.5 dark:border-[#21262d] dark:bg-[#0d1117]">
               {outgoing.map((value, index) => (
                 <span
                   key={`out-${index}`}
@@ -381,7 +383,7 @@ function ErpOnboardingScene() {
           ))}
         </div>
 
-        <div className="rounded-xl border border-[#e1e4eb] bg-white px-5 py-4 shadow-[0_8px_24px_rgba(25,35,52,0.06)] dark:border-[#21262d] dark:bg-[#161b22] dark:shadow-[0_8px_24px_rgba(0,0,0,0.3)]">
+        <div className="rounded-sm border border-[#e1e4eb] bg-white px-5 py-4 shadow-[0_8px_24px_rgba(25,35,52,0.06)] dark:border-[#21262d] dark:bg-[#161b22] dark:shadow-[0_8px_24px_rgba(0,0,0,0.3)]">
           <h4 className="text-center text-xl font-semibold text-[#1f2430] dark:text-[#e6edf3]">Welcome</h4>
 
           <div className="mt-4 space-y-2.5">
@@ -415,7 +417,7 @@ function ErpOnboardingScene() {
             <button
               type="button"
               onClick={() => setActiveStep((current) => (current + 1) % 3)}
-              className="rounded bg-[#1e232e] px-2.5 py-1 text-[10px] font-semibold text-white transition-colors hover:bg-[#2d3442] dark:bg-[#3F618C] dark:text-black dark:hover:bg-[#79c0ff]"
+              className="rounded-sm bg-[#1e232e] px-2.5 py-1 text-[10px] font-semibold text-white transition-colors hover:bg-[#2d3442] dark:bg-[#3F618C] dark:text-black dark:hover:bg-[#79c0ff]"
             >
               Next
             </button>
@@ -460,14 +462,14 @@ function ErpOpportunityScene() {
   return (
     <div className="grid h-full grid-cols-[30px_minmax(0,1fr)] bg-[#f7f8fa] dark:bg-[#0d1117]">
       <aside className="border-r border-[#e1e4eb] bg-[#f2f3f6] py-2 dark:border-[#21262d] dark:bg-[#161b22]">
-        <div className="mx-auto grid h-5 w-5 place-items-center rounded bg-[#7c838f] text-[9px] font-semibold text-white dark:bg-[#484f58]">C</div>
+        <div className="mx-auto grid h-5 w-5 place-items-center rounded-sm bg-[#7c838f] text-[9px] font-semibold text-neutral-900 dark:text-white dark:bg-[#484f58]">C</div>
         <div className="mt-2 space-y-1.5 px-1">
           {[Search, Bell, BarChart3, Users, MapPin, Settings].map((Icon, index) => (
             <button
               key={`crm-icon-${index}`}
               type="button"
               onClick={() => setActiveRail(index)}
-              className={`grid w-full place-items-center rounded p-0.5 ${activeRail === index ? 'bg-[#dce3ee] text-[#4b5b71] dark:bg-[#1c2333] dark:text-[#c9d1d9]' : 'text-[#7f8899] hover:bg-[#e5eaf2] dark:text-[#8b949e] dark:hover:bg-[#1c2333]'
+              className={`grid w-full place-items-center rounded-sm p-0.5 ${activeRail === index ? 'bg-[#dce3ee] text-[#4b5b71] dark:bg-[#1c2333] dark:text-[#c9d1d9]' : 'text-[#7f8899] hover:bg-[#e5eaf2] dark:text-[#8b949e] dark:hover:bg-[#1c2333]'
                 }`}
             >
               <Icon className="h-2.5 w-2.5" />
@@ -479,7 +481,7 @@ function ErpOpportunityScene() {
       <div className="min-w-0">
         <div className="flex items-center justify-between border-b border-[#e0e4ea] px-2 py-1.5 text-[9px] text-[#6b7484] dark:border-[#21262d] dark:text-[#8b949e]">
           <p className="font-semibold">/ CRM / Opportunity / New Opportunity</p>
-          <button className="rounded bg-[#1d232d] px-2 py-1 text-[8px] font-semibold text-white dark:bg-[#3F618C] dark:text-black">
+          <button className="rounded-sm bg-[#1d232d] px-2 py-1 text-[8px] font-semibold text-white dark:bg-[#3F618C] dark:text-black">
             <Save className="mr-1 inline h-2.5 w-2.5" />
             Save
           </button>
@@ -598,7 +600,7 @@ function ErpOpportunityScene() {
 
         {activeTab === 'Contacts' ? (
           <div className="grid h-full place-items-center p-4">
-            <div className="w-full max-w-md rounded border border-[#dce2ec] bg-white p-3 dark:border-[#21262d] dark:bg-[#161b22]">
+            <div className="w-full max-w-md rounded-sm border border-[#dce2ec] bg-white p-3 dark:border-[#21262d] dark:bg-[#161b22]">
               <p className="text-[10px] font-semibold text-[#57657b] dark:text-[#c9d1d9]">Primary Contact</p>
               <div className="mt-2 grid gap-2">
                 <MiniField label="Contact Name *" value={formValues.party} onChange={updateField('party')} placeholder="Name" />
@@ -610,7 +612,7 @@ function ErpOpportunityScene() {
 
         {activeTab === 'Items' ? (
           <div className="grid h-full place-items-center p-4">
-            <div className="w-full max-w-md rounded border border-[#dce2ec] bg-white p-3 dark:border-[#21262d] dark:bg-[#161b22]">
+            <div className="w-full max-w-md rounded-sm border border-[#dce2ec] bg-white p-3 dark:border-[#21262d] dark:bg-[#161b22]">
               <p className="text-[10px] font-semibold text-[#57657b] dark:text-[#c9d1d9]">Opportunity Items</p>
               <div className="mt-2 grid gap-2">
                 <MiniField
@@ -651,14 +653,14 @@ function ErpCrmDashboardScene() {
   return (
     <div className="grid h-full grid-cols-[30px_minmax(0,1fr)] bg-[#f7f8fa] dark:bg-[#0d1117]">
       <aside className="border-r border-[#e1e4eb] bg-[#f2f3f6] py-2 dark:border-[#21262d] dark:bg-[#161b22]">
-        <div className="mx-auto grid h-5 w-5 place-items-center rounded bg-[#7c838f] text-[9px] font-semibold text-white dark:bg-[#484f58]">C</div>
+        <div className="mx-auto grid h-5 w-5 place-items-center rounded-sm bg-[#7c838f] text-[9px] font-semibold text-neutral-900 dark:text-white dark:bg-[#484f58]">C</div>
         <div className="mt-2 space-y-1.5 px-1">
           {[Search, Bell, BarChart3, Users, Calendar, Settings].map((Icon, index) => (
             <button
               key={`crm-dash-icon-${index}`}
               type="button"
               onClick={() => setActiveRail(index)}
-              className={`grid w-full place-items-center rounded p-0.5 ${activeRail === index ? 'bg-[#dce3ee] text-[#4b5b71] dark:bg-[#1c2333] dark:text-[#c9d1d9]' : 'text-[#7f8899] hover:bg-[#e5eaf2] dark:text-[#8b949e] dark:hover:bg-[#1c2333]'
+              className={`grid w-full place-items-center rounded-sm p-0.5 ${activeRail === index ? 'bg-[#dce3ee] text-[#4b5b71] dark:bg-[#1c2333] dark:text-[#c9d1d9]' : 'text-[#7f8899] hover:bg-[#e5eaf2] dark:text-[#8b949e] dark:hover:bg-[#1c2333]'
                 }`}
             >
               <Icon className="h-2.5 w-2.5" />
@@ -679,7 +681,7 @@ function ErpCrmDashboardScene() {
               key={label}
               type="button"
               onClick={() => setActiveMetric(index)}
-              className={`rounded border bg-white px-2 py-1.5 text-left dark:bg-[#161b22] ${activeMetric === index ? 'border-[#a9bbd2] dark:border-[#3F618C]' : 'border-[#dce2ec] hover:border-[#bcc9db] dark:border-[#21262d] dark:hover:border-[#484f58]'
+              className={`rounded-sm border bg-white px-2 py-1.5 text-left dark:bg-[#161b22] ${activeMetric === index ? 'border-[#a9bbd2] dark:border-[#3F618C]' : 'border-[#dce2ec] hover:border-[#bcc9db] dark:border-[#21262d] dark:hover:border-[#484f58]'
                 }`}
             >
               <p className="text-[8px] text-[#77849a] dark:text-[#8b949e]">{label}</p>
@@ -689,7 +691,7 @@ function ErpCrmDashboardScene() {
         </div>
 
         {panels.map((title) => (
-          <div key={title} className="mt-2 rounded border border-[#dce2ec] bg-white p-2 dark:border-[#21262d] dark:bg-[#161b22]">
+          <div key={title} className="mt-2 rounded-sm border border-[#dce2ec] bg-white p-2 dark:border-[#21262d] dark:bg-[#161b22]">
             <div className="flex items-center justify-between">
               <div>
                 <button
@@ -706,7 +708,7 @@ function ErpCrmDashboardScene() {
                 <select
                   value={period}
                   onChange={(event) => setPeriod(event.target.value)}
-                  className="h-4 rounded bg-[#f0f2f6] px-1.5 text-[8px] outline-none dark:bg-[#1c2333] dark:text-[#c9d1d9]"
+                  className="h-4 rounded-sm bg-[#f0f2f6] px-1.5 text-[8px] outline-none dark:bg-[#1c2333] dark:text-[#c9d1d9]"
                 >
                   <option>Last Quarter</option>
                   <option>Last Year</option>
@@ -715,7 +717,7 @@ function ErpCrmDashboardScene() {
                 <select
                   value={cadence}
                   onChange={(event) => setCadence(event.target.value)}
-                  className="h-4 rounded bg-[#f0f2f6] px-1.5 text-[8px] outline-none dark:bg-[#1c2333] dark:text-[#c9d1d9]"
+                  className="h-4 rounded-sm bg-[#f0f2f6] px-1.5 text-[8px] outline-none dark:bg-[#1c2333] dark:text-[#c9d1d9]"
                 >
                   <option>Weekly</option>
                   <option>Monthly</option>
@@ -724,7 +726,7 @@ function ErpCrmDashboardScene() {
               </div>
             </div>
 
-            <div className="mt-1 rounded border border-[#e4e8ef] bg-[#fcfdff] p-1 dark:border-[#21262d] dark:bg-[#0d1117]">
+            <div className="mt-1 rounded-sm border border-[#e4e8ef] bg-[#fcfdff] p-1 dark:border-[#21262d] dark:bg-[#0d1117]">
               <svg viewBox="0 0 100 100" className="h-12 w-full" aria-hidden>
                 {[24, 46, 68, 90].map((line) => (
                   <line key={`${title}-${line}`} x1="0" y1={line} x2="100" y2={line} stroke="currentColor" strokeWidth="0.8" className="text-[#edf0f5] dark:text-[#21262d]" />
@@ -751,7 +753,7 @@ function ErpAppSwitcherScene() {
     <div className="relative h-full overflow-hidden bg-[#f1f2f5] dark:bg-[#0d1117]">
       <div className="absolute inset-0 bg-black/55 dark:bg-black/70" />
       <div className="relative grid h-full place-items-center p-3">
-        <div className="w-full max-w-[390px] rounded-2xl bg-white p-4 shadow-[0_18px_40px_rgba(13,20,34,0.22)] dark:bg-[#161b22] dark:shadow-[0_18px_40px_rgba(0,0,0,0.5)]">
+        <div className="w-full max-w-[390px] rounded-sm bg-white p-4 shadow-[0_18px_40px_rgba(13,20,34,0.22)] dark:bg-[#161b22] dark:shadow-[0_18px_40px_rgba(0,0,0,0.5)]">
           <p className="text-center text-base font-semibold text-[#2b3240] dark:text-[#e6edf3]">Accounting</p>
           <div className="mt-3 grid grid-cols-4 gap-2.5">
             {ACCOUNTING_APPS.map(({ label, icon: Icon }) => (
@@ -759,10 +761,10 @@ function ErpAppSwitcherScene() {
                 key={label}
                 type="button"
                 onClick={() => setActiveApp(label)}
-                className="rounded-md px-1 py-0.5 text-center transition-colors hover:bg-[#f1f5fb] dark:hover:bg-[#1c2333]"
+                className="rounded-sm px-1 py-0.5 text-center transition-colors hover:bg-[#f1f5fb] dark:hover:bg-[#1c2333]"
               >
                 <div
-                  className={`mx-auto grid h-8 w-8 place-items-center rounded-lg text-white ${activeApp === label ? 'bg-[#0d76d8] dark:bg-[#1f6feb]' : 'bg-[#1687eb] dark:bg-[#3F618C]'
+                  className={`mx-auto grid h-8 w-8 place-items-center rounded-sm text-white ${activeApp === label ? 'bg-[#0d76d8] dark:bg-[#1f6feb]' : 'bg-[#1687eb] dark:bg-[#3F618C]'
                     }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -803,7 +805,7 @@ export function ErpReplicaPreview() {
 
   return (
     <div
-      className="relative mx-auto w-full max-w-[640px] overflow-hidden border border-[#d6dde8] bg-[#f6f7f9] shadow-[0_18px_34px_rgba(15,23,42,0.12)] dark:border-[#21262d] dark:bg-[#0d1117] dark:shadow-[0_18px_34px_rgba(0,0,0,0.4)]"
+      className="relative mx-auto h-full w-full overflow-hidden bg-[#f6f7f9] dark:bg-[#0d1117]"
       style={{ fontFamily: 'Inter, "Segoe UI", "Helvetica Neue", Arial, sans-serif' }}
     >
       <div className="pointer-events-none absolute inset-0 z-20">
@@ -813,7 +815,7 @@ export function ErpReplicaPreview() {
           className="absolute -translate-x-1/2 -translate-y-1/2"
         >
           <div className="relative">
-            <MousePointer2 className="h-4 w-4 text-[#161d29] drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)] dark:text-white" />
+            <MousePointer2 className="h-4 w-4 text-[#161d29] drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)] dark:text-neutral-900 dark:text-white" />
             {cursorPoint.click ? (
               <motion.span
                 key={`${activeScene.id}-${cursorIndex}`}
@@ -897,7 +899,7 @@ export function CadWorkspaceScene() {
         {['□', '○', '△', '⬠', '⊕', '↗', '⊞'].map((icon, i) => (
           <div
             key={i}
-            className={`flex h-6 w-6 items-center justify-center rounded text-[10px] transition-colors ${i === 0 ? 'bg-[#2a5e87] text-white dark:bg-[#1f6feb]' : 'text-[#617289] hover:bg-white dark:text-[#8b949e] dark:hover:bg-[#21262d]'}`}
+            className={`flex h-6 w-6 items-center justify-center rounded-sm text-[10px] transition-colors ${i === 0 ? 'bg-[#2a5e87] text-neutral-900 dark:text-white dark:bg-[#1f6feb]' : 'text-[#617289] hover:bg-white dark:text-[#8b949e] dark:hover:bg-[#21262d]'}`}
           >
             {icon}
           </div>
@@ -905,7 +907,7 @@ export function CadWorkspaceScene() {
       </div>
 
       {/* Main viewport */}
-      <div className="relative flex-1 bg-[#1a1d23] dark:bg-[#0a0d12]">
+      <div className="relative flex-1 bg-[#1a1d23] dark:bg-white dark:bg-[#0a0d12]">
         {/* Grid background */}
         <svg className="absolute inset-0 h-full w-full opacity-20" aria-hidden>
           <defs>
@@ -990,7 +992,7 @@ export function CadWorkspaceScene() {
         >
           <div className="relative">
             <MousePointer2 className="h-3.5 w-3.5 text-emerald-400 drop-shadow" />
-            <span className="absolute -top-3.5 left-3 whitespace-nowrap rounded bg-emerald-500/90 px-1 py-0.5 text-[7px] font-medium text-white">
+            <span className="absolute -top-3.5 left-3 whitespace-nowrap rounded-sm bg-emerald-500/90 px-1 py-0.5 text-[7px] font-medium text-neutral-900 dark:text-white">
               Sarah M.
             </span>
           </div>
@@ -1002,7 +1004,7 @@ export function CadWorkspaceScene() {
         >
           <div className="relative">
             <MousePointer2 className="h-3.5 w-3.5 text-violet-400 drop-shadow" />
-            <span className="absolute -top-3.5 left-3 whitespace-nowrap rounded bg-violet-500/90 px-1 py-0.5 text-[7px] font-medium text-white">
+            <span className="absolute -top-3.5 left-3 whitespace-nowrap rounded-sm bg-violet-500/90 px-1 py-0.5 text-[7px] font-medium text-neutral-900 dark:text-white">
               James K.
             </span>
           </div>
@@ -1010,7 +1012,7 @@ export function CadWorkspaceScene() {
 
         {/* Top breadcrumb */}
         <div className="absolute left-10 top-2 z-10 flex items-center gap-1 text-[9px] text-[#8b949e]">
-          <span className="rounded bg-[#21262d]/80 px-1.5 py-0.5">Bracket_v4.step</span>
+          <span className="rounded-sm bg-[#21262d]/80 px-1.5 py-0.5">Bracket_v4.step</span>
           <span>·</span>
           <span className="text-emerald-400">● 2 collaborators</span>
         </div>
@@ -1025,7 +1027,7 @@ export function CadWorkspaceScene() {
 
         {/* Chat history */}
         <div className="flex-1 space-y-2 overflow-hidden px-2 py-2">
-          <div className="rounded-lg bg-white/80 px-2 py-1.5 text-[9px] leading-[1.4] text-[#24292f] dark:bg-[#0d1117]/80 dark:text-[#c9d1d9]">
+          <div className="rounded-sm bg-white/80 px-2 py-1.5 text-[9px] leading-[1.4] text-[#24292f] dark:bg-[#0d1117]/80 dark:text-[#c9d1d9]">
             <span className="font-semibold text-[#2a5e87] dark:text-[#3F618C]">You:</span>{' '}
             {promptText.slice(0, typedChars)}
             <motion.span
@@ -1038,7 +1040,7 @@ export function CadWorkspaceScene() {
             <motion.div
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
-              className="rounded-lg bg-[#2a5e87]/10 px-2 py-1.5 text-[9px] leading-[1.4] text-[#24292f] dark:bg-[#1f6feb]/10 dark:text-[#c9d1d9]"
+              className="rounded-sm bg-[#2a5e87]/10 px-2 py-1.5 text-[9px] leading-[1.4] text-[#24292f] dark:bg-[#1f6feb]/10 dark:text-[#c9d1d9]"
             >
               <span className="font-semibold text-[#2a5e87] dark:text-[#3F618C]">AI:</span>{' '}
               Generating bracket... Applying ISO 4762 M6 constraints. Adding 3mm fillets to all edges.
@@ -1048,7 +1050,7 @@ export function CadWorkspaceScene() {
 
         {/* Input box */}
         <div className="border-t border-[#dde3ed] px-2 py-1.5 dark:border-[#21262d]">
-          <div className="flex items-center gap-1 rounded border border-[#ccd4df] bg-white px-2 py-1 text-[9px] text-[#8b949e] dark:border-[#30363d] dark:bg-[#0d1117]">
+          <div className="flex items-center gap-1 rounded-sm border border-[#ccd4df] bg-white px-2 py-1 text-[9px] text-[#8b949e] dark:border-[#30363d] dark:bg-[#0d1117]">
             Ask AI anything...
           </div>
         </div>
@@ -1066,7 +1068,7 @@ function CadSimulationScene() {
         {['◎', '◇', '▦', '≋', '⊿', '⊙'].map((icon, i) => (
           <div
             key={i}
-            className={`flex h-6 w-6 items-center justify-center rounded text-[10px] ${i === 3 ? 'bg-[#dc2626] text-white dark:bg-[#f85149]' : 'text-[#617289] dark:text-[#8b949e]'}`}
+            className={`flex h-6 w-6 items-center justify-center rounded-sm text-[10px] ${i === 3 ? 'bg-[#dc2626] text-neutral-900 dark:text-white dark:bg-[#f85149]' : 'text-[#617289] dark:text-[#8b949e]'}`}
           >
             {icon}
           </div>
@@ -1074,7 +1076,7 @@ function CadSimulationScene() {
       </div>
 
       {/* Main simulation viewport */}
-      <div className="relative flex-1 bg-[#1a1d23] dark:bg-[#0a0d12]">
+      <div className="relative flex-1 bg-[#1a1d23] dark:bg-white dark:bg-[#0a0d12]">
         {/* Heat map gradient on the bracket shape */}
         <svg
           className="absolute inset-0 h-full w-full"
@@ -1147,14 +1149,14 @@ function CadSimulationScene() {
         <motion.div
           animate={{ opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute left-14 top-14 z-10 rounded border border-red-500/40 bg-red-500/20 px-1.5 py-0.5 text-[8px] font-mono text-red-400"
+          className="absolute left-14 top-14 z-10 rounded-sm border border-red-500/40 bg-red-500/20 px-1.5 py-0.5 text-[8px] font-mono text-red-400"
         >
           Max: 423°C
         </motion.div>
 
         {/* Status bar */}
         <div className="absolute left-10 top-2 z-10 flex items-center gap-2 text-[9px] text-[#8b949e]">
-          <span className="rounded bg-[#21262d]/80 px-1.5 py-0.5">Bracket_v4 · Thermal Analysis</span>
+          <span className="rounded-sm bg-[#21262d]/80 px-1.5 py-0.5">Bracket_v4 · Thermal Analysis</span>
           <motion.span
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 1.5, repeat: Infinity }}
@@ -1173,7 +1175,7 @@ function CadSimulationScene() {
         </div>
 
         <div className="flex-1 space-y-2 overflow-hidden px-2 py-2">
-          <div className="rounded-lg bg-white/80 px-2 py-1.5 text-[9px] leading-[1.4] text-[#24292f] dark:bg-[#0d1117]/80 dark:text-[#c9d1d9]">
+          <div className="rounded-sm bg-white/80 px-2 py-1.5 text-[9px] leading-[1.4] text-[#24292f] dark:bg-[#0d1117]/80 dark:text-[#c9d1d9]">
             <span className="font-semibold text-[#2a5e87] dark:text-[#3F618C]">You:</span>{' '}
             Run thermal analysis on this bracket, assume aluminium 6061, 200W heat source at bolt holes
           </div>
@@ -1181,7 +1183,7 @@ function CadSimulationScene() {
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="rounded-lg bg-[#2a5e87]/10 px-2 py-1.5 text-[9px] leading-[1.4] text-[#24292f] dark:bg-[#1f6feb]/10 dark:text-[#c9d1d9]"
+            className="rounded-sm bg-[#2a5e87]/10 px-2 py-1.5 text-[9px] leading-[1.4] text-[#24292f] dark:bg-[#1f6feb]/10 dark:text-[#c9d1d9]"
           >
             <span className="font-semibold text-[#2a5e87] dark:text-[#3F618C]">AI:</span>{' '}
             Thermal simulation complete. Peak temp 423°C at bolt hole interfaces. Recommended: increase fillet radius to 5mm for better heat dissipation.
@@ -1190,7 +1192,7 @@ function CadSimulationScene() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
-            className="flex items-center gap-1 rounded bg-emerald-500/10 px-2 py-1 text-[8px] text-emerald-600 dark:text-emerald-400"
+            className="flex items-center gap-1 rounded-sm bg-emerald-500/10 px-2 py-1 text-[8px] text-emerald-600 dark:text-emerald-400"
           >
             <CheckCircle2 className="h-3 w-3" />
             Mesh quality: Excellent (98.4%)
@@ -1198,7 +1200,7 @@ function CadSimulationScene() {
         </div>
 
         <div className="border-t border-[#dde3ed] px-2 py-1.5 dark:border-[#21262d]">
-          <div className="flex items-center gap-1 rounded border border-[#ccd4df] bg-white px-2 py-1 text-[9px] text-[#8b949e] dark:border-[#30363d] dark:bg-[#0d1117]">
+          <div className="flex items-center gap-1 rounded-sm border border-[#ccd4df] bg-white px-2 py-1 text-[9px] text-[#8b949e] dark:border-[#30363d] dark:bg-[#0d1117]">
             Ask AI anything...
           </div>
         </div>
@@ -1231,7 +1233,7 @@ function CadReplicaPreview() {
 
   return (
     <div
-      className="relative mx-auto w-full max-w-[640px] overflow-hidden border border-[#d6dde8] bg-[#f6f7f9] shadow-[0_18px_34px_rgba(15,23,42,0.12)] dark:border-[#21262d] dark:bg-[#0d1117] dark:shadow-[0_18px_34px_rgba(0,0,0,0.4)]"
+      className="relative mx-auto h-full w-full overflow-hidden bg-[#f6f7f9] dark:bg-[#0d1117]"
       style={{ fontFamily: 'Inter, "Segoe UI", "Helvetica Neue", Arial, sans-serif' }}
     >
       {/* Animated cursor */}
@@ -1242,7 +1244,7 @@ function CadReplicaPreview() {
           className="absolute -translate-x-1/2 -translate-y-1/2"
         >
           <div className="relative">
-            <MousePointer2 className="h-4 w-4 text-[#161d29] drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)] dark:text-white" />
+            <MousePointer2 className="h-4 w-4 text-[#161d29] drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)] dark:text-neutral-900 dark:text-white" />
             {cursorPoint.click ? (
               <motion.span
                 key={`cad-${activeScene.id}-${cursorIndex}`}
@@ -1291,15 +1293,15 @@ function IotReplicaPreview() {
 
   return (
     <div
-      className="relative mx-auto w-full max-w-[640px] overflow-hidden rounded-xl border border-[#d6dde8] bg-[#f6f7f9] shadow-[0_18px_34px_rgba(15,23,42,0.12)] dark:border-[#21262d] dark:bg-[#0d1117] dark:shadow-[0_18px_34px_rgba(0,0,0,0.4)]"
+      className="relative mx-auto h-full w-full overflow-hidden bg-[#f6f7f9] dark:bg-[#0d1117]"
       style={{ fontFamily: 'Inter, "Segoe UI", "Helvetica Neue", Arial, sans-serif' }}
     >
-      <div className="aspect-[16/10] w-full overflow-hidden flex bg-[#0a0d12]">
+      <div className="aspect-[16/10] w-full overflow-hidden flex bg-white dark:bg-[#0a0d12]">
         
         {/* Sidebar */}
         <div className="flex w-9 shrink-0 flex-col items-center gap-1.5 border-r border-[#21262d] bg-[#161b22] px-1 py-2">
           {[LayoutDashboard, Search, Settings].map((Icon, i) => (
-            <div key={i} className={`flex h-6 w-6 items-center justify-center rounded text-[10px] ${i === 0 ? 'bg-[#1f6feb] text-white' : 'text-[#8b949e]'}`}>
+            <div key={i} className={`flex h-6 w-6 items-center justify-center rounded-sm text-[10px] ${i === 0 ? 'bg-[#1f6feb] text-neutral-900 dark:text-white' : 'text-[#8b949e]'}`}>
               <Icon className="h-3 w-3" />
             </div>
           ))}
@@ -1312,7 +1314,7 @@ function IotReplicaPreview() {
               <p className="text-[10px] font-semibold text-[#3F618C]">Line 1 Control Center</p>
               <p className="text-[8px] text-[#8b949e]">Hardware Telemetry & Vision</p>
             </div>
-            <div className="flex items-center gap-1 rounded bg-emerald-500/10 px-2 py-0.5 text-[8px] text-emerald-400">
+            <div className="flex items-center gap-1 rounded-sm bg-emerald-500/10 px-2 py-0.5 text-[8px] text-emerald-400">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
               Live Sync
             </div>
@@ -1322,13 +1324,13 @@ function IotReplicaPreview() {
             
             {/* Weight Scale Integration */}
             <div className="flex flex-col gap-3">
-              <div className="rounded-lg border border-[#21262d] bg-[#161b22] p-3 flex-1 flex flex-col justify-center items-center relative overflow-hidden">
+              <div className="rounded-sm border border-[#21262d] bg-[#161b22] p-3 flex-1 flex flex-col justify-center items-center relative overflow-hidden">
                 <p className="text-[9px] text-[#8b949e] absolute top-2 left-3">MODBUS / Scale 01</p>
                 <motion.div 
                   key={weight}
                   initial={{ opacity: 0.7, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="font-mono text-3xl font-bold text-white tracking-tight"
+                  className="font-mono text-3xl font-bold text-neutral-900 dark:text-white tracking-tight"
                 >
                   {weight.toFixed(1)} <span className="text-sm text-[#8b949e]">kg</span>
                 </motion.div>
@@ -1338,13 +1340,13 @@ function IotReplicaPreview() {
               </div>
 
               {/* PLC Parameter Logs */}
-              <div className="rounded-lg border border-[#21262d] bg-[#161b22] p-2 flex-1 flex flex-col">
+              <div className="rounded-sm border border-[#21262d] bg-[#161b22] p-2 flex-1 flex flex-col">
                 <p className="text-[9px] text-[#8b949e] mb-2">CNC Tool Parameters (OPC UA)</p>
                 <div className="space-y-1">
                   {['Spindle Speed', 'Feed Rate', 'Coolant Temp'].map((label, i) => (
-                    <div key={label} className="flex justify-between items-center bg-[#0d1117] px-2 py-1 rounded">
-                      <span className="text-[8px] text-neutral-400">{label}</span>
-                      <span className="text-[8px] font-mono text-white">{[12000, 450, 22.4][i]} {[ 'RPM', 'mm/m', '°C'][i]}</span>
+                    <div key={label} className="flex justify-between items-center bg-[#0d1117] px-2 py-1 rounded-sm">
+                      <span className="text-[8px] text-neutral-600 dark:text-neutral-400">{label}</span>
+                      <span className="text-[8px] font-mono text-neutral-900 dark:text-white">{[12000, 450, 22.4][i]} {[ 'RPM', 'mm/m', '°C'][i]}</span>
                     </div>
                   ))}
                 </div>
@@ -1352,14 +1354,14 @@ function IotReplicaPreview() {
             </div>
 
             {/* Vision Camera Feed */}
-            <div className="rounded-lg border border-[#21262d] bg-[#161b22] p-3 relative overflow-hidden flex flex-col">
+            <div className="rounded-sm border border-[#21262d] bg-[#161b22] p-3 relative overflow-hidden flex flex-col">
               <div className="flex justify-between items-center mb-2 z-10">
                 <p className="text-[9px] text-[#8b949e]">Quality Vision Camera</p>
                 <p className="text-[8px] font-mono text-[#3F618C]">CAM_02</p>
               </div>
               
               {/* Fake Camera Feed Background */}
-              <div className="flex-1 bg-[#0d1117] rounded border border-[#21262d] relative overflow-hidden">
+              <div className="flex-1 bg-[#0d1117] rounded-sm border border-[#21262d] relative overflow-hidden">
                 <svg className="absolute inset-0 h-full w-full opacity-30" aria-hidden>
                   <defs>
                     <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
@@ -1395,51 +1397,180 @@ function IotReplicaPreview() {
 }
 
 function ServiceDescriptions() {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mt-24 lg:mt-32 border-t border-white/5 pt-16">
-      {showcaseTabs.map((tab) => {
-        const HeaderIcon = getShowcaseHeaderIcon(tab.label);
-        
-        let ShowcaseAnim = null;
-        if (tab.key === 'erp') ShowcaseAnim = <ErpReplicaPreview />;
-        if (tab.key === 'cad') ShowcaseAnim = <CadReplicaPreview />;
-        // If IoT was added back, we'd add it here as well
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: targetRef });
+  
+  // Map scroll progress to a discrete active index (0, 1, or 2)
+  const activeIndex = useTransform(scrollYProgress, (p) => {
+    if (p < 0.33) return 0;
+    if (p < 0.66) return 1;
+    return 2;
+  });
 
-        return (
-          <div key={tab.key} className="flex flex-col group">
-            {ShowcaseAnim && (
-               <div className="w-full mb-10 relative rounded-lg overflow-hidden shadow-2xl">
-                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-emerald-500/20 blur opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-                 <div className="relative">
-                   {ShowcaseAnim}
-                 </div>
-               </div>
-            )}
-            <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center mb-6 transition-colors group-hover:bg-white/[0.06]">
-              <HeaderIcon className="w-5 h-5 text-neutral-300" />
-            </div>
-            <h3 className="text-xl font-medium text-white mb-3 tracking-tight">{tab.title}</h3>
-            <p className="text-neutral-400 leading-relaxed text-[15px] mb-6">
-              {tab.description}
-            </p>
-            <ul className="space-y-3">
-              {tab.outcomes.map((outcome, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-[14px] text-neutral-300">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#3F618C] mt-2 shrink-0" />
-                  <span className="leading-relaxed">{outcome}</span>
-                </li>
-              ))}
-            </ul>
+  // Animate the X position to snap perfectly to the active slide
+  const x = useSpring(
+    useTransform(activeIndex, (i) => `-${i * 33.333}%`),
+    { stiffness: 300, damping: 35, restDelta: 0.001 }
+  );
+
+  const dot1Opacity = useTransform(activeIndex, (i) => i === 0 ? 1 : 0.2);
+  const dot2Opacity = useTransform(activeIndex, (i) => i === 1 ? 1 : 0.2);
+  const dot3Opacity = useTransform(activeIndex, (i) => i === 2 ? 1 : 0.2);
+
+  return (
+    <>
+      <div ref={targetRef} className="hidden md:block relative h-[220vh] mt-6">
+        <div className="sticky top-24 flex flex-col h-[calc(100vh-6rem)] overflow-hidden">
+          {/* Slider Indicator */}
+          <div className="flex justify-center items-center gap-3 pt-6 pb-2 shrink-0 z-20">
+            <motion.div style={{ opacity: dot1Opacity }} className="w-2.5 h-2.5 rounded-full bg-[#3F618C]" />
+            <motion.div style={{ opacity: dot2Opacity }} className="w-2.5 h-2.5 rounded-full bg-[#3F618C]" />
+            <motion.div style={{ opacity: dot3Opacity }} className="w-2.5 h-2.5 rounded-full bg-[#3F618C]" />
           </div>
-        );
-      })}
-    </div>
+
+          <motion.div style={{ x }} className="flex w-[300%] flex-1 will-change-transform">
+          {showcaseTabs.map((tab) => {
+            const HeaderIcon = getShowcaseHeaderIcon(tab.label);
+            
+            let ShowcaseAnim = null;
+            if (tab.key === 'manufacturing-erp') ShowcaseAnim = <ErpReplicaPreview />;
+            if (tab.key === 'restaurant-erp') ShowcaseAnim = <RestaurantReplicaPreview />;
+            if (tab.key === 'cad') ShowcaseAnim = <CadReplicaPreview />;
+
+            return (
+              <div key={tab.key} className="w-1/3 shrink-0 flex justify-center items-center h-full overflow-hidden">
+                <div className="w-full max-w-[1400px] px-6 lg:px-12 flex flex-col lg:flex-row gap-8 lg:gap-16 items-center justify-center group h-full">
+                  
+                  {/* Left: Text Content */}
+                  <div className="w-full lg:flex-[0.85] flex flex-col justify-center">
+                    <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-sm bg-white/[0.03] border border-black/10 dark:border-white/10 flex items-center justify-center mb-4 lg:mb-6 transition-colors group-hover:bg-white/[0.06]">
+                      <HeaderIcon className="w-4 h-4 lg:w-5 lg:h-5 text-neutral-700 dark:text-neutral-300" />
+                    </div>
+                    <h3 className="text-xl lg:text-3xl font-medium text-neutral-900 dark:text-white mb-3 lg:mb-4 tracking-tight">{tab.title}</h3>
+                    <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm lg:text-[18px] mb-6 lg:mb-8">
+                      {tab.description}
+                    </p>
+
+                    <ul className="space-y-3 lg:space-y-4 mb-6 lg:mb-10">
+                      {tab.outcomes.map((outcome, idx) => (
+                        <li key={idx} className="flex items-start gap-2 lg:gap-3 text-xs lg:text-[15px] text-neutral-700 dark:text-neutral-300">
+                          <div className="w-1 h-1 lg:w-1.5 lg:h-1.5 rounded-full bg-[#3F618C] mt-2 lg:mt-2.5 shrink-0" />
+                          <span className="leading-relaxed">{outcome}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* CTAs */}
+                    <div className="flex flex-wrap gap-4">
+                      <a 
+                        href={tab.ctaHref} 
+                        target={tab.ctaIsExternal ? "_blank" : "_self"} 
+                        rel="noreferrer" 
+                        className="bg-[#3F618C] hover:bg-[#5b80ab] text-white px-6 py-3 rounded-sm text-[14px] font-semibold transition-colors flex items-center gap-2"
+                      >
+                        {tab.ctaLabel} <ArrowRight className="w-4 h-4" />
+                      </a>
+                      {tab.secondaryCtaLabel && (
+                        <a 
+                          href={tab.secondaryCtaHref} 
+                          target={tab.secondaryCtaHref.startsWith('http') ? "_blank" : "_self"}
+                          rel={tab.secondaryCtaHref.startsWith('http') ? "noopener noreferrer" : ""}
+                          className="bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/10 text-neutral-700 dark:text-neutral-300 px-6 py-3 rounded-sm text-[14px] font-semibold transition-colors"
+                        >
+                          {tab.secondaryCtaLabel}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Right: Visual Showcase */}
+                  <div className="w-full lg:flex-[1.15] mt-6 lg:mt-0">
+                    {ShowcaseAnim && (
+                       <div className="w-full relative overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-[#0a0d12]">
+                         <div className="relative w-full aspect-[16/10] overflow-hidden">
+                           {ShowcaseAnim}
+                         </div>
+                       </div>
+                    )}
+                  </div>
+
+                </div>
+              </div>
+            );
+          })}
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Mobile View: Vertical Static Stack */}
+      <div className="md:hidden flex flex-col gap-24 mt-12 mb-12">
+        {showcaseTabs.map((tab) => {
+          const HeaderIcon = getShowcaseHeaderIcon(tab.label);
+          let ShowcaseAnim = null;
+          if (tab.key === 'manufacturing-erp') ShowcaseAnim = <ErpReplicaPreview />;
+          if (tab.key === 'restaurant-erp') ShowcaseAnim = <RestaurantReplicaPreview />;
+          if (tab.key === 'cad') ShowcaseAnim = <CadReplicaPreview />;
+
+          return (
+            <div key={tab.key} className="flex flex-col gap-8">
+              {/* Text Content */}
+              <div className="w-full flex flex-col">
+                <div className="w-12 h-12 rounded-sm bg-white/[0.03] border border-black/10 dark:border-white/10 flex items-center justify-center mb-6">
+                  <HeaderIcon className="w-6 h-6 text-neutral-700 dark:text-neutral-300" />
+                </div>
+                <h3 className="text-3xl font-medium text-neutral-900 dark:text-white mb-4 tracking-tight">{tab.title}</h3>
+                <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-[16px] mb-6">
+                  {tab.description}
+                </p>
+
+                <ul className="space-y-4 mb-8">
+                  {tab.outcomes.map((outcome, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-[14px] text-neutral-700 dark:text-neutral-300">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#3F618C] mt-2 shrink-0" />
+                      <span className="leading-relaxed">{outcome}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTAs */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a 
+                    href={tab.ctaHref} 
+                    target={tab.ctaIsExternal ? "_blank" : "_self"}
+                    className="bg-[#3F618C] hover:bg-[#5b80ab] text-white px-6 py-3.5 rounded-sm text-[15px] font-semibold flex items-center justify-center gap-2 transition-colors"
+                  >
+                    {tab.ctaLabel} <ArrowRight className="w-4 h-4" />
+                  </a>
+                  {tab.secondaryCtaLabel && (
+                    <a 
+                      href={tab.secondaryCtaHref}
+                      className="bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-neutral-700 dark:text-neutral-300 px-6 py-3.5 rounded-sm text-[15px] font-semibold text-center transition-colors"
+                    >
+                      {tab.secondaryCtaLabel}
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Visual Showcase */}
+              {ShowcaseAnim && (
+                <div className="w-full relative overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-[#0a0d12] rounded-sm">
+                  <div className="relative w-full aspect-[16/10] sm:aspect-video overflow-hidden">
+                    {ShowcaseAnim}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
 
 export default function Products({ onContactOpen }: { onContactOpen: () => void }) {
   return (
-    <section id="services" className="relative pt-24 pb-24 bg-[#0a0a0a] transition-colors duration-300 scroll-mt-24 font-sans overflow-hidden">
+    <section id="services" className="relative pt-24 pb-24 bg-white dark:bg-[#0a0a0a] transition-colors duration-300 scroll-mt-24 font-sans overflow-visible">
       
       <div className="container mx-auto max-w-[1400px] px-6 md:px-12 relative z-10">
         
@@ -1448,7 +1579,7 @@ export default function Products({ onContactOpen }: { onContactOpen: () => void 
           <div className="flex items-center justify-center gap-4">
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
               <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#3F618C]">
-                  Our Services
+                  Our Products
               </span>
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
           </div>
@@ -1459,11 +1590,11 @@ export default function Products({ onContactOpen }: { onContactOpen: () => void 
           
           {/* Left: Balanced Copy */}
           <div className="order-2 lg:order-1 flex flex-col justify-center max-w-[500px] mx-auto lg:mx-0">
-            <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] mb-6 text-[#f5f5f5] tracking-tight text-balance">
+            <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] mb-6 text-neutral-900 dark:text-[#f5f5f5] tracking-tight text-balance">
               Adaptable across all industries
             </h2>
             
-            <p className="text-[17px] lg:text-[19px] text-[#a1a1aa] mb-8 leading-relaxed text-balance">
+            <p className="text-[17px] lg:text-[19px] text-neutral-600 dark:text-neutral-500 dark:text-[#a1a1aa] mb-8 leading-relaxed text-balance">
               Whether managing a high-volume restaurant or a precision manufacturing floor, our adaptable software fits your exact needs. Accelerate operations by offloading complex workflows to intelligent systems, freeing you to focus on critical decisions.
             </p>
             
@@ -1477,7 +1608,7 @@ export default function Products({ onContactOpen }: { onContactOpen: () => void 
 
           {/* Right: Visual Context (Images) */}
           <div className="order-1 lg:order-2 w-full flex justify-center lg:justify-end relative h-[300px] sm:h-[400px] lg:h-[480px]">
-            <div className="relative w-full max-w-[640px] h-full flex items-center justify-center">
+            <div className="relative w-full h-full flex items-center justify-center">
                 {/* Decorative Elements */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-emerald-500/5 blur-[120px] z-0 pointer-events-none" />
                 
@@ -1487,12 +1618,12 @@ export default function Products({ onContactOpen }: { onContactOpen: () => void 
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: false, margin: "-100px" }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="absolute left-0 top-[5%] w-[70%] md:w-[60%] h-[60%] rounded-xl overflow-hidden shadow-2xl border border-white/10 z-10"
+                  className="absolute left-0 top-[5%] w-[70%] md:w-[60%] h-[60%] rounded-sm overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 z-10"
                 >
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-transparent to-transparent z-10" />
                     <img src="/industry-cad-demo.jpg" alt="Industrial Manufacturing" className="w-full h-full object-cover brightness-90" />
                     <div className="absolute bottom-4 left-4 z-20">
-                        <p className="text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">Industrial Engineering</p>
+                        <p className="text-neutral-900 dark:text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">Industrial Engineering</p>
                     </div>
                 </motion.div>
 
@@ -1502,18 +1633,24 @@ export default function Products({ onContactOpen }: { onContactOpen: () => void 
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: false, margin: "-100px" }}
                   transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                  className="absolute right-0 bottom-[5%] w-[70%] md:w-[60%] h-[60%] rounded-xl overflow-hidden shadow-2xl border border-white/10 z-20"
+                  className="absolute right-0 bottom-[5%] w-[70%] md:w-[60%] h-[60%] rounded-sm overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 z-20"
                 >
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-transparent to-transparent z-10" />
                     <img src="/restaurant-erp-demo.jpg" alt="Restaurant Management" className="w-full h-full object-cover brightness-90" />
                     <div className="absolute bottom-4 left-4 z-20">
-                        <p className="text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">Hospitality & Retail</p>
+                        <p className="text-neutral-900 dark:text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">Hospitality & Retail</p>
                     </div>
                 </motion.div>
                 
             </div>
           </div>
           
+        </div>
+
+        {/* Call to Action Arrow before slider */}
+        <div className="mt-24 mb-4 flex items-center gap-2">
+          <p className="text-neutral-600 dark:text-neutral-400 text-[15px] font-medium">Check out our product catalogue</p>
+          <ArrowDown className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
         </div>
 
         {/* Bottom Descriptions Grid */}

@@ -7,7 +7,7 @@
 
 @layer base {
   body {
-    @apply bg-black text-white font-sans antialiased selection:bg-white selection:text-black;
+    @apply bg-white text-neutral-900 dark:bg-[#0a0a0a] dark:text-white font-sans antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black;
     overflow-x: hidden;
   }
   .theme {
@@ -90,5 +90,24 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+@layer utilities {
+  .container-inline {
+    container-type: inline-size;
+  }
+  .scale-to-container-1024 {
+    transform: scale(min(1, calc(100cqi / 1024)));
+  }
+  .scale-to-container-900 {
+    transform: scale(min(1, calc(100cqi / 900)));
+  }
+}
+
+@layer base {
+  *, *::before, *::after {
+    transition-property: width, max-width, min-width, height, max-height, min-height, padding, margin, font-size, line-height, flex, flex-basis;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
   }
 }

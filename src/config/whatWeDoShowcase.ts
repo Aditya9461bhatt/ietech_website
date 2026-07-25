@@ -1,4 +1,4 @@
-export type ShowcaseTabKey = 'erp' | 'iot' | 'cad';
+export type ShowcaseTabKey = 'manufacturing-erp' | 'restaurant-erp' | 'iot' | 'cad';
 
 export interface ShowcaseScreenshot {
   id: string;
@@ -25,7 +25,7 @@ export interface ShowcaseTab {
 // Screenshots remain optional metadata; landing previews are now rendered as UI mockups.
 export const showcaseTabs: ShowcaseTab[] = [
   {
-    key: 'erp',
+    key: 'manufacturing-erp',
     label: 'Product',
     title: 'i.e ERP - Manufacturing Command Centre',
     description:
@@ -35,11 +35,11 @@ export const showcaseTabs: ShowcaseTab[] = [
       'Automate invoicing, approvals, procurement, and reporting to cut manual effort',
       'Track revenue, expenses, production, and pipeline in real time with configurable dashboards',
     ],
-    ctaLabel: 'Try Interactive Demo',
-    ctaHref: 'https://demoerp.ietech.ai',
-    ctaIsExternal: true,
+    ctaLabel: 'Explore Manufacturing ERP',
+    ctaHref: '#/use-cases/manufacturing',
+    ctaIsExternal: false,
     secondaryCtaLabel: 'Get in Touch',
-    secondaryCtaHref: '#contact',
+    secondaryCtaHref: 'https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Inquiry+about+your+services&body=Hey,+we+would+like+to+inquire+about+your+services.',
     screenshots: [
       {
         id: 'erp-overview',
@@ -55,6 +55,24 @@ export const showcaseTabs: ShowcaseTab[] = [
       },
     ],
   },
+  {
+    key: 'restaurant-erp',
+    label: 'Product',
+    title: 'i.e ERP - Restaurant Management System',
+    description:
+      'A fully integrated point-of-sale, kitchen management, and inventory tracking system built for restaurants, hotels, and multi-chain hospitality businesses.',
+    outcomes: [
+      'Manage real-time billing and POS across multiple outlets',
+      'Track ingredient consumption and automate purchase orders',
+      'Seamlessly handle table reservations, digital menus, and room service',
+    ],
+    ctaLabel: 'Explore Restaurant ERP',
+    ctaHref: '#/use-cases/restaurant',
+    ctaIsExternal: false,
+    secondaryCtaLabel: 'Get in Touch',
+    secondaryCtaHref: 'https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Inquiry+about+your+services&body=Hey,+we+would+like+to+inquire+about+your+services.',
+    screenshots: [],
+  },
 
   {
     key: 'cad',
@@ -68,10 +86,10 @@ export const showcaseTabs: ShowcaseTab[] = [
       'Collaborate in real time with guided onboarding for distributed design teams',
     ],
     ctaLabel: 'Register for Pilot',
-    ctaHref: '#contact',
+    ctaHref: 'https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Inquiry+about+your+services&body=Hey,+we+would+like+to+inquire+about+your+services.',
     ctaIsExternal: false,
     secondaryCtaLabel: 'Read Product Vision',
-    secondaryCtaHref: '#cad',
+    secondaryCtaHref: '#/cad',
     screenshots: [
       {
         id: 'cad-canvas',
