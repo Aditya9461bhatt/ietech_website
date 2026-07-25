@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MousePointer2, Search, Bell, Home, LayoutDashboard, 
-  ShoppingCart, UtensilsCrossed, Package, Settings, Users,
+  ShoppingCart, UtensilsCrossed, Package, Settings,
   CheckCircle2, Clock
 } from 'lucide-react';
 
@@ -45,7 +45,7 @@ const RESTAURANT_CURSOR_PATHS: Record<RestaurantSceneId, Array<{ x: number; y: n
 };
 
 function PosScene() {
-  const [activeRail, setActiveRail] = useState(4);
+  const [activeRail] = useState(4);
   const items = [
     { name: 'Caesar Salad', price: '₹295' },
     { name: 'Truffle Fries', price: '₹185' },

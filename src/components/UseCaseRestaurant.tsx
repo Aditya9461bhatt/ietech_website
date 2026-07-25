@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowDown, CheckCircle2, Store, Smartphone, BarChart3, Loader2, CheckCircle, Users, Bed, ClipboardList, DollarSign, Package, UtensilsCrossed, GraduationCap } from 'lucide-react';
+import { ArrowRight, ArrowDown, CheckCircle2, Loader2, CheckCircle, Users, Bed, ClipboardList, DollarSign, Package, UtensilsCrossed } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import Navbar from './Navbar';
 import Footer from './Footer';

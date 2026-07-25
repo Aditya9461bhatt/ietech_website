@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MessageCircle, ChevronDown, BookOpen, Target, History, Users, Utensils, Factory, GraduationCap, ArrowRight, Menu, X, Sun, Moon } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Mail, Phone, MessageCircle, ChevronDown, BookOpen, Target, History, Users, Utensils, Factory, GraduationCap, ArrowRight, Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
 const ABOUT_ITEMS = [
@@ -8,25 +9,25 @@ const ABOUT_ITEMS = [
     icon: <BookOpen className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
     title: 'Who we are',
     description: 'Learn about our core mission and values',
-    href: '#about'
+    href: '/#about'
   },
   {
     icon: <Target className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
     title: 'How we work',
     description: 'Discover our proven deployment methodology',
-    href: '#how-we-work'
+    href: '/#how-we-work'
   },
   {
     icon: <History className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
     title: 'How we started',
     description: 'The story behind i.e tech',
-    href: '#/about/history'
+    href: '/about/history'
   },
   {
     icon: <Users className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
     title: 'Founders and Team',
     description: 'Meet the people driving the vision',
-    href: '#/about/team'
+    href: '/about/team'
   }
 ];
 
@@ -35,19 +36,19 @@ const SERVICES_ITEMS = [
     icon: <Utensils className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
     title: 'Restaurant ERP',
     description: 'Specialized POS and inventory for hospitality',
-    href: '#/use-cases/restaurant'
+    href: '/use-cases/restaurant'
   },
   {
     icon: <Factory className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
     title: 'Manufacturing ERP',
     description: 'End-to-end industrial shop floor control',
-    href: '#/use-cases/manufacturing'
+    href: '/use-cases/manufacturing'
   },
   {
     icon: <GraduationCap className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
     title: 'Staff Training',
     description: 'Comprehensive training for your workforce',
-    href: '#/services/training'
+    href: '/services/training'
   }
 ];
 
@@ -77,7 +78,7 @@ export default function Navbar() {
   const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(null);
   
   const contactDropdownRef = useRef<HTMLDivElement>(null);
-  const navDropdownRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -99,7 +100,8 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-4 md:px-12 bg-white/90 dark:bg-[#0a0a0a]/90 backdrop-blur-md border-b border-black/10 dark:border-white/10 shadow-lg transition-colors duration-300"
     >
       <motion.a
-        href="#/"
+        href="/"
+        onClick={(e) => { e.preventDefault(); navigate('/'); }}
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
@@ -146,9 +148,9 @@ export default function Navbar() {
                 {/* Left Side: Links */}
                 <div className="w-1/2 p-6 flex flex-col gap-2 bg-white dark:bg-[#0a0a0a]">
                   {ABOUT_ITEMS.map((item) => (
-                    <a
+                    <Link
                       key={item.title}
-                      href={item.href}
+                      to={item.href}
                       className="flex items-start gap-4 p-3 rounded-sm hover:bg-black/5 dark:bg-white/5 transition-colors group/item"
                       onClick={() => setActiveMenu(null)}
                     >
@@ -159,13 +161,13 @@ export default function Navbar() {
                         <h4 className="text-sm font-semibold text-neutral-900 dark:text-white mb-1 group-hover/item:text-[#3F618C] transition-colors">{item.title}</h4>
                         <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-snug">{item.description}</p>
                       </div>
-                    </a>
+                    </Link>
                   ))}
                 </div>
                 {/* Right Side: Promoted Case Study */}
                 <div className="w-1/2 bg-neutral-50 dark:bg-[#111111] p-6 border-l border-black/5 dark:border-white/5 flex flex-col">
                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F618C] mb-3">Featured Case Study</p>
-                   <a href="#/case-studies" onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
+                   <Link to="/projects" onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
                      <div className="aspect-[4/3] relative">
                        <img src="/industry-cad-demo.jpg" alt="Manufacturing CAD Case Study" className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.45] transition-all duration-700" />
                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
@@ -174,11 +176,11 @@ export default function Navbar() {
                          <p className="text-xs text-neutral-300 leading-relaxed">End-to-end ERP automation deployed on the shop floor.</p>
                        </div>
                      </div>
-                   </a>
+                   </Link>
                    <div className="mt-3 flex items-center gap-2">
-                     <a href="#/case-studies" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors">
+                     <Link to="/projects" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors">
                        Click to view the full case study <ArrowRight className="w-3.5 h-3.5" />
-                     </a>
+                     </Link>
                    </div>
                 </div>
               </motion.div>
@@ -208,9 +210,9 @@ export default function Navbar() {
                 {/* Left Side: Links */}
                 <div className="w-1/2 p-6 flex flex-col gap-2 bg-white dark:bg-[#0a0a0a]">
                   {SERVICES_ITEMS.map((item) => (
-                    <a
+                    <Link
                       key={item.title}
-                      href={item.href}
+                      to={item.href}
                       className="flex items-start gap-4 p-3 rounded-sm hover:bg-black/5 dark:bg-white/5 transition-colors group/item"
                       onClick={() => setActiveMenu(null)}
                     >
@@ -221,13 +223,13 @@ export default function Navbar() {
                         <h4 className="text-sm font-semibold text-neutral-900 dark:text-white mb-1 group-hover/item:text-[#3F618C] transition-colors">{item.title}</h4>
                         <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-snug">{item.description}</p>
                       </div>
-                    </a>
+                    </Link>
                   ))}
                 </div>
                 {/* Right Side: Promoted Blog Post */}
                 <div className="w-1/2 bg-neutral-50 dark:bg-[#111111] p-6 border-l border-black/5 dark:border-white/5 flex flex-col">
                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F618C] mb-3">Latest from the Blog</p>
-                   <a href="#/blog/cad-integration" onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
+                   <Link to="/blog/cad-integration" onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
                      <div className="aspect-[4/3] relative">
                        <img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?q=80&w=1600&auto=format&fit=crop" alt="CAD Integration Blog" className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.45] transition-all duration-700" />
                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
@@ -236,11 +238,11 @@ export default function Navbar() {
                          <p className="text-xs text-neutral-300 leading-relaxed">Connecting CAD directly to your factory floor can save thousands of hours.</p>
                        </div>
                      </div>
-                   </a>
+                   </Link>
                    <div className="mt-3 flex items-center gap-2">
-                     <a href="#/blog/cad-integration" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors">
+                     <Link to="/blog/cad-integration" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors">
                        Click to read the full blog <ArrowRight className="w-3.5 h-3.5" />
-                     </a>
+                     </Link>
                    </div>
                 </div>
               </motion.div>
@@ -248,21 +250,21 @@ export default function Navbar() {
           </AnimatePresence>
         </div>
 
-        <a
-          href="#/case-studies"
+        <Link
+          to="/projects"
           className="inline-flex items-center text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:text-white/70 dark:hover:text-white"
           onMouseEnter={() => setActiveMenu(null)}
         >
           CASE STUDIES
-        </a>
+        </Link>
         
-        <a
-          href="#/blogs"
+        <Link
+          to="/blogs"
           className="inline-flex items-center text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:text-white/70 dark:hover:text-white"
           onMouseEnter={() => setActiveMenu(null)}
         >
           BLOGS
-        </a>
+        </Link>
 
       </div>
 
@@ -393,14 +395,14 @@ export default function Navbar() {
                       className="overflow-hidden flex flex-col gap-4 mt-4 pl-4 border-l border-black/10 dark:border-white/10"
                     >
                       {ABOUT_ITEMS.map((item) => (
-                        <a
+                        <Link
                           key={item.title}
-                          href={item.href}
+                          to={item.href}
                           className="text-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {item.title}
-                        </a>
+                        </Link>
                       ))}
                     </motion.div>
                   )}
@@ -425,14 +427,14 @@ export default function Navbar() {
                       className="overflow-hidden flex flex-col gap-4 mt-4 pl-4 border-l border-black/10 dark:border-white/10"
                     >
                       {SERVICES_ITEMS.map((item) => (
-                        <a
+                        <Link
                           key={item.title}
-                          href={item.href}
+                          to={item.href}
                           className="text-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           {item.title}
-                        </a>
+                        </Link>
                       ))}
                     </motion.div>
                   )}
@@ -440,21 +442,21 @@ export default function Navbar() {
               </div>
 
               {/* Direct Links */}
-              <a 
-                href="#/case-studies" 
+              <Link
+                to="/projects"
                 className="text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:text-neutral-300 transition-colors" 
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Case Studies
-              </a>
+              </Link>
               
-              <a 
-                href="#/blog" 
+              <Link
+                to="/blogs"
                 className="text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:text-neutral-300 transition-colors" 
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Blog
-              </a>
+              </Link>
 
               <button 
                 className="text-2xl font-medium text-neutral-900 dark:text-white hover:text-neutral-700 dark:text-neutral-300 transition-colors text-left" 

@@ -518,7 +518,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
                 When we start, our team visits your factory and trains your operators, supervisors, and planners on the software. We do hands-on training to make sure everything runs smoothly with no downtime.
               </p>
               <div className="mt-2">
-                <a href="#/services/training" className="inline-flex items-center gap-2 text-[#F0F8FF] font-medium text-[15px] hover:underline group">
+                <a href="/services/training" className="inline-flex items-center gap-2 text-[#F0F8FF] font-medium text-[15px] hover:underline group">
                   Get in detail brief 
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>

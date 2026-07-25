@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   Bell, Home, LayoutDashboard, Box, Factory, ClipboardList, 
-  PackageSearch, CalendarClock, PenTool, FileBarChart, Settings, 
+  PackageSearch, CalendarClock, FileBarChart, Settings, 
   ChevronRight, ArrowUpRight, Search, Activity, MoreHorizontal,
   Workflow
 } from 'lucide-react';

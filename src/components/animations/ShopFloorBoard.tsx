@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Settings, CheckCircle2, ChevronRight, Play, MoreHorizontal, FileText, ChevronDown } from 'lucide-react';
+import { Settings, ChevronRight, FileText, ChevronDown } from 'lucide-react';
 
 export default function ShopFloorBoard() {
   return (

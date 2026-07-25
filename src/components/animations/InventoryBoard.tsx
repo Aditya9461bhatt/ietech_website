@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { 
   Home, LayoutDashboard, Box, Factory, ClipboardList, PackageSearch, 
   CalendarClock, Wrench, FileBarChart, Settings, Search, Bell, 
-  ChevronRight, BoxSelect, MoreHorizontal, BarChart3, Menu, ChevronDown
+  ChevronRight, MoreHorizontal, BarChart3, Menu, ChevronDown
 } from 'lucide-react';
 
 export default function InventoryBoard() {
