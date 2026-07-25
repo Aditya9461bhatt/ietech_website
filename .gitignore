@@ -20,3 +20,7 @@ download_logos.sh
 old_repo/
 old_repo_sparse/
 tree.json
+
+# Local binaries
+cloudflared
+cloudflared.tgz
