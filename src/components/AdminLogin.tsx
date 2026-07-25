@@ -18,7 +18,16 @@ export default function AdminLogin() {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err: any) {
       console.error(err);
-      setError(err.message || 'Failed to login. Please check your credentials.');
+      const code = String(err?.code ?? '');
+      if (code === 'auth/invalid-credential' || code === 'auth/wrong-password' || code === 'auth/user-not-found') {
+        setError('Incorrect email or password.');
+      } else if (code === 'auth/too-many-requests') {
+        setError('Too many attempts — please wait a few minutes and try again.');
+      } else if (code === 'auth/network-request-failed') {
+        setError('Network error — check your connection and try again.');
+      } else {
+        setError('Sign-in failed. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }

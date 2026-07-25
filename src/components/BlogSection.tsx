@@ -9,6 +9,7 @@ interface BlogPost {
   id: string;
   title: string;
   date: string;
+  dateISO?: string;
   category: string;
   image?: string;
   excerpt?: string;
@@ -33,8 +34,12 @@ export default function BlogSection() {
           fetchedPosts.push({ id: doc.id, ...doc.data() } as BlogPost);
         });
         
-        // Sort by date (descending)
-        fetchedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        // Sort by date (descending); prefers the machine-readable dateISO.
+        const t = (p: BlogPost) => {
+          const ms = p.dateISO ? Date.parse(p.dateISO) : Date.parse(p.date);
+          return Number.isNaN(ms) ? 0 : ms;
+        };
+        fetchedPosts.sort((a, b) => t(b) - t(a));
         setPosts(fetchedPosts);
       } catch (error) {
         console.error("Error fetching blogs:", error);

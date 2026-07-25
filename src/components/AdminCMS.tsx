@@ -6,6 +6,9 @@ import { doc as firestoreDoc, setDoc as firestoreSetDoc, getDoc as firestoreGetD
 import { useAuth } from '../context/AuthContext';
 import { Loader2, ArrowLeft, Save, Bold, Heading2, Heading3, Link as LinkIcon, List } from 'lucide-react';
 import AdminLogin from './AdminLogin';
+import { ALLOWED_ADMIN_EMAILS } from '../config/adminAllowlist';
+
+const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 interface AdminCMSProps {
   type: 'blog' | 'case_study';
@@ -18,6 +21,7 @@ export default function AdminCMS({ type, editId, onBack }: AdminCMSProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [isFetching, setIsFetching] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
   const [message, setMessage] = useState('');
 
   const [formData, setFormData] = useState({
@@ -44,11 +48,12 @@ export default function AdminCMS({ type, editId, onBack }: AdminCMSProps) {
           const collectionName = type === 'blog' ? 'blogs' : 'case_studies';
           const docSnap = await firestoreGetDoc(firestoreDoc(db, collectionName, editId));
           if (docSnap.exists()) {
-            setFormData({
-              ...formData,
+            setFormData(prev => ({
+              ...prev,
               id: docSnap.id,
               ...docSnap.data()
-            });
+            }));
+            setIsDirty(false);
           } else {
             setMessage('Error: Document not found.');
           }
@@ -69,18 +74,25 @@ export default function AdminCMS({ type, editId, onBack }: AdminCMSProps) {
           excerpt: '',
           shortDescription: '',
           image: '',
-          content: type === 'blog' ? '## Introduction\\n\\nWrite your blog here...' : '# The Problem\\n\\nDescribe the problem here...\\n\\n# The Solution\\n\\nDescribe the solution here...'
+          content: type === 'blog' ? '## Introduction\n\nWrite your blog here...' : '# The Problem\n\nDescribe the problem here...\n\n# The Solution\n\nDescribe the solution here...'
         }));
+        setIsDirty(false);
       }
     }
     initData();
   }, [editId, type]);
 
+  // Warn before the tab closes with unpublished changes.
+  useEffect(() => {
+    if (!isDirty) return;
+    const onBeforeUnload = (e: BeforeUnloadEvent) => { e.preventDefault(); };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [isDirty]);
+
   if (authLoading || isFetching) {
     return <div className="min-h-screen bg-black flex items-center justify-center"><Loader2 className="w-8 h-8 text-[#3F618C] animate-spin" /></div>;
   }
-
-  const ALLOWED_ADMIN_EMAILS = ['138aditya@gmail.com'];
 
   if (!user) {
     return <AdminLogin />;
@@ -112,6 +124,12 @@ export default function AdminCMS({ type, editId, onBack }: AdminCMSProps) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setIsDirty(true);
+  };
+
+  const handleBack = () => {
+    if (isDirty && !window.confirm('You have unpublished changes. Leave without publishing?')) return;
+    onBack();
   };
 
   const insertMarkdown = (prefix: string, suffix: string = '') => {
@@ -128,6 +146,7 @@ export default function AdminCMS({ type, editId, onBack }: AdminCMSProps) {
 
     const newText = before + prefix + selectedText + suffix + after;
     setFormData({ ...formData, content: newText });
+    setIsDirty(true);
 
     // Reset cursor position inside the tags
     setTimeout(() => {
@@ -137,15 +156,30 @@ export default function AdminCMS({ type, editId, onBack }: AdminCMSProps) {
   };
 
   const handlePublish = async () => {
-    if (!formData.id) {
+    const slug = formData.id.trim();
+    if (!slug) {
       setMessage("Error: You must provide a URL Slug (id).");
+      return;
+    }
+    if (!SLUG_RE.test(slug)) {
+      setMessage('Error: Slug must be lowercase letters/numbers separated by hyphens (e.g. tirupati-erp).');
       return;
     }
     setIsSaving(true);
     setMessage('');
     try {
       const collectionName = type === 'blog' ? 'blogs' : 'case_studies';
-      const docRef = firestoreDoc(db, collectionName, formData.id);
+      const docRef = firestoreDoc(db, collectionName, slug);
+
+      // Publishing a new doc under an existing slug would silently replace it.
+      if (!editId) {
+        const existing = await firestoreGetDoc(docRef);
+        if (existing.exists()) {
+          setMessage(`Error: "${slug}" already exists — pick another slug or edit the existing ${type === 'blog' ? 'blog' : 'case study'}.`);
+          setIsSaving(false);
+          return;
+        }
+      }
       
       // Clean up data based on type before saving
       const dataToSave: any = {
@@ -155,6 +189,11 @@ export default function AdminCMS({ type, editId, onBack }: AdminCMSProps) {
         authorEmail: formData.authorEmail,
         image: formData.image,
         content: formData.content,
+        // Machine-sortable timestamps; `date` stays the display string.
+        dateISO: Number.isNaN(Date.parse(formData.date))
+          ? new Date().toISOString()
+          : new Date(Date.parse(formData.date)).toISOString(),
+        updatedAt: new Date().toISOString(),
       };
 
       if (type === 'case_study') {
@@ -167,6 +206,7 @@ export default function AdminCMS({ type, editId, onBack }: AdminCMSProps) {
       }
 
       await firestoreSetDoc(docRef, dataToSave);
+      setIsDirty(false);
       setMessage(`Success: ${type === 'blog' ? 'Blog' : 'Case study'} published!`);
     } catch (err: any) {
       setMessage("Error: " + err.message);
@@ -181,7 +221,7 @@ export default function AdminCMS({ type, editId, onBack }: AdminCMSProps) {
       {/* CMS Header */}
       <div className="flex-none bg-black border-b border-neutral-800 p-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <button onClick={onBack} className="text-neutral-600 dark:text-neutral-500 hover:text-white transition-colors">
+          <button onClick={handleBack} className="text-neutral-600 dark:text-neutral-500 hover:text-white transition-colors" aria-label="Back to dashboard">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <h1 className="text-xl font-bold uppercase tracking-wider">
@@ -275,13 +315,13 @@ export default function AdminCMS({ type, editId, onBack }: AdminCMSProps) {
               <button title="Bold" onClick={() => insertMarkdown('**', '**')} className="p-1.5 text-neutral-600 dark:text-neutral-400 hover:text-white hover:bg-black/10 dark:bg-white/10 transition-colors">
                 <Bold className="w-4 h-4" />
               </button>
-              <button title="Heading 2" onClick={() => insertMarkdown('\\n## ', '')} className="p-1.5 text-neutral-600 dark:text-neutral-400 hover:text-white hover:bg-black/10 dark:bg-white/10 transition-colors">
+              <button title="Heading 2" onClick={() => insertMarkdown('\n## ', '')} className="p-1.5 text-neutral-600 dark:text-neutral-400 hover:text-white hover:bg-black/10 dark:bg-white/10 transition-colors">
                 <Heading2 className="w-4 h-4" />
               </button>
-              <button title="Heading 3" onClick={() => insertMarkdown('\\n### ', '')} className="p-1.5 text-neutral-600 dark:text-neutral-400 hover:text-white hover:bg-black/10 dark:bg-white/10 transition-colors">
+              <button title="Heading 3" onClick={() => insertMarkdown('\n### ', '')} className="p-1.5 text-neutral-600 dark:text-neutral-400 hover:text-white hover:bg-black/10 dark:bg-white/10 transition-colors">
                 <Heading3 className="w-4 h-4" />
               </button>
-              <button title="Bullet List" onClick={() => insertMarkdown('\\n- ', '')} className="p-1.5 text-neutral-600 dark:text-neutral-400 hover:text-white hover:bg-black/10 dark:bg-white/10 transition-colors">
+              <button title="Bullet List" onClick={() => insertMarkdown('\n- ', '')} className="p-1.5 text-neutral-600 dark:text-neutral-400 hover:text-white hover:bg-black/10 dark:bg-white/10 transition-colors">
                 <List className="w-4 h-4" />
               </button>
               <button title="Link" onClick={() => insertMarkdown('[', '](https://)')} className="p-1.5 text-neutral-600 dark:text-neutral-400 hover:text-white hover:bg-black/10 dark:bg-white/10 transition-colors">

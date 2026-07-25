@@ -13,6 +13,7 @@ interface Project {
   status?: string;
   shortDescription?: string;
   date: string;
+  dateISO?: string;
   authorName: string;
   authorEmail: string;
   image: string;
@@ -33,6 +34,12 @@ export default function Projects() {
         querySnapshot.forEach((doc) => {
           projects.push({ id: doc.id, ...doc.data() } as Project);
         });
+        // Newest first; prefers the machine-readable dateISO.
+        const t = (p: Project) => {
+          const ms = p.dateISO ? Date.parse(p.dateISO) : Date.parse(p.date);
+          return Number.isNaN(ms) ? 0 : ms;
+        };
+        projects.sort((a, b) => t(b) - t(a));
         setProjectsData(projects);
       } catch (error) {
         console.error("Error fetching projects:", error);

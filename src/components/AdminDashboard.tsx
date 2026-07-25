@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react';
 import { db } from '../lib/firebase';
-import { collection, getDocs, query } from 'firebase/firestore';
+import { collection, getDocs, query, doc, deleteDoc } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
-import { Loader2, ArrowLeft, Plus, Search, FileText, Briefcase, Pencil } from 'lucide-react';
+import { Loader2, ArrowLeft, Plus, Search, FileText, Briefcase, Pencil, Trash2 } from 'lucide-react';
 import AdminLogin from './AdminLogin';
+import { ALLOWED_ADMIN_EMAILS } from '../config/adminAllowlist';
 
 interface CMSItem {
   id: string;
   type: 'blog' | 'case_study';
   title: string;
   date: string;
+  dateISO?: string;
   authorName: string;
 }
+
+const itemTime = (item: CMSItem) => {
+  const t = item.dateISO ? Date.parse(item.dateISO) : Date.parse(item.date);
+  return Number.isNaN(t) ? 0 : t;
+};
 
 export default function AdminDashboard({ onNavigate }: { onNavigate: (route: string) => void }) {
   const { user, isLoading: authLoading } = useAuth();
@@ -19,6 +26,7 @@ export default function AdminDashboard({ onNavigate }: { onNavigate: (route: str
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'blog' | 'case_study'>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -35,6 +43,7 @@ export default function AdminDashboard({ onNavigate }: { onNavigate: (route: str
             type: 'case_study',
             title: doc.data().title || 'Untitled',
             date: doc.data().date || '',
+            dateISO: doc.data().dateISO,
             authorName: doc.data().authorName || 'Unknown',
           });
         });
@@ -48,12 +57,13 @@ export default function AdminDashboard({ onNavigate }: { onNavigate: (route: str
             type: 'blog',
             title: doc.data().title || 'Untitled',
             date: doc.data().date || '',
+            dateISO: doc.data().dateISO,
             authorName: doc.data().authorName || 'Unknown',
           });
         });
 
-        // Sort by date (descending) -- assuming string format works or just rough sort
-        fetchedItems.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        // Sort by date (descending); prefers the machine-readable dateISO.
+        fetchedItems.sort((a, b) => itemTime(b) - itemTime(a));
         setItems(fetchedItems);
       } catch (error) {
         console.error("Error fetching CMS data:", error);
@@ -67,8 +77,6 @@ export default function AdminDashboard({ onNavigate }: { onNavigate: (route: str
   if (authLoading) {
     return <div className="min-h-screen bg-black flex items-center justify-center"><Loader2 className="w-8 h-8 text-[#3F618C] animate-spin" /></div>;
   }
-
-  const ALLOWED_ADMIN_EMAILS = ['138aditya@gmail.com'];
 
   if (!user) {
     return <AdminLogin />;
@@ -97,6 +105,21 @@ export default function AdminDashboard({ onNavigate }: { onNavigate: (route: str
       </div>
     );
   }
+
+  const handleDelete = async (item: CMSItem) => {
+    const label = item.type === 'blog' ? 'blog' : 'case study';
+    if (!window.confirm(`Delete the ${label} "${item.title}"? This removes it from the live site and cannot be undone.`)) return;
+    setDeletingId(item.id);
+    try {
+      await deleteDoc(doc(db, item.type === 'blog' ? 'blogs' : 'case_studies', item.id));
+      setItems(prev => prev.filter(i => !(i.id === item.id && i.type === item.type)));
+    } catch (error) {
+      console.error('Error deleting document:', error);
+      window.alert(`Couldn't delete "${item.title}". Please try again.`);
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   const filteredItems = items.filter(item => {
     const matchesFilter = filter === 'all' || item.type === filter;
@@ -200,9 +223,18 @@ export default function AdminDashboard({ onNavigate }: { onNavigate: (route: str
                   </div>
                 </div>
                 
-                <button className="text-neutral-600 dark:text-neutral-500 hover:text-white transition-colors opacity-0 group-hover:opacity-100 flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-                  <Pencil className="w-3.5 h-3.5" /> Edit
-                </button>
+                <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button className="text-neutral-600 dark:text-neutral-500 hover:text-white transition-colors flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+                    <Pencil className="w-3.5 h-3.5" /> Edit
+                  </button>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handleDelete(item); }}
+                    disabled={deletingId === item.id}
+                    className="text-neutral-600 dark:text-neutral-500 hover:text-red-400 transition-colors flex items-center gap-2 text-xs font-bold uppercase tracking-wider disabled:opacity-50"
+                  >
+                    {deletingId === item.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />} Delete
+                  </button>
+                </div>
               </div>
             ))
           )}
