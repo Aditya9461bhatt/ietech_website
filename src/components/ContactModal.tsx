@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, Mail, Phone, Loader2, CheckCircle, ArrowRight } from 'lucide-react';
 import { useGoogleInquiry } from '../hooks/useGoogleInquiry';
@@ -20,10 +20,29 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         submit: submitGoogle,
         reset: resetGoogle,
     } = useGoogleInquiry();
+    const dialogRef = useRef<HTMLDivElement>(null);
+
+    // Dialog mechanics: lock page scroll, focus the dialog, close on Escape.
+    useEffect(() => {
+        if (!isOpen) return;
+        document.body.style.overflow = 'hidden';
+        dialogRef.current?.focus();
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') handleClose();
+        };
+        document.addEventListener('keydown', onKey);
+        return () => {
+            document.body.style.overflow = '';
+            document.removeEventListener('keydown', onKey);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOpen]);
 
     const handleClose = () => {
-        setEmail('');
-        setPhone('');
+        if (submitted) {
+            setEmail('');
+            setPhone('');
+        }
         setError('');
         setSubmitted(false);
         setIsLoading(false);
@@ -85,7 +104,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         exit={{ opacity: 0, scale: 0.97, y: 8 }}
                         transition={{ type: 'spring', stiffness: 320, damping: 28 }}
                         onClick={(e) => e.stopPropagation()}
-                        className="relative z-10 w-full max-w-[420px] overflow-hidden rounded-sm border border-black/10 bg-white shadow-[0_24px_64px_rgba(0,0,0,0.18)] dark:border-black/10 dark:border-white/10 dark:bg-black dark:shadow-[0_24px_64px_rgba(0,0,0,0.6)]"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Contact us"
+                        ref={dialogRef}
+                        tabIndex={-1}
+                        className="relative z-10 w-full max-w-[420px] outline-none overflow-hidden rounded-sm border border-black/10 bg-white shadow-[0_24px_64px_rgba(0,0,0,0.18)] dark:border-black/10 dark:border-white/10 dark:bg-black dark:shadow-[0_24px_64px_rgba(0,0,0,0.6)]"
                     >
                         {/* Close button */}
                         <button

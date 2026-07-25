@@ -83,6 +83,19 @@ export default function Navbar() {
   const { openContact } = useContact();
 
   useEffect(() => {
+    if (!activeMenu) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setActiveMenu(null); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [activeMenu]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) setExpandedMobileMenu(null);
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (contactDropdownRef.current && !contactDropdownRef.current.contains(e.target as Node)) {
         setDropdownOpen(false);
@@ -115,6 +128,9 @@ export default function Navbar() {
       {/* Mobile Menu Toggle (Right side) */}
       <div className="flex md:hidden items-center gap-4">
         <button 
+          type="button"
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileMenuOpen}
           className="text-neutral-900 dark:text-white hover:text-[#3F618C] transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
@@ -133,7 +149,12 @@ export default function Navbar() {
           className="relative group h-full"
           onMouseEnter={() => setActiveMenu('about')}
         >
-          <button className={`inline-flex items-center gap-1 text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 ${activeMenu === 'about' ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:text-white/70 dark:hover:text-white'}`}>
+          <button
+            type="button"
+            aria-haspopup="true"
+            aria-expanded={activeMenu === 'about'}
+            onClick={() => setActiveMenu(activeMenu === 'about' ? null : 'about')}
+            className={`inline-flex items-center gap-1 text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 ${activeMenu === 'about' ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:text-white/70 dark:hover:text-white'}`}>
             ABOUT
             <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeMenu === 'about' ? 'rotate-180' : ''}`} />
           </button>
@@ -145,8 +166,9 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.98 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-6 w-[700px] bg-neutral-50 dark:bg-[#111111] border border-black/10 dark:border-white/10 rounded-sm shadow-2xl overflow-hidden flex"
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-6 w-[700px] max-w-[calc(100vw-2rem)] bg-neutral-50 dark:bg-[#111111] border border-black/10 dark:border-white/10 rounded-sm shadow-2xl flex"
               >
+                <div className="absolute -top-6 left-0 right-0 h-6" aria-hidden="true" />
                 {/* Left Side: Links */}
                 <div className="w-1/2 p-6 flex flex-col gap-2 bg-white dark:bg-[#0a0a0a]">
                   {ABOUT_ITEMS.map((item) => (
@@ -195,7 +217,12 @@ export default function Navbar() {
           className="relative group h-full"
           onMouseEnter={() => setActiveMenu('services')}
         >
-          <button className={`inline-flex items-center gap-1 text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 ${activeMenu === 'services' ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:text-white/70 dark:hover:text-white'}`}>
+          <button
+            type="button"
+            aria-haspopup="true"
+            aria-expanded={activeMenu === 'services'}
+            onClick={() => setActiveMenu(activeMenu === 'services' ? null : 'services')}
+            className={`inline-flex items-center gap-1 text-[11px] xl:text-xs font-bold tracking-[0.15em] transition-colors duration-200 ${activeMenu === 'services' ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-500 hover:text-neutral-900 dark:text-white/70 dark:hover:text-white'}`}>
             SERVICES
             <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeMenu === 'services' ? 'rotate-180' : ''}`} />
           </button>
@@ -207,8 +234,9 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.98 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-6 w-[700px] bg-neutral-50 dark:bg-[#111111] border border-black/10 dark:border-white/10 rounded-sm shadow-2xl overflow-hidden flex"
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-6 w-[700px] max-w-[calc(100vw-2rem)] bg-neutral-50 dark:bg-[#111111] border border-black/10 dark:border-white/10 rounded-sm shadow-2xl flex"
               >
+                <div className="absolute -top-6 left-0 right-0 h-6" aria-hidden="true" />
                 {/* Left Side: Links */}
                 <div className="w-1/2 p-6 flex flex-col gap-2 bg-white dark:bg-[#0a0a0a]">
                   {SERVICES_ITEMS.map((item) => (
@@ -231,7 +259,7 @@ export default function Navbar() {
                 {/* Right Side: Promoted Blog Post */}
                 <div className="w-1/2 bg-neutral-50 dark:bg-[#111111] p-6 border-l border-black/5 dark:border-white/5 flex flex-col">
                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F618C] mb-3">Latest from the Blog</p>
-                   <Link to="/blog/cad-integration" onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
+                   <Link to="/blogs" onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
                      <div className="aspect-[4/3] relative">
                        <img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?q=80&w=1600&auto=format&fit=crop" alt="CAD Integration Blog" className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.45] transition-all duration-700" />
                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
@@ -242,7 +270,7 @@ export default function Navbar() {
                      </div>
                    </Link>
                    <div className="mt-3 flex items-center gap-2">
-                     <Link to="/blog/cad-integration" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors">
+                     <Link to="/blogs" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors">
                        Click to read the full blog <ArrowRight className="w-3.5 h-3.5" />
                      </Link>
                    </div>

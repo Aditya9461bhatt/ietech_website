@@ -22,6 +22,7 @@ interface Project {
 export default function Projects() {
   const [projectsData, setProjectsData] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadFailed, setLoadFailed] = useState(false);
 
   useEffect(() => {
     async function fetchProjects() {
@@ -35,6 +36,7 @@ export default function Projects() {
         setProjectsData(projects);
       } catch (error) {
         console.error("Error fetching projects:", error);
+        setLoadFailed(true);
       } finally {
         setIsLoading(false);
       }
@@ -89,8 +91,8 @@ export default function Projects() {
         {/* Empty State */}
         {!isLoading && projectsData.length === 0 && (
           <div className="text-center py-20 border border-black/10 dark:border-white/10 bg-black">
-            <h3 className="text-xl text-neutral-900 dark:text-white font-bold mb-2">No Case Studies Found</h3>
-            <p className="text-neutral-600 dark:text-neutral-500 text-sm">Please log in to the CMS (/admin) to publish your first case study.</p>
+            <h3 className="text-xl text-neutral-900 dark:text-white font-bold mb-2">{loadFailed ? "Couldn't load case studies" : 'No Case Studies Yet'}</h3>
+            <p className="text-neutral-600 dark:text-neutral-500 text-sm">{loadFailed ? 'Something went wrong on our end. Please refresh or try again later.' : 'Our latest customer stories are on the way — check back soon.'}</p>
           </div>
         )}
 

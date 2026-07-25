@@ -25,6 +25,7 @@ interface BlogDetailProps {
 export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadFailed, setLoadFailed] = useState(false);
 
   useEffect(() => {
     async function fetchBlog() {
@@ -40,6 +41,7 @@ export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
         }
       } catch (err) {
         console.error("Error fetching blog:", err);
+        setLoadFailed(true);
       } finally {
         setIsLoading(false);
       }
@@ -59,10 +61,13 @@ export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
   if (!post) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center text-white">
-        <Seo title="Post Not Found" path={`/blog/${slug}`} noindex />
+        <Seo title={loadFailed ? 'Something went wrong' : 'Post Not Found'} path={`/blog/${slug}`} noindex />
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Post not found</h1>
-          <button onClick={onBack} className="text-blue-400 hover:underline">Return to Home</button>
+          <h1 className="text-4xl font-bold mb-4">{loadFailed ? 'Something went wrong' : 'Post not found'}</h1>
+          {loadFailed && (
+            <p className="text-neutral-400 mb-4">We couldn't load this article. Please refresh or try again later.</p>
+          )}
+          <button onClick={onBack} className="text-blue-400 hover:underline">Back to Blogs</button>
         </div>
       </div>
     );

@@ -23,6 +23,7 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
   const [project, setProject] = useState<Project | null>(null);
   const [otherProjects, setOtherProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadFailed, setLoadFailed] = useState(false);
 
   useEffect(() => {
     async function fetchProject() {
@@ -49,13 +50,14 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
         }
       } catch (err) {
         console.error("Error fetching project:", err);
+        setLoadFailed(true);
       } finally {
         setIsLoading(false);
       }
     }
     
     fetchProject();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [projectId]);
 
   if (isLoading) {
@@ -69,13 +71,16 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
   if (!project) {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-8 font-sans">
-        <Seo title="Case Study Not Found" path={`/project/${projectId}`} noindex />
-        <h2 className="text-2xl font-bold mb-4 tracking-tighter">Project Not Found</h2>
+        <Seo title={loadFailed ? 'Something went wrong' : 'Case Study Not Found'} path={`/project/${projectId}`} noindex />
+        <h2 className="text-2xl font-bold mb-4 tracking-tighter">{loadFailed ? 'Something went wrong' : 'Project Not Found'}</h2>
+        {loadFailed && (
+          <p className="text-neutral-400 mb-4 text-sm">We couldn't load this case study. Please refresh or try again later.</p>
+        )}
         <button
           onClick={onBack}
           className="px-6 py-3 border border-neutral-800 bg-[#3F618C] text-black font-bold uppercase tracking-wider rounded-none hover:opacity-90 transition-all text-xs"
         >
-          Return to Home
+          Back to Case Studies
         </button>
       </div>
     );
@@ -167,6 +172,8 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
                 
                 <a 
                   href={`https://mail.google.com/mail/?view=cm&fs=1&to=${project.authorEmail}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-xs text-[#3F618C] hover:text-neutral-900 dark:text-white transition-colors uppercase tracking-wider font-bold inline-block border-b border-[#3F618C] pb-0.5 hover:border-white"
                 >
                   Reach out to writer

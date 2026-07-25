@@ -16,7 +16,6 @@ export interface ShowcaseTab {
   outcomes: string[];
   ctaLabel: string;
   ctaHref: string;
-  ctaIsExternal?: boolean;
   secondaryCtaLabel: string;
   secondaryCtaHref: string;
   screenshots: ShowcaseScreenshot[];
@@ -36,8 +35,7 @@ export const showcaseTabs: ShowcaseTab[] = [
       'Track revenue, expenses, production, and pipeline in real time with configurable dashboards',
     ],
     ctaLabel: 'Explore Manufacturing ERP',
-    ctaHref: '#/use-cases/manufacturing',
-    ctaIsExternal: false,
+    ctaHref: '/use-cases/manufacturing',
     secondaryCtaLabel: 'Get in Touch',
     secondaryCtaHref: 'https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Inquiry+about+your+services&body=Hey,+we+would+like+to+inquire+about+your+services.',
     screenshots: [
@@ -67,8 +65,7 @@ export const showcaseTabs: ShowcaseTab[] = [
       'Seamlessly handle table reservations, digital menus, and room service',
     ],
     ctaLabel: 'Explore Restaurant ERP',
-    ctaHref: '#/use-cases/restaurant',
-    ctaIsExternal: false,
+    ctaHref: '/use-cases/restaurant',
     secondaryCtaLabel: 'Get in Touch',
     secondaryCtaHref: 'https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Inquiry+about+your+services&body=Hey,+we+would+like+to+inquire+about+your+services.',
     screenshots: [],
@@ -86,10 +83,11 @@ export const showcaseTabs: ShowcaseTab[] = [
       'Collaborate in real time with guided onboarding for distributed design teams',
     ],
     ctaLabel: 'Register for Pilot',
-    ctaHref: 'https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Inquiry+about+your+services&body=Hey,+we+would+like+to+inquire+about+your+services.',
-    ctaIsExternal: false,
-    secondaryCtaLabel: 'Read Product Vision',
-    secondaryCtaHref: '#/cad',
+    ctaHref: 'https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Interested+in+the+AI+CAD+Pilot',
+    // No CAD product page exists yet — leave the secondary CTA empty (it is
+    // conditionally rendered) and restore it once the page ships.
+    secondaryCtaLabel: '',
+    secondaryCtaHref: '',
     screenshots: [
       {
         id: 'cad-canvas',

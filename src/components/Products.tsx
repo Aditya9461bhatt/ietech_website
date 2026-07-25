@@ -1349,8 +1349,8 @@ function ServiceDescriptions() {
                     <div className="flex flex-wrap gap-4">
                       <a 
                         href={tab.ctaHref} 
-                        target={tab.ctaIsExternal ? "_blank" : "_self"} 
-                        rel="noreferrer" 
+                        target={tab.ctaHref.startsWith('http') ? "_blank" : "_self"} 
+                        rel={tab.ctaHref.startsWith('http') ? "noopener noreferrer" : undefined} 
                         className="bg-[#3F618C] hover:bg-[#5b80ab] text-white px-6 py-3 rounded-sm text-[14px] font-semibold transition-colors flex items-center gap-2"
                       >
                         {tab.ctaLabel} <ArrowRight className="w-4 h-4" />
@@ -1421,7 +1421,8 @@ function ServiceDescriptions() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a 
                     href={tab.ctaHref} 
-                    target={tab.ctaIsExternal ? "_blank" : "_self"}
+                    target={tab.ctaHref.startsWith('http') ? "_blank" : "_self"}
+                    rel={tab.ctaHref.startsWith('http') ? "noopener noreferrer" : undefined}
                     className="bg-[#3F618C] hover:bg-[#5b80ab] text-white px-6 py-3.5 rounded-sm text-[15px] font-semibold flex items-center justify-center gap-2 transition-colors"
                   >
                     {tab.ctaLabel} <ArrowRight className="w-4 h-4" />
@@ -1429,6 +1430,8 @@ function ServiceDescriptions() {
                   {tab.secondaryCtaLabel && (
                     <a 
                       href={tab.secondaryCtaHref}
+                      target={tab.secondaryCtaHref.startsWith('http') ? "_blank" : "_self"}
+                      rel={tab.secondaryCtaHref.startsWith('http') ? "noopener noreferrer" : undefined}
                       className="bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-neutral-700 dark:text-neutral-300 px-6 py-3.5 rounded-sm text-[15px] font-semibold text-center transition-colors"
                     >
                       {tab.secondaryCtaLabel}
