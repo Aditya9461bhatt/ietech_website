@@ -1,6 +1,6 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { initializeApp, type FirebaseApp } from 'firebase/app';
+import { getAuth, type Auth } from 'firebase/auth';
+import { getFirestore, type Firestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -11,6 +11,23 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+// A build without VITE_FIREBASE_* env vars must not take the whole site down:
+// getAuth() throws auth/invalid-api-key at module scope, which blanks every page
+// (and makes the prerenderer bake empty shells). Initialize only when configured
+// and let Firebase-backed features fall back to their empty states.
+export const isFirebaseConfigured = Boolean(firebaseConfig.apiKey && firebaseConfig.projectId);
+
+let app: FirebaseApp | undefined;
+let authInstance: Auth | undefined;
+let dbInstance: Firestore | undefined;
+
+if (isFirebaseConfigured) {
+  app = initializeApp(firebaseConfig);
+  authInstance = getAuth(app);
+  dbInstance = getFirestore(app);
+} else {
+  console.warn('[firebase] VITE_FIREBASE_* env vars are missing — auth, contact forms, and CMS content are disabled for this build.');
+}
+
+export const auth = authInstance as Auth;
+export const db = dbInstance as Firestore;
