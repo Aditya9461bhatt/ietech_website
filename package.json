@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "prerender": "node scripts/prerender.mjs",
+    "cms": "vite --config cms/vite.config.ts --open",
     "build:static": "npm run build && npm run prerender",
     "lint": "eslint .",
     "preview": "vite preview"
