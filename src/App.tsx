@@ -150,7 +150,7 @@ function ProjectDetailPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   return (
-    <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
+    <div className="dark bg-[#0a0a0a] min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
       <Navbar />
       <Suspense fallback={<RouteFallback />}>
         <ProjectDetail projectId={slug || ''} onBack={() => navigate('/projects')} />
@@ -163,7 +163,7 @@ function BlogDetailPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
   return (
-    <div className="bg-white dark:bg-[#0a0a0a] min-h-screen text-neutral-900 dark:text-white font-sans antialiased transition-colors duration-300 relative">
+    <div className="dark bg-[#0a0a0a] min-h-screen text-white font-sans antialiased transition-colors duration-300 relative">
       <Navbar />
       <Suspense fallback={<RouteFallback />}>
         <BlogDetail slug={slug || ''} onBack={() => navigate('/blogs')} />

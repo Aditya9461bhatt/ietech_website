@@ -77,15 +77,43 @@
   },
   "navbar": {
     "aboutItems": [
-      { "title": "Who we are", "description": "A consulting-first technology company for manufacturers", "href": "/#about" },
-      { "title": "How we work", "description": "Study the plant first, then build — our deployment method", "href": "/#how-we-work" },
-      { "title": "How we started", "description": "The story behind i.e tech", "href": "/about/history" },
-      { "title": "Founders and Team", "description": "The engineers you'll actually be working with", "href": "/about/team" }
+      {
+        "title": "Who we are",
+        "description": "A consulting-first technology company for manufacturers",
+        "href": "/#about"
+      },
+      {
+        "title": "How we work",
+        "description": "Study the plant first, then build — our deployment method",
+        "href": "/#how-we-work"
+      },
+      {
+        "title": "How we started",
+        "description": "The story behind i.e tech",
+        "href": "/about/history"
+      },
+      {
+        "title": "Founders and Team",
+        "description": "The engineers you'll actually be working with",
+        "href": "/about/team"
+      }
     ],
     "servicesItems": [
-      { "title": "Restaurant ERP", "description": "POS, kitchen, and inventory for hospitality groups", "href": "/use-cases/restaurant" },
-      { "title": "Manufacturing ERP", "description": "End-to-end control of your shop floor and back office", "href": "/use-cases/manufacturing" },
-      { "title": "Staff Training", "description": "Hands-on training so your team owns the system", "href": "/services/training" }
+      {
+        "title": "Restaurant ERP",
+        "description": "POS, kitchen, and inventory for hospitality groups",
+        "href": "/use-cases/restaurant"
+      },
+      {
+        "title": "Manufacturing ERP",
+        "description": "End-to-end control of your shop floor and back office",
+        "href": "/use-cases/manufacturing"
+      },
+      {
+        "title": "Staff Training",
+        "description": "Hands-on training so your team owns the system",
+        "href": "/services/training"
+      }
     ],
     "aboutPromo": {
       "kicker": "Featured Case Study",
@@ -130,5 +158,22 @@
     "blurb": "How manufacturers, foundries, and engineering businesses run on i.e tech — the problems they brought us, the systems we built together, and what changed in daily operations.",
     "emptyHeading": "No Case Studies Yet",
     "emptyMessage": "Our latest customer stories are on the way — check back soon."
+  },
+  "pages": {
+    "history": {
+      "heading": "How We Started",
+      "intro": "i.e tech began where our customers work: on the shop floor, watching good businesses run on scattered spreadsheets, phone calls, and the memory of their busiest people.",
+      "body": "We're engineers by background — our team has shipped software at global technology companies, contributed to open-source engineering projects, and worked hands-on with tier-1 manufacturers and precision parts producers. What kept striking us was the gap: world-class machining and casting happening on the floor, while the information around it moved on paper.\n\nSo we started i.e tech to close that gap properly. Not by selling licences and leaving, but by doing the unglamorous first step ourselves — walking the plant, mapping how orders, material, and money actually move, and only then deploying software shaped around it.\n\nToday that approach is our entire company: a consulting-led suite of ERP, CAD, and shop-floor IoT for manufacturers, foundries, and engineering businesses that have outgrown the spreadsheet era.\n\n## What we believe\n\n- **The plant is the spec.** Software should bend around your process, not the other way round.\n- **Deployment is the product.** A system nobody uses is shelfware; training and adoption are part of every engagement.\n- **Founders answer the phone.** You'll deal with the people who build the product — before and after go-live."
+    },
+    "team": {
+      "heading": "Founders & Team",
+      "intro": "i.e tech is founder-led and engineer-built. When you work with us, you work directly with the people who design, deploy, and stand behind the product.",
+      "body": "**Jayraj — CEO** leads the business and every customer engagement. He's the person on your factory floor in week one, mapping how your operation actually runs and staying accountable for what we promise.\n\n**Aditya — CTO** leads engineering. He's responsible for the product suite — the ERP, the CAD workspace, and the shop-floor integrations — and for making sure what we deploy keeps working long after go-live.\n\nAround them is a hands-on engineering team with experience across enterprise software, open-source projects, and manufacturing programmes with tier-1 suppliers.\n\n## How we work with you\n\nNo account managers, no hand-offs. The engineers who configure your system are the ones who trained on your floor, and the founders stay reachable on the numbers listed at the bottom of this page — that's deliberate, and it's permanent."
+    },
+    "training": {
+      "heading": "Staff Training",
+      "intro": "Software succeeds when your people own it. Every i.e tech deployment includes structured, on-site training for the team that will actually run the system.",
+      "body": "A system your operators avoid is worse than no system at all. That's why training isn't an add-on for us — it's a standing part of every deployment, delivered at your plant, on your machines, with your live data.\n\n## What the programme covers\n\n- **Operators** — day-to-day entries at the point of work: bookings, material issues, quality checks. Short, practical sessions on the floor.\n- **Supervisors and planners** — scheduling, work-order management, and reading the live production picture.\n- **Accounts and back office** — invoicing, purchase, GST and compliance flows that fall out of daily use.\n- **Owners and management** — the dashboards and reports that answer questions with numbers instead of meetings.\n\n## How it runs\n\nWe train in parallel with your existing process, so nothing stops while people learn. After go-live, we stay available for refreshers, new-hire onboarding, and process changes — the training relationship doesn't end when the deployment does.\n\nWant us to design a training plan for your team? [Get in touch](/#contact)."
+    }
   }
 }

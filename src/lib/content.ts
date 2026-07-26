@@ -1,5 +1,11 @@
 import siteJson from '../../content/site.json';
 
+export interface ContentPageData {
+  heading: string;
+  intro: string;
+  body: string;
+}
+
 /**
  * All site content is baked in at build time from the /content directory —
  * the live website can only change through a rebuild + deploy ("Publish to
@@ -70,6 +76,11 @@ export interface SiteContent {
     successMessage: string;
   };
   footer: { tagline: string; ctaLabel: string; copyrightName: string };
+  pages: {
+    history: ContentPageData;
+    team: ContentPageData;
+    training: ContentPageData;
+  };
   blogsPage: { heading: string; blurb: string; emptyHeading: string; emptyMessage: string };
   projectsPage: {
     kicker: string;
