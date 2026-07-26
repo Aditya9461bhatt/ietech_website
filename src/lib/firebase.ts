@@ -1,6 +1,6 @@
 import { initializeApp, type FirebaseApp } from 'firebase/app';
-import { getAuth, type Auth } from 'firebase/auth';
-import { getFirestore, type Firestore } from 'firebase/firestore';
+import { connectAuthEmulator, getAuth, type Auth } from 'firebase/auth';
+import { connectFirestoreEmulator, getFirestore, type Firestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -25,6 +25,13 @@ if (isFirebaseConfigured) {
   app = initializeApp(firebaseConfig);
   authInstance = getAuth(app);
   dbInstance = getFirestore(app);
+  // Local sandbox: `VITE_FIREBASE_EMULATOR=true npm run dev` after
+  // `firebase emulators:start` — dev-only, never active in production builds.
+  if (import.meta.env.DEV && import.meta.env.VITE_FIREBASE_EMULATOR === 'true') {
+    connectAuthEmulator(authInstance, 'http://localhost:9099', { disableWarnings: true });
+    connectFirestoreEmulator(dbInstance, 'localhost', 8080);
+    console.info('[firebase] using local Auth/Firestore emulators');
+  }
 } else {
   console.warn('[firebase] VITE_FIREBASE_* env vars are missing — auth, contact forms, and CMS content are disabled for this build.');
 }
