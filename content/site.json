@@ -1,12 +1,12 @@
 {
   "hero": {
-    "headline": "Manage your business operations with",
-    "headlineAccent": "our ERP & CAD.",
-    "subheadline": "We build and manage fully customized ERP and CAD ecosystems. Get the exact workflows and 3D engineering tools you need as a seamless service.",
-    "trustLine": "Trusted by leading companies",
+    "headline": "Consulting-led software for",
+    "headlineAccent": "manufacturing that means business.",
+    "subheadline": "i.e tech works with factories, foundries, and engineering firms to replace scattered spreadsheets and disconnected tools with one suite — ERP, CAD, and shop-floor IoT — shaped around how your plant actually runs.",
+    "trustLine": "Trusted by leading manufacturers",
     "googleCta": "Connect Instantly with Google",
-    "googleNote": "Share your email and we'll reach out within 24 hours",
-    "successMessage": "Inquiry received. We will contact soon."
+    "googleNote": "Share your email and we'll call you back within 24 hours",
+    "successMessage": "Inquiry received. We will contact you soon."
   },
   "contacts": [
     {
@@ -31,44 +31,44 @@
       {
         "key": "manufacturing-erp",
         "label": "Product",
-        "title": "i.e ERP - Manufacturing Command Centre",
-        "description": "Centralise finance, HR, CRM, inventory, production planning, and supply chain on one cloud-native platform built for manufacturers and engineering firms scaling beyond spreadsheets and disconnected tools.",
+        "title": "i.e ERP — Manufacturing Command Centre",
+        "description": "One platform for finance, HR, CRM, inventory, production planning, and dispatch — configured around your routings and your approval chains, not a template. We study how your plant works before a single screen is deployed.",
         "outcomes": [
-          "Unify finance, HR, CRM, inventory, and operations in one live data model",
-          "Automate invoicing, approvals, procurement, and reporting to cut manual effort",
-          "Track revenue, expenses, production, and pipeline in real time with configurable dashboards"
+          "Run finance, inventory, production, and sales on one live data model instead of five disconnected tools",
+          "Automate invoicing, approvals, procurement, and reporting that your team currently does by hand",
+          "See revenue, expenses, work orders, and pipeline in real time on dashboards built for your roles"
         ],
         "ctaLabel": "Explore Manufacturing ERP",
         "ctaHref": "/use-cases/manufacturing",
-        "secondaryCtaLabel": "Get in Touch",
-        "secondaryCtaHref": "https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Inquiry+about+your+services&body=Hey,+we+would+like+to+inquire+about+your+services."
+        "secondaryCtaLabel": "Talk to Us",
+        "secondaryCtaHref": "https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Manufacturing+ERP+inquiry&body=Hi,+we+run+a+manufacturing+business+and+would+like+to+talk+about+your+ERP."
       },
       {
         "key": "restaurant-erp",
         "label": "Product",
-        "title": "i.e ERP - Restaurant Management System",
-        "description": "A fully integrated point-of-sale, kitchen management, and inventory tracking system built for restaurants, hotels, and multi-chain hospitality businesses.",
+        "title": "i.e ERP — Restaurant Management System",
+        "description": "Point-of-sale, kitchen, inventory, and rooms in one integrated system for restaurants, hotels, and multi-outlet hospitality groups — deployed and supported by the team that built it.",
         "outcomes": [
-          "Manage real-time billing and POS across multiple outlets",
-          "Track ingredient consumption and automate purchase orders",
-          "Seamlessly handle table reservations, digital menus, and room service"
+          "Real-time billing and POS across every outlet, synced to one back office",
+          "Ingredient-level consumption tracking with automatic purchase suggestions",
+          "Tables, reservations, digital menus, and room service handled in the same system"
         ],
         "ctaLabel": "Explore Restaurant ERP",
         "ctaHref": "/use-cases/restaurant",
-        "secondaryCtaLabel": "Get in Touch",
-        "secondaryCtaHref": "https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Inquiry+about+your+services&body=Hey,+we+would+like+to+inquire+about+your+services."
+        "secondaryCtaLabel": "Talk to Us",
+        "secondaryCtaHref": "https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Restaurant+ERP+inquiry&body=Hi,+we+run+a+hospitality+business+and+would+like+to+talk+about+your+ERP."
       },
       {
         "key": "cad",
         "label": "Product",
         "title": "AI-Assisted CAD Workspace",
-        "description": "Design at the speed of thought in a cloud-native CAD workspace where AI assists with geometry, constraints, simulations, and optimisation.",
+        "description": "A cloud-native CAD environment where AI assists with geometry, constraints, and simulation — built for engineering teams that iterate fast and can't afford seats sitting idle.",
         "outcomes": [
-          "Cut iteration cycles with AI-assisted part generation, simulation, and constraint handling",
-          "Solve complex assemblies faster with engineering-grade constraint intelligence",
-          "Collaborate in real time with guided onboarding for distributed design teams"
+          "Cut design iteration cycles with AI-assisted part generation and constraint handling",
+          "Resolve complex assemblies faster with engineering-grade constraint intelligence",
+          "Collaborate in real time, with guided onboarding for distributed design teams"
         ],
-        "ctaLabel": "Register for Pilot",
+        "ctaLabel": "Register for the Pilot",
         "ctaHref": "https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Interested+in+the+AI+CAD+Pilot",
         "secondaryCtaLabel": "",
         "secondaryCtaHref": ""
@@ -77,57 +77,57 @@
   },
   "navbar": {
     "aboutItems": [
-      { "title": "Who we are", "description": "Learn about our core mission and values", "href": "/#about" },
-      { "title": "How we work", "description": "Discover our proven deployment methodology", "href": "/#how-we-work" },
+      { "title": "Who we are", "description": "A consulting-first technology company for manufacturers", "href": "/#about" },
+      { "title": "How we work", "description": "Study the plant first, then build — our deployment method", "href": "/#how-we-work" },
       { "title": "How we started", "description": "The story behind i.e tech", "href": "/about/history" },
-      { "title": "Founders and Team", "description": "Meet the people driving the vision", "href": "/about/team" }
+      { "title": "Founders and Team", "description": "The engineers you'll actually be working with", "href": "/about/team" }
     ],
     "servicesItems": [
-      { "title": "Restaurant ERP", "description": "Specialized POS and inventory for hospitality", "href": "/use-cases/restaurant" },
-      { "title": "Manufacturing ERP", "description": "End-to-end industrial shop floor control", "href": "/use-cases/manufacturing" },
-      { "title": "Staff Training", "description": "Comprehensive training for your workforce", "href": "/services/training" }
+      { "title": "Restaurant ERP", "description": "POS, kitchen, and inventory for hospitality groups", "href": "/use-cases/restaurant" },
+      { "title": "Manufacturing ERP", "description": "End-to-end control of your shop floor and back office", "href": "/use-cases/manufacturing" },
+      { "title": "Staff Training", "description": "Hands-on training so your team owns the system", "href": "/services/training" }
     ],
     "aboutPromo": {
       "kicker": "Featured Case Study",
       "title": "How We Digitised a Steel Manufacturing Plant",
       "description": "End-to-end ERP automation deployed on the shop floor.",
-      "linkText": "Click to view the full case study",
+      "linkText": "View our case studies",
       "href": "/projects"
     },
     "servicesPromo": {
       "kicker": "Latest from the Blog",
       "title": "CAD Integration Strategies for Modern Manufacturing",
-      "description": "Connecting CAD directly to your factory floor can save thousands of hours.",
-      "linkText": "Click to read the full blog",
-      "href": "/blogs"
+      "description": "Connecting CAD directly to your factory floor can save thousands of engineering hours.",
+      "linkText": "Read the full article",
+      "href": "/blog/cad-integration-strategies"
     }
   },
   "contactModal": {
-    "heading": "Get in Touch",
-    "subheading": "Tell us how to reach you and we'll take it from there.",
+    "heading": "Talk to the founders",
+    "subheading": "Tell us how to reach you and we'll take it from there — no forms committee, no sales funnel.",
     "directContactLabel": "Direct Contact",
     "googleCta": "Continue with Google",
-    "submitCta": "Get in Touch",
-    "promiseLine": "We'll reach out to you within 48 hours of you registering here.",
+    "submitCta": "Request a Callback",
+    "promiseLine": "We'll reach out within 24 hours of you registering here.",
     "successHeading": "We've got your details!",
-    "successMessage": "Our team will reach out to you within 48 hours. Keep an eye on your inbox."
+    "successMessage": "One of the founders will reach out within 24 hours. Keep an eye on your inbox."
   },
   "footer": {
-    "tagline": "Ready to transform operations? Contact leadership for demos, partnerships, and deployment planning.",
+    "tagline": "Ready to modernise your plant? Talk to the founders about demos, partnerships, and deployment planning.",
     "ctaLabel": "CONTACT US",
     "copyrightName": "i.e tech"
   },
   "blogsPage": {
     "heading": "Our\nBlogs",
-    "blurb": "Stay updated with our latest insights on AI integration, ERP systems, and modern manufacturing workflows.",
-    "emptyHeading": "No Blogs Yet",
+    "blurb": "Practical writing on manufacturing ERP, CAD, factory digitalisation, and what actually works on the shop floor — from the team that deploys it.",
+    "emptyHeading": "No Articles Yet",
     "emptyMessage": "New articles are on the way — check back soon."
   },
   "projectsPage": {
     "kicker": "Case Studies",
-    "headingLine1": "Operational Impact.",
-    "headingLine2": "Built for scale.",
-    "blurb": "Welcome to our central repository for all case studies and success stories. Here you can explore in-depth technical analyses of the custom software, integrations, and automation pipelines we've built to solve complex industrial problems.",
+    "headingLine1": "Operational impact,",
+    "headingLine2": "measured on the floor.",
+    "blurb": "How manufacturers, foundries, and engineering businesses run on i.e tech — the problems they brought us, the systems we built together, and what changed in daily operations.",
     "emptyHeading": "No Case Studies Yet",
     "emptyMessage": "Our latest customer stories are on the way — check back soon."
   }

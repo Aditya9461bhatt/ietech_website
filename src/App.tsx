@@ -113,7 +113,7 @@ function BlogsPage() {
       <Seo
         title="Blogs & Insights"
         path="/blogs"
-        description="Insights on AI integration, custom ERP systems, CAD, and modern manufacturing workflows from the i.e tech team."
+        description="Practical articles on manufacturing ERP, CAD integration, and factory digitalisation — written by the team that deploys them."
       />
       <div className="relative z-10 pt-20">
         <Navbar />
@@ -133,7 +133,7 @@ function ProjectsPage() {
       <Seo
         title="Customers & Case Studies"
         path="/projects"
-        description="Real-world Industry 4.0 deployments: ERP, CNC, foundry, casting and logistics case studies delivered by i.e tech."
+        description="How factories, foundries, and engineering businesses run on i.e tech — real ERP, CAD, and shop-floor deployments and what changed."
       />
       <div className="relative z-10 pt-20">
         <Navbar />
@@ -217,7 +217,7 @@ export default function App() {
               Component={CompanyHistory}
               title="Our Journey"
               path="/about/history"
-              description="The story of i.e tech: from CAD and engineering services to AI-driven Industry 4.0 solutions."
+              description="The story of i.e tech: from engineering services to a consulting-led software suite for manufacturers."
             />
           }
         />
@@ -250,7 +250,7 @@ export default function App() {
               Component={UseCaseRestaurant}
               title="AI ERP for Restaurants"
               path="/use-cases/restaurant"
-              description="How i.e tech's AI-driven ERP streamlines orders, inventory, and operations for restaurants."
+              description="How i.e tech's restaurant ERP runs orders, kitchen, inventory, and rooms for hospitality businesses — deployed and supported by its builders."
             />
           }
         />
@@ -261,7 +261,7 @@ export default function App() {
               Component={UseCaseManufacturing}
               title="AI ERP for Manufacturing"
               path="/use-cases/manufacturing"
-              description="How i.e tech's AI-driven ERP connects planning, production, and dispatch for manufacturers."
+              description="How i.e tech's manufacturing ERP connects planning, production, stores, and dispatch — configured around your plant, not a template."
             />
           }
         />

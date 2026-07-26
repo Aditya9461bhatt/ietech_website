@@ -1,7 +1,7 @@
 const SITE_URL = 'https://ietech.ai';
 const SITE_NAME = 'i.e tech';
 const DEFAULT_DESCRIPTION =
-  'Realising Industry 4.0 in real-world industries through AI, software, and intelligent hardware engineering.';
+  'i.e tech is a consulting-led technology company for manufacturers — ERP, CAD, and shop-floor IoT deployed around how your factory actually runs.';
 const DEFAULT_IMAGE = `${SITE_URL}/logo.svg`;
 
 interface SeoProps {
