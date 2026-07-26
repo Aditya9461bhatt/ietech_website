@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Loader2, CheckCircle } from 'lucide-react';
 import { useGoogleInquiry } from '../hooks/useGoogleInquiry';
+import { site } from '../lib/content';
 
 export default function Hero() {
   const {
@@ -22,9 +23,9 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-5xl md:text-6xl lg:text-[4rem] font-medium tracking-tight text-neutral-900 dark:text-white/95 max-w-4xl mx-auto leading-[1.1] text-balance transition-colors"
         >
-          Manage your business operations with
+          {site.hero.headline}
           <span className="block mt-2 font-semibold bg-gradient-to-br from-[#4A72A4] to-[#2C4566] bg-clip-text text-transparent">
-            our ERP & CAD.
+            {site.hero.headlineAccent}
           </span>
         </motion.h1>
 
@@ -34,7 +35,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-6 text-base md:text-lg lg:text-xl text-neutral-600 dark:text-neutral-500 max-w-2xl mx-auto leading-relaxed transition-colors text-balance"
         >
-          We build and manage fully customized ERP and CAD ecosystems. Get the exact workflows and 3D engineering tools you need as a seamless service.
+          {site.hero.subheadline}
         </motion.p>
 
         <motion.div
@@ -44,7 +45,7 @@ export default function Hero() {
           className="mt-12 md:mt-16 flex flex-col items-center justify-center gap-5 w-full max-w-4xl mx-auto"
         >
           <span className="text-[10px] md:text-xs font-semibold text-neutral-600 dark:text-neutral-500 uppercase tracking-[0.2em]">
-            Trusted by leading companies
+            {site.hero.trustLine}
           </span>
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-4 sm:gap-x-10 opacity-60 hover:opacity-100 transition-opacity duration-500">
             <img src="/logos/clients/tirupatiforge.png" alt="Tirupati Forge" className="h-[40px] md:h-[52px] w-auto object-contain mix-blend-screen invert grayscale" />
@@ -86,7 +87,7 @@ export default function Hero() {
                       <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
                       <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
                     </svg>
-                    <span className="relative">Connect Instantly with Google</span>
+                    <span className="relative">{site.hero.googleCta}</span>
                   </>
                 )}
               </button>
@@ -94,7 +95,7 @@ export default function Hero() {
                 <p className="text-xs text-red-400 mt-1">{googleError}</p>
               )}
               <p className="text-xs text-neutral-600 dark:text-neutral-500 mt-3 font-medium">
-                Share your email and we'll reach out within 24 hours
+                {site.hero.googleNote}
               </p>
             </div>
           ) : (
@@ -103,7 +104,7 @@ export default function Hero() {
                 className="inline-flex items-center justify-center gap-3 rounded-none border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-6 py-3 text-sm font-semibold text-neutral-900 dark:text-neutral-200 backdrop-blur-sm transition-all cursor-default"
               >
                 <CheckCircle className="h-4 w-4 text-neutral-900 dark:text-white" />
-                Inquiry received. We will contact soon.
+                {site.hero.successMessage}
               </div>
             </div>
           )}

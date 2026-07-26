@@ -1,81 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Seo, { SITE_URL } from './Seo';
-import { db } from '../lib/firebase';
-import { doc, getDoc, collection, getDocs, query, limit, where } from 'firebase/firestore';
-
-interface Project {
-  id: string;
-  title: string;
-  client: string;
-  industry: string;
-  date: string;
-  authorName: string;
-  authorEmail: string;
-  image: string;
-  content: string;
-}
+import { getCaseStudies, getCaseStudy } from '../lib/content';
 
 export default function ProjectDetail({ projectId, onBack }: { projectId: string; onBack: () => void }) {
-  const [project, setProject] = useState<Project | null>(null);
-  const [otherProjects, setOtherProjects] = useState<Project[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadFailed, setLoadFailed] = useState(false);
+  const project = getCaseStudy(projectId);
+  const otherProjects = getCaseStudies().filter((p) => p.slug !== projectId).slice(0, 3);
 
   useEffect(() => {
-    async function fetchProject() {
-      setIsLoading(true);
-      try {
-        const docRef = doc(db, 'case_studies', projectId);
-        const docSnap = await getDoc(docRef);
-        
-        if (docSnap.exists()) {
-          setProject({ id: docSnap.id, ...docSnap.data() } as Project);
-          
-          // Fetch 3 other case studies for the footer
-          const otherQ = query(
-            collection(db, 'case_studies'),
-            where('__name__', '!=', projectId),
-            limit(3)
-          );
-          const otherSnap = await getDocs(otherQ);
-          const others: Project[] = [];
-          otherSnap.forEach((d) => others.push({ id: d.id, ...d.data() } as Project));
-          setOtherProjects(others);
-        } else {
-          setProject(null);
-        }
-      } catch (err) {
-        console.error("Error fetching project:", err);
-        setLoadFailed(true);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    
-    fetchProject();
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [projectId]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-8 font-sans">
-        <Loader2 className="w-8 h-8 text-[#3F618C] animate-spin" />
-      </div>
-    );
-  }
 
   if (!project) {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-8 font-sans">
-        <Seo title={loadFailed ? 'Something went wrong' : 'Case Study Not Found'} path={`/project/${projectId}`} noindex />
-        <h2 className="text-2xl font-bold mb-4 tracking-tighter">{loadFailed ? 'Something went wrong' : 'Project Not Found'}</h2>
-        {loadFailed && (
-          <p className="text-neutral-400 mb-4 text-sm">We couldn't load this case study. Please refresh or try again later.</p>
-        )}
+        <Seo title="Case Study Not Found" path={`/project/${projectId}`} noindex />
+        <h2 className="text-2xl font-bold mb-4 tracking-tighter">Project Not Found</h2>
         <button
           onClick={onBack}
           className="px-6 py-3 border border-neutral-800 bg-[#3F618C] text-black font-bold uppercase tracking-wider rounded-none hover:opacity-90 transition-all text-xs"
@@ -113,7 +56,7 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
     <div className="min-h-screen bg-black text-white font-sans transition-colors duration-300">
       <Seo
         title={project.title}
-        path={`/project/${project.id}`}
+        path={`/project/${project.slug}`}
         description={description}
         image={imageAbs}
         type="article"
@@ -221,8 +164,8 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {otherProjects.map(p => (
               <Link
-                key={p.id}
-                to={`/project/${p.id}`}
+                key={p.slug}
+                to={`/project/${p.slug}`}
                 className="group block border border-neutral-800 bg-black overflow-hidden"
               >
                 <div className="aspect-[4/3] overflow-hidden bg-neutral-900 relative">

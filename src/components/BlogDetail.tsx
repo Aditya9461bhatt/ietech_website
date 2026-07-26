@@ -1,21 +1,9 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, Loader2 } from 'lucide-react';
+import { ArrowLeft, Clock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Seo, { SITE_URL } from './Seo';
-import { db } from '../lib/firebase';
-import { doc, getDoc } from 'firebase/firestore';
-
-interface BlogPost {
-  id: string;
-  title: string;
-  date: string;
-  category: string;
-  image?: string;
-  content: string;
-  authorName?: string;
-}
+import { getBlog } from '../lib/content';
 
 interface BlogDetailProps {
   slug: string;
@@ -23,50 +11,14 @@ interface BlogDetailProps {
 }
 
 export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadFailed, setLoadFailed] = useState(false);
-
-  useEffect(() => {
-    async function fetchBlog() {
-      setIsLoading(true);
-      try {
-        const docRef = doc(db, 'blogs', slug);
-        const docSnap = await getDoc(docRef);
-        
-        if (docSnap.exists()) {
-          setPost({ id: docSnap.id, ...docSnap.data() } as BlogPost);
-        } else {
-          setPost(null);
-        }
-      } catch (err) {
-        console.error("Error fetching blog:", err);
-        setLoadFailed(true);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchBlog();
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [slug]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-8 font-sans">
-        <Loader2 className="w-8 h-8 text-[#3F618C] animate-spin" />
-      </div>
-    );
-  }
+  const post = getBlog(slug);
 
   if (!post) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center text-white">
-        <Seo title={loadFailed ? 'Something went wrong' : 'Post Not Found'} path={`/blog/${slug}`} noindex />
+        <Seo title="Post Not Found" path={`/blog/${slug}`} noindex />
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">{loadFailed ? 'Something went wrong' : 'Post not found'}</h1>
-          {loadFailed && (
-            <p className="text-neutral-400 mb-4">We couldn't load this article. Please refresh or try again later.</p>
-          )}
+          <h1 className="text-4xl font-bold mb-4">Post not found</h1>
           <button onClick={onBack} className="text-blue-400 hover:underline">Back to Blogs</button>
         </div>
       </div>
@@ -98,14 +50,14 @@ export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
       name: 'i.e tech',
       logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.svg` },
     },
-    mainEntityOfPage: `${SITE_URL}/blog/${post.id}`,
+    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
   };
 
   return (
     <article className="min-h-screen bg-black text-white pb-24 font-sans">
       <Seo
         title={post.title}
-        path={`/blog/${post.id}`}
+        path={`/blog/${post.slug}`}
         description={description}
         image={imageAbs}
         type="article"

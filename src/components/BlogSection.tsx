@@ -1,55 +1,12 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, Loader2 } from 'lucide-react';
-import { db } from '../lib/firebase';
-import { collection, getDocs, query } from 'firebase/firestore';
-
-interface BlogPost {
-  id: string;
-  title: string;
-  date: string;
-  dateISO?: string;
-  category: string;
-  image?: string;
-  excerpt?: string;
-  content: string;
-  authorName?: string;
-}
+import { ArrowUpRight } from 'lucide-react';
+import { getBlogs, site } from '../lib/content';
 
 export default function BlogSection() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadFailed, setLoadFailed] = useState(false);
+  const posts = getBlogs();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
-  useEffect(() => {
-    async function fetchBlogs() {
-      try {
-        const q = query(collection(db, 'blogs'));
-        const querySnapshot = await getDocs(q);
-        const fetchedPosts: BlogPost[] = [];
-        querySnapshot.forEach((doc) => {
-          fetchedPosts.push({ id: doc.id, ...doc.data() } as BlogPost);
-        });
-        
-        // Sort by date (descending); prefers the machine-readable dateISO.
-        const t = (p: BlogPost) => {
-          const ms = p.dateISO ? Date.parse(p.dateISO) : Date.parse(p.date);
-          return Number.isNaN(ms) ? 0 : ms;
-        };
-        fetchedPosts.sort((a, b) => t(b) - t(a));
-        setPosts(fetchedPosts);
-      } catch (error) {
-        console.error("Error fetching blogs:", error);
-        setLoadFailed(true);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchBlogs();
-  }, []);
 
   return (
     <section id="blogs" className="py-24 relative overflow-hidden bg-black text-white">
@@ -68,10 +25,12 @@ export default function BlogSection() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-5xl md:text-6xl font-black tracking-tight mb-6 leading-[1.1]">
-                Our<br />Blogs
+                {site.blogsPage.heading.split('\n').map((line, i) => (
+                  <span key={i}>{i > 0 && <br />}{line}</span>
+                ))}
               </h2>
               <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-sm mb-12">
-                Stay updated with our latest insights on AI integration, ERP systems, and modern manufacturing workflows.
+                {site.blogsPage.blurb}
               </p>
               
               {pathname !== '/blogs' && (
@@ -90,21 +49,17 @@ export default function BlogSection() {
 
           {/* Right Column - Blog List */}
           <div className="lg:w-2/3 flex flex-col gap-4">
-            {isLoading ? (
-              <div className="flex justify-center items-center py-20">
-                <Loader2 className="w-8 h-8 text-[#3F618C] animate-spin" />
-              </div>
-            ) : posts.length === 0 ? (
+            {posts.length === 0 ? (
               <div className="text-center py-20 border border-white/10 bg-black/50 rounded-sm">
-                <h3 className="text-xl text-white font-bold mb-2">{loadFailed ? "Couldn't load blogs" : 'No Blogs Yet'}</h3>
-                <p className="text-neutral-500 text-sm">{loadFailed ? 'Something went wrong on our end. Please refresh or try again later.' : 'New articles are on the way — check back soon.'}</p>
+                <h3 className="text-xl text-white font-bold mb-2">{site.blogsPage.emptyHeading}</h3>
+                <p className="text-neutral-500 text-sm">{site.blogsPage.emptyMessage}</p>
               </div>
             ) : (
               posts.map((post, index) => (
                 <motion.a
-                  key={post.id}
-                  href={`/blog/${post.id}`}
-                  onClick={(e) => { e.preventDefault(); navigate(`/blog/${post.id}`); }}
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  onClick={(e) => { e.preventDefault(); navigate(`/blog/${post.slug}`); }}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: false }}

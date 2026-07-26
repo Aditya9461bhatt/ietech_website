@@ -4,35 +4,22 @@ rules_version = '2';
 //
 // SECURITY MODEL
 // --------------
-// The React app enforces an admin allow-list in the UI (ALLOWED_ADMIN_EMAILS),
-// but UI checks are cosmetic: anyone can call the Firestore REST/SDK API directly
-// with the public web config. These rules are the ONLY real access control, so
-// every collection is locked down here as well.
-//
-// Keep the admin list below in sync with ALLOWED_ADMIN_EMAILS in
-// src/components/AdminCMS.tsx and src/components/AdminDashboard.tsx.
+// Site content lives as files in the repo (see /content) and the CMS is a
+// local-only tool — Firestore's sole remaining job is receiving contact-form
+// leads. Everything else is denied.
 
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Is the caller a signed-in, verified admin?
-    function isAdmin() {
-      return request.auth != null
-        && request.auth.token.email_verified == true
-        && request.auth.token.email in [
-          '138aditya@gmail.com'
-        ];
-    }
-
-    // Public content: anyone may read; only an admin may create/update/delete.
+    // Content (blogs / case studies) now lives as files in the repo and is
+    // baked into the site at build time — these collections are unused and
+    // fully locked. (Kept as an explicit deny in case old data remains.)
     match /blogs/{docId} {
-      allow read: if true;
-      allow write: if isAdmin();
+      allow read, write: if false;
     }
 
     match /case_studies/{docId} {
-      allow read: if true;
-      allow write: if isAdmin();
+      allow read, write: if false;
     }
 
     // Contact form: the public may CREATE a lead, but nobody may read, update,

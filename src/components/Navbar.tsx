@@ -4,73 +4,24 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Phone, MessageCircle, ChevronDown, BookOpen, Target, History, Users, Utensils, Factory, GraduationCap, ArrowRight, Menu, X } from 'lucide-react';
 import Logo from './Logo';
 import { useContact } from '../context/ContactContext';
+import { site } from '../lib/content';
 
-const ABOUT_ITEMS = [
-  {
-    icon: <BookOpen className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
-    title: 'Who we are',
-    description: 'Learn about our core mission and values',
-    href: '/#about'
-  },
-  {
-    icon: <Target className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
-    title: 'How we work',
-    description: 'Discover our proven deployment methodology',
-    href: '/#how-we-work'
-  },
-  {
-    icon: <History className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
-    title: 'How we started',
-    description: 'The story behind i.e tech',
-    href: '/about/history'
-  },
-  {
-    icon: <Users className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
-    title: 'Founders and Team',
-    description: 'Meet the people driving the vision',
-    href: '/about/team'
-  }
-];
+// Icons stay in code (matched by position); all text comes from content/site.json.
+const ABOUT_ICONS = [BookOpen, Target, History, Users];
+const SERVICES_ICONS = [Utensils, Factory, GraduationCap];
+const DEFAULT_ICON = BookOpen;
 
-const SERVICES_ITEMS = [
-  {
-    icon: <Utensils className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
-    title: 'Restaurant ERP',
-    description: 'Specialized POS and inventory for hospitality',
-    href: '/use-cases/restaurant'
-  },
-  {
-    icon: <Factory className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
-    title: 'Manufacturing ERP',
-    description: 'End-to-end industrial shop floor control',
-    href: '/use-cases/manufacturing'
-  },
-  {
-    icon: <GraduationCap className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />,
-    title: 'Staff Training',
-    description: 'Comprehensive training for your workforce',
-    href: '/services/training'
-  }
-];
+const ABOUT_ITEMS = site.navbar.aboutItems.map((item, i) => {
+  const Icon = ABOUT_ICONS[i] ?? DEFAULT_ICON;
+  return { ...item, icon: <Icon className="w-5 h-5 text-neutral-600 dark:text-neutral-400" /> };
+});
 
-const contacts = [
-  {
-    name: 'Jayraj',
-    role: 'CEO',
-    email: 'ceojayraj@ietech.ai',
-    phone: '+919558525296',
-    phoneDisplay: '+91 95585 25296',
-    whatsapp: '919558525296',
-  },
-  {
-    name: 'Aditya',
-    role: 'CTO',
-    email: 'ctoaditya@ietech.ai',
-    phone: '+919313523728',
-    phoneDisplay: '+91 93135 23728',
-    whatsapp: '919313523728',
-  },
-];
+const SERVICES_ITEMS = site.navbar.servicesItems.map((item, i) => {
+  const Icon = SERVICES_ICONS[i] ?? DEFAULT_ICON;
+  return { ...item, icon: <Icon className="w-5 h-5 text-neutral-600 dark:text-neutral-400" /> };
+});
+
+const contacts = site.contacts;
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -190,20 +141,20 @@ export default function Navbar() {
                 </div>
                 {/* Right Side: Promoted Case Study */}
                 <div className="w-1/2 bg-neutral-50 dark:bg-[#111111] p-6 border-l border-black/5 dark:border-white/5 flex flex-col">
-                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F618C] mb-3">Featured Case Study</p>
-                   <Link to="/projects" onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
+                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F618C] mb-3">{site.navbar.aboutPromo.kicker}</p>
+                   <Link to={site.navbar.aboutPromo.href} onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
                      <div className="aspect-[4/3] relative">
-                       <img src="/industry-cad-demo.jpg" alt="Manufacturing CAD Case Study" className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.45] transition-all duration-700" />
+                       <img src="/industry-cad-demo.jpg" alt={site.navbar.aboutPromo.title} className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.45] transition-all duration-700" />
                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                        <div className="absolute inset-0 flex flex-col justify-end p-5">
-                         <h3 className="text-[15px] font-bold text-white leading-snug mb-1">How We Digitised a Steel Manufacturing Plant</h3>
-                         <p className="text-xs text-neutral-300 leading-relaxed">End-to-end ERP automation deployed on the shop floor.</p>
+                         <h3 className="text-[15px] font-bold text-white leading-snug mb-1">{site.navbar.aboutPromo.title}</h3>
+                         <p className="text-xs text-neutral-300 leading-relaxed">{site.navbar.aboutPromo.description}</p>
                        </div>
                      </div>
                    </Link>
                    <div className="mt-3 flex items-center gap-2">
-                     <Link to="/projects" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
-                       Click to view the full case study <ArrowRight className="w-3.5 h-3.5" />
+                     <Link to={site.navbar.aboutPromo.href} onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
+                       {site.navbar.aboutPromo.linkText} <ArrowRight className="w-3.5 h-3.5" />
                      </Link>
                    </div>
                 </div>
@@ -258,20 +209,20 @@ export default function Navbar() {
                 </div>
                 {/* Right Side: Promoted Blog Post */}
                 <div className="w-1/2 bg-neutral-50 dark:bg-[#111111] p-6 border-l border-black/5 dark:border-white/5 flex flex-col">
-                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F618C] mb-3">Latest from the Blog</p>
-                   <Link to="/blogs" onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
+                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F618C] mb-3">{site.navbar.servicesPromo.kicker}</p>
+                   <Link to={site.navbar.servicesPromo.href} onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
                      <div className="aspect-[4/3] relative">
-                       <img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?q=80&w=1600&auto=format&fit=crop" alt="CAD Integration Blog" className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.45] transition-all duration-700" />
+                       <img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?q=80&w=1600&auto=format&fit=crop" alt={site.navbar.servicesPromo.title} className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.45] transition-all duration-700" />
                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                        <div className="absolute inset-0 flex flex-col justify-end p-5">
-                         <h3 className="text-[15px] font-bold text-white leading-snug mb-1">CAD Integration Strategies for Modern Manufacturing</h3>
-                         <p className="text-xs text-neutral-300 leading-relaxed">Connecting CAD directly to your factory floor can save thousands of hours.</p>
+                         <h3 className="text-[15px] font-bold text-white leading-snug mb-1">{site.navbar.servicesPromo.title}</h3>
+                         <p className="text-xs text-neutral-300 leading-relaxed">{site.navbar.servicesPromo.description}</p>
                        </div>
                      </div>
                    </Link>
                    <div className="mt-3 flex items-center gap-2">
-                     <Link to="/blogs" onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
-                       Click to read the full blog <ArrowRight className="w-3.5 h-3.5" />
+                     <Link to={site.navbar.servicesPromo.href} onClick={() => setActiveMenu(null)} className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
+                       {site.navbar.servicesPromo.linkText} <ArrowRight className="w-3.5 h-3.5" />
                      </Link>
                    </div>
                 </div>

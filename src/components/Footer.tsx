@@ -1,20 +1,13 @@
 import { Mail, Phone } from 'lucide-react';
 import Logo from './Logo';
+import { site } from '../lib/content';
 
-const leadershipContacts = [
-  {
-    name: 'Jayraj (CEO)',
-    email: 'ceojayraj@ietech.ai',
-    phoneDisplay: '9558525296',
-    phoneHref: 'tel:+919558525296',
-  },
-  {
-    name: 'Aditya (CTO)',
-    email: 'ctoaditya@ietech.ai',
-    phoneDisplay: '9313523728',
-    phoneHref: 'tel:+919313523728',
-  },
-];
+const leadershipContacts = site.contacts.map((c) => ({
+  name: `${c.name} (${c.role})`,
+  email: c.email,
+  phoneDisplay: c.phoneDisplay,
+  phoneHref: `tel:${c.phone}`,
+}));
 
 export default function Footer({ onContactOpen }: { onContactOpen?: () => void }) {
   return (
@@ -52,7 +45,7 @@ export default function Footer({ onContactOpen }: { onContactOpen?: () => void }
           <div className="flex items-center gap-3">
             <Logo className="h-9 w-auto opacity-90" />
             <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              Ready to transform operations? Contact leadership for demos, partnerships, and deployment planning.
+              {site.footer.tagline}
             </p>
           </div>
 
@@ -61,7 +54,7 @@ export default function Footer({ onContactOpen }: { onContactOpen?: () => void }
             onClick={onContactOpen}
             className="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold tracking-[0.1em] text-white bg-black dark:text-black dark:bg-white  uppercase rounded-none transition-all duration-300 hover:bg-neutral-800 dark:hover:bg-neutral-200"
           >
-            CONTACT US
+            {site.footer.ctaLabel}
           </button>
         </div>
 
@@ -95,7 +88,7 @@ export default function Footer({ onContactOpen }: { onContactOpen?: () => void }
         </div>
 
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          &copy; {new Date().getFullYear()} i.e tech. All rights reserved.
+          &copy; {new Date().getFullYear()} {site.footer.copyrightName}. All rights reserved.
         </p>
       </div>
     </footer>

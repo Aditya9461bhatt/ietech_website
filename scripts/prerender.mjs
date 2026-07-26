@@ -9,13 +9,13 @@
  *
  * It also writes `dist/sitemap.xml` from the same route list.
  *
- * Dynamic routes (blog/case-study slugs) are read from the Firestore REST API,
- * so a rebuild picks up newly published content. Run it as part of the build:
+ * Dynamic routes (blog/case-study slugs) come from the /content directory —
+ * the same files the site itself bakes in. Run it as part of the build:
  *   npm run build:static
  */
 import { createServer } from 'node:http';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, extname, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer';
@@ -27,29 +27,14 @@ const PORT = 5178;
 const ORIGIN = `http://localhost:${PORT}`;
 const SITE_URL = 'https://ietech.ai';
 
-// --- read Firebase config from .env (project id + api key) --------------------
-function loadEnv() {
-  const env = {};
-  try {
-    const raw = existsSync(join(ROOT, '.env')) ? readFileSync(join(ROOT, '.env'), 'utf8') : '';
-    for (const line of raw.split('\n')) {
-      const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*"?([^"\n]*)"?\s*$/);
-      if (m) env[m[1]] = m[2];
-    }
-  } catch {}
-  return env;
-}
-
-async function fetchSlugs(projectId, apiKey, collection) {
-  const url = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/${collection}?key=${apiKey}&pageSize=300`;
-  try {
-    const res = await fetch(url);
-    if (!res.ok) return [];
-    const data = await res.json();
-    return (data.documents || []).map((d) => d.name.split('/').pop());
-  } catch {
-    return [];
-  }
+// --- content slugs from /content (drafts excluded) ----------------------------
+function contentSlugs(dir) {
+  const full = join(ROOT, 'content', dir);
+  if (!existsSync(full)) return [];
+  return readdirSync(full)
+    .filter((f) => f.endsWith('.md'))
+    .filter((f) => !/^status:\s*draft\s*$/m.test(readFileSync(join(full, f), 'utf8')))
+    .map((f) => f.replace(/\.md$/, ''));
 }
 
 // --- minimal static server with SPA fallback ---------------------------------
@@ -149,14 +134,8 @@ async function main() {
     console.error('[prerender] dist/index.html not found — run `vite build` first.');
     process.exit(1);
   }
-  const env = loadEnv();
-  const projectId = env.VITE_FIREBASE_PROJECT_ID || 'ietech-ai';
-  const apiKey = env.VITE_FIREBASE_API_KEY || '';
-
-  const [blogSlugs, caseSlugs] = await Promise.all([
-    apiKey ? fetchSlugs(projectId, apiKey, 'blogs') : [],
-    apiKey ? fetchSlugs(projectId, apiKey, 'case_studies') : [],
-  ]);
+  const blogSlugs = contentSlugs('blogs');
+  const caseSlugs = contentSlugs('case-studies');
 
   const routes = [
     '/', '/blogs', '/projects', '/404',

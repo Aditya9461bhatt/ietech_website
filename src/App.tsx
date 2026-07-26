@@ -1,5 +1,5 @@
 import { useEffect, lazy, Suspense } from 'react';
-import { Routes, Route, Navigate, useParams, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams, useNavigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -14,8 +14,6 @@ import './index.css';
 // Route-level components that never render on the landing page are split into
 // their own chunks so they (and their Firebase/markdown/admin code) stay out of
 // the initial download.
-const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
-const AdminCMS = lazy(() => import('./components/AdminCMS'));
 const Projects = lazy(() => import('./components/Projects'));
 const ProjectDetail = lazy(() => import('./components/ProjectDetail'));
 const BlogSection = lazy(() => import('./components/BlogSection'));
@@ -174,33 +172,6 @@ function BlogDetailPage() {
   );
 }
 
-function AdminDashboardPage() {
-  const navigate = useNavigate();
-  return (
-    <>
-      <Seo title="Admin" path="/admin" noindex />
-      <Suspense fallback={<RouteFallback />}>
-        <AdminDashboard onNavigate={(route) => navigate(hashToPath(route))} />
-      </Suspense>
-    </>
-  );
-}
-
-function AdminEditPage() {
-  const [params] = useSearchParams();
-  const navigate = useNavigate();
-  const type = (params.get('type') as 'blog' | 'case_study') || 'blog';
-  const id = params.get('id') || undefined;
-  return (
-    <>
-      <Seo title="Edit Content" path="/admin/edit" noindex />
-      <Suspense fallback={<RouteFallback />}>
-        <AdminCMS type={type} editId={id} onBack={() => navigate('/admin')} />
-      </Suspense>
-    </>
-  );
-}
-
 type StandaloneComponent = React.ComponentType<{ onContactOpen: () => void }>;
 
 /** Full-page components that render their own Navbar/Footer (added on master). */
@@ -224,11 +195,6 @@ function StandalonePage({
       </Suspense>
     </>
   );
-}
-
-/** Translate any legacy `#/...` route strings still passed by children to paths. */
-function hashToPath(route: string): string {
-  return route.replace(/^#/, '') || '/';
 }
 
 export default function App() {
@@ -299,8 +265,6 @@ export default function App() {
             />
           }
         />
-        <Route path="/admin" element={<AdminDashboardPage />} />
-        <Route path="/admin/edit" element={<AdminEditPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

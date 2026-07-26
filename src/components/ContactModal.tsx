@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, Mail, Phone, Loader2, CheckCircle, ArrowRight } from 'lucide-react';
 import { useGoogleInquiry } from '../hooks/useGoogleInquiry';
+import { site } from '../lib/content';
 
 interface ContactModalProps {
     isOpen: boolean;
@@ -127,24 +128,23 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                     {/* Header */}
                                     <div className="text-center">
                                         <h2 className="text-xl font-bold tracking-tight text-black dark:text-white sm:text-2xl">
-                                            Get in Touch
+                                            {site.contactModal.heading}
                                         </h2>
                                         <p className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-                                            Tell us how to reach you and we'll take it from there.
+                                            {site.contactModal.subheading}
                                         </p>
                                     </div>
 
                                     <div className="mt-5 rounded-sm border border-neutral-200 bg-neutral-50 p-3 dark:border-white/10 dark:bg-white/[0.03]">
                                         <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-neutral-600 dark:text-neutral-400">
-                                            Direct Contact
+                                            {site.contactModal.directContactLabel}
                                         </p>
                                         <div className="mt-2 space-y-1.5 text-xs">
-                                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai" target="_blank" rel="noopener noreferrer" className="block text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-neutral-900 dark:hover:text-white">
-                                                Jayraj (CEO): ceojayraj@ietech.ai · 9558525296
-                                            </a>
-                                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ctoaditya@ietech.ai" target="_blank" rel="noopener noreferrer" className="block text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-neutral-900 dark:hover:text-white">
-                                                Aditya (CTO): ctoaditya@ietech.ai · 9313523728
-                                            </a>
+                                            {site.contacts.map((c) => (
+                                                <a key={c.email} href={`https://mail.google.com/mail/?view=cm&fs=1&to=${c.email}`} target="_blank" rel="noopener noreferrer" className="block text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white">
+                                                    {c.name} ({c.role}): {c.email} · {c.phoneDisplay}
+                                                </a>
+                                            ))}
                                         </div>
                                     </div>
 
@@ -180,7 +180,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                                         fill="#EA4335"
                                                     />
                                                 </svg>
-                                                Continue with Google
+                                                {site.contactModal.googleCta}
                                             </>
                                         )}
                                     </button>
@@ -260,7 +260,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                                 </>
                                             ) : (
                                                 <>
-                                                    Get in Touch
+                                                    {site.contactModal.submitCta}
                                                     <ArrowRight className="h-4 w-4" />
                                                 </>
                                             )}
@@ -268,7 +268,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
                                         {/* 48-hour note */}
                                         <p className="pt-1 text-center text-[11px] leading-relaxed text-neutral-600 dark:text-neutral-500">
-                                            We'll reach out to you within 48 hours of you registering here.
+                                            {site.contactModal.promiseLine}
                                         </p>
                                     </form>
                                 </>
@@ -279,10 +279,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                         <CheckCircle className="h-7 w-7 text-emerald-500" />
                                     </div>
                                     <h2 className="mt-5 text-xl font-bold text-black dark:text-white">
-                                        We've got your details!
+                                        {site.contactModal.successHeading}
                                     </h2>
                                     <p className="mt-2 max-w-[280px] text-sm text-neutral-600 dark:text-neutral-400">
-                                        Our team will reach out to you within 48 hours. Keep an eye on your inbox.
+                                        {site.contactModal.successMessage}
                                     </p>
                                     <button
                                         type="button"

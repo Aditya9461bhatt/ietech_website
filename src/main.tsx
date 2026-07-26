@@ -4,7 +4,6 @@ import { MotionConfig } from 'framer-motion'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import { ThemeProvider } from './hooks/useTheme.tsx'
-import { AuthProvider } from './context/AuthContext.tsx'
 import { ContactProvider } from './context/ContactContext.tsx'
 
 // NOTE: we intentionally use createRoot (not hydrateRoot) even though pages are
@@ -33,13 +32,11 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <AuthProvider>
-          <ContactProvider>
-            <MotionConfig reducedMotion="user">
-              <App />
-            </MotionConfig>
-          </ContactProvider>
-        </AuthProvider>
+        <ContactProvider>
+          <MotionConfig reducedMotion="user">
+            <App />
+          </MotionConfig>
+        </ContactProvider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,

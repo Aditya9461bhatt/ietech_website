@@ -1,55 +1,10 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Loader2 } from 'lucide-react';
-import { db } from '../lib/firebase';
-import { collection, getDocs, query } from 'firebase/firestore';
-
-interface Project {
-  id: string;
-  title: string;
-  client: string;
-  industry: string;
-  status?: string;
-  shortDescription?: string;
-  date: string;
-  dateISO?: string;
-  authorName: string;
-  authorEmail: string;
-  image: string;
-  content: string;
-}
+import { ArrowUpRight } from 'lucide-react';
+import { getCaseStudies, site } from '../lib/content';
 
 export default function Projects() {
-  const [projectsData, setProjectsData] = useState<Project[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadFailed, setLoadFailed] = useState(false);
-
-  useEffect(() => {
-    async function fetchProjects() {
-      try {
-        const q = query(collection(db, 'case_studies'));
-        const querySnapshot = await getDocs(q);
-        const projects: Project[] = [];
-        querySnapshot.forEach((doc) => {
-          projects.push({ id: doc.id, ...doc.data() } as Project);
-        });
-        // Newest first; prefers the machine-readable dateISO.
-        const t = (p: Project) => {
-          const ms = p.dateISO ? Date.parse(p.dateISO) : Date.parse(p.date);
-          return Number.isNaN(ms) ? 0 : ms;
-        };
-        projects.sort((a, b) => t(b) - t(a));
-        setProjectsData(projects);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-        setLoadFailed(true);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchProjects();
-  }, []);
+  const projectsData = getCaseStudies();
 
   const fadeUp = {
     initial: { opacity: 0, y: 30 },
@@ -74,42 +29,35 @@ export default function Projects() {
             <div className="flex items-center justify-center gap-4 mb-4 md:mb-6">
                 <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
                 <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#3F618C]">
-                    Case Studies
+                    {site.projectsPage.kicker}
                 </span>
                 <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-neutral-900 dark:text-white leading-[1.1] mb-4">
-              Operational Impact.<br/>
-              <span className="text-neutral-600 dark:text-neutral-500">Built for scale.</span>
+              {site.projectsPage.headingLine1}<br/>
+              <span className="text-neutral-600 dark:text-neutral-500">{site.projectsPage.headingLine2}</span>
             </h2>
             <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
-              Welcome to our central repository for all case studies and success stories. Here you can explore in-depth technical analyses of the custom software, integrations, and automation pipelines we've built to solve complex industrial problems.
+              {site.projectsPage.blurb}
             </p>
           </motion.div>
         </div>
 
-        {/* Loading State */}
-        {isLoading && (
-          <div className="flex justify-center items-center py-20">
-            <Loader2 className="w-8 h-8 text-[#3F618C] animate-spin" />
-          </div>
-        )}
-
         {/* Empty State */}
-        {!isLoading && projectsData.length === 0 && (
+        {projectsData.length === 0 && (
           <div className="text-center py-20 border border-black/10 dark:border-white/10 bg-white dark:bg-black">
-            <h3 className="text-xl text-neutral-900 dark:text-white font-bold mb-2">{loadFailed ? "Couldn't load case studies" : 'No Case Studies Yet'}</h3>
-            <p className="text-neutral-600 dark:text-neutral-500 text-sm">{loadFailed ? 'Something went wrong on our end. Please refresh or try again later.' : 'Our latest customer stories are on the way — check back soon.'}</p>
+            <h3 className="text-xl text-neutral-900 dark:text-white font-bold mb-2">{site.projectsPage.emptyHeading}</h3>
+            <p className="text-neutral-600 dark:text-neutral-500 text-sm">{site.projectsPage.emptyMessage}</p>
           </div>
         )}
 
         {/* Simple Grid Layout */}
-        {!isLoading && projectsData.length > 0 && (
+        {projectsData.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
             {projectsData.map((project) => {
               return (
                 <div
-                  key={project.id}
+                  key={project.slug}
                   className="bg-transparent border border-black/10 dark:border-white/10 flex flex-col group hover:border-white/30 transition-colors duration-300 relative"
                 >
                   {/* Visual Graphic Representation */}
@@ -139,7 +87,7 @@ export default function Projects() {
                     {/* Explore More */}
                     <div className="mt-auto pt-4 border-t border-black/5 dark:border-white/5">
                       <Link
-                        to={`/project/${project.id}`}
+                        to={`/project/${project.slug}`}
                         className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:text-[#3F618C] transition-colors group/btn"
                       >
                         <span>Explore more</span>
