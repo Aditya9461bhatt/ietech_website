@@ -1,12 +1,24 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowDown, CheckCircle2, Loader2, CheckCircle, ClipboardList, Package, Layers, ShieldCheck, Factory, BarChart3 } from 'lucide-react';
 import { useGoogleInquiry } from '../hooks/useGoogleInquiry';
+import { site } from '../lib/content';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ManufacturingERP from './animations/ManufacturingERP';
 import ShopFloorBoard from './animations/ShopFloorBoard';
 import InventoryBoard from './animations/InventoryBoard';
 import ScaledPreview from './ScaledPreview';
+
+const content = site.useCases.manufacturing;
+
+const moduleIcons = [
+  <Layers className="w-5 h-5" />,
+  <Factory className="w-5 h-5" />,
+  <Package className="w-5 h-5" />,
+  <ShieldCheck className="w-5 h-5" />,
+  <ClipboardList className="w-5 h-5" />,
+  <BarChart3 className="w-5 h-5" />,
+];
 
 export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen: () => void }) {
   const {
@@ -30,7 +42,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               className="mb-6"
             >
               <span className="text-[10px] md:text-xs font-semibold text-neutral-600 dark:text-neutral-500 uppercase tracking-[0.2em]">
-                Manufacturing ERP Solution
+                {content.hero.kicker}
               </span>
             </motion.div>
 
@@ -40,9 +52,9 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-5xl md:text-6xl lg:text-[4rem] font-medium tracking-tight text-neutral-900 dark:text-white/95 max-w-4xl mx-auto leading-[1.1] text-balance transition-colors"
             >
-              Run your entire factory floor with
+              {content.hero.headline}
               <span className="block mt-2 font-semibold bg-gradient-to-br from-[#F0F8FF] to-[#D35400] bg-clip-text text-transparent">
-                our Manufacturing ERP.
+                {content.hero.headlineAccent}
               </span>
             </motion.h1>
 
@@ -52,7 +64,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mt-6 text-base md:text-lg lg:text-xl text-neutral-600 dark:text-neutral-500 max-w-2xl mx-auto leading-relaxed transition-colors text-balance"
             >
-              Bring your materials, work orders, shop floor, planning, and quality control into one easy-to-use platform. Get rid of bottlenecks and speed up your factory.
+              {content.hero.subheadline}
             </motion.p>
 
             <motion.div
@@ -65,13 +77,13 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
                 <div className="flex flex-col items-center gap-2 relative">
                   <div className="flex items-center gap-4">
                     <a
-                      href="https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Requesting a Demo for ietech ERP"
+                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=${content.hero.demoMailSubject}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative inline-flex items-center gap-3 overflow-hidden rounded-none bg-black text-white dark:bg-white dark:text-black px-7 py-3.5  font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:shadow-[0_14px_36px_rgba(250,250,250,0.2)]"
                     >
                       <span className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-gradient-to-r from-transparent via-black/10 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />
-                      <span className="relative uppercase text-xs font-bold tracking-[0.1em]">Request a Demo</span>
+                      <span className="relative uppercase text-xs font-bold tracking-[0.1em]">{content.hero.demoCta}</span>
                     </a>
                     <button
                       type="button"
@@ -102,7 +114,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
                     <p className="text-xs text-red-400 mt-1">{googleError}</p>
                   )}
                   <p className="text-xs text-neutral-600 dark:text-neutral-500 mt-3 font-medium">
-                    Share your email and we'll reach out within 24 hours
+                    {content.hero.googleNote}
                   </p>
                 </div>
               ) : (
@@ -111,7 +123,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
                     className="inline-flex items-center justify-center gap-3 rounded-none border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-6 py-3 text-sm font-semibold text-neutral-900 dark:text-neutral-200 backdrop-blur-sm transition-all cursor-default"
                   >
                     <CheckCircle className="h-4 w-4 text-neutral-900 dark:text-white" />
-                    Inquiry received. We will contact soon.
+                    {content.hero.successMessage}
                   </div>
                 </div>
               )}
@@ -125,7 +137,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
             <div className="flex items-center justify-center gap-4">
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
               <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] bg-gradient-to-br from-[#F0F8FF] to-[#D35400] bg-clip-text text-transparent">
-                What We Do
+                {content.whatWeDo.kicker}
               </span>
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
             </div>
@@ -140,18 +152,13 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               className="order-2 lg:order-1 flex flex-col justify-center max-w-[500px] mx-auto lg:mx-0"
             >
               <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] mb-6 text-neutral-900 dark:text-[#f5f5f5] tracking-tight text-balance">
-                Everything you need to run your factory
+                {content.whatWeDo.heading}
               </h2>
               <p className="text-[17px] lg:text-[19px] text-neutral-600 dark:text-[#a1a1aa] mb-8 leading-relaxed text-balance">
-                Stop relying on messy spreadsheets, paper notes, and disconnected software. Our system brings your whole factory onto one simple platform to automate the hard work for you.
+                {content.whatWeDo.paragraph}
               </p>
               <ul className="flex flex-col gap-4">
-                {[
-                  'Replace messy, disconnected legacy software',
-                  'Perfect for factories with complex, multi-step production',
-                  'Ditch the spreadsheets for live, accurate data',
-                  'Find and fix delays to produce goods faster'
-                ].map((feature, i) => (
+                {content.whatWeDo.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-3 text-neutral-600 dark:text-neutral-400">
                     <CheckCircle2 className="w-5 h-5 text-[#F0F8FF] shrink-0 mt-0.5" />
                     <span className="text-sm md:text-base">{feature}</span>
@@ -172,7 +179,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10" />
                   <img src="/industry-cad-demo.jpg" alt="Shop Floor Control" className="w-full h-full object-cover brightness-90" />
                   <div className="absolute bottom-4 left-4 z-20">
-                    <p className="text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">Shop Floor Control</p>
+                    <p className="text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">{content.whatWeDo.imageCaptions[0]}</p>
                   </div>
                 </motion.div>
                 <motion.div
@@ -185,7 +192,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10" />
                   <img src="/manufacturing-erp-demo.png" alt="Manufacturing ERP" className="w-full h-full object-cover object-top brightness-90" />
                   <div className="absolute bottom-4 left-4 z-20">
-                    <p className="text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">Manufacturing ERP</p>
+                    <p className="text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">{content.whatWeDo.imageCaptions[1]}</p>
                   </div>
                 </motion.div>
               </div>
@@ -200,7 +207,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
             <div className="flex items-center justify-center gap-4">
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
               <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] bg-gradient-to-br from-[#F0F8FF] to-[#D35400] bg-clip-text text-transparent">
-                Experience our ERP
+                {content.demosKicker}
               </span>
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
             </div>
@@ -209,14 +216,14 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
           {/* Constant Top */}
           <div className="mb-12 max-w-3xl">
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
-              Command Center for Production
+              {content.demoSections[0].heading}
             </h2>
             <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
-              A single screen to see exactly what's happening on your shop floor. Instantly check live production numbers and ongoing work orders.
+              {content.demoSections[0].paragraph}
             </p>
             <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-              <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
+              <span className="text-[13px] font-medium">{content.demoHint}</span>
             </div>
           </div>
 
@@ -241,15 +248,10 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               transition={{ duration: 0.7, delay: 0.2 }}
               className="flex-1 w-full flex flex-col gap-6"
             >
-              {[
-                { title: 'Live production numbers and work tracking' },
-                { title: 'One-click access to all your work orders' },
-                { title: 'Easy material planning so you never run out' },
-                { title: 'Simple settings and shop floor routing' }
-              ].map((f, i) => (
+              {content.demoSections[0].features.map((f, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#F0F8FF] shrink-0" />
-                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f.title}</span>
+                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f}</span>
                 </div>
               ))}
             </motion.div>
@@ -266,18 +268,13 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] text-neutral-900 dark:text-[#f5f5f5] tracking-tight mb-4">
-              Stop the chaos on the shop floor
+              {content.beforeAfter.heading}
             </h2>
-            <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa]">See how everyday headaches transform into a smooth-running factory.</p>
+            <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa]">{content.beforeAfter.subheading}</p>
           </motion.div>
 
           <div className="flex flex-col gap-px">
-            {[
-              { before: 'Messy spreadsheets to guess material needs', after: 'System automatically tells you what to buy' },
-              { before: "No idea what's happening on the shop floor", after: 'Live tracking of every work order and job' },
-              { before: "Quality checks lost on paper forms", after: "Digital quality checks that can't be skipped" },
-              { before: 'Guessing how much it costs to make a product', after: 'Exact costs including materials, labor, and scrap' },
-            ].map((row, i) => (
+            {content.beforeAfter.rows.map((row, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 10 }}
@@ -304,14 +301,14 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
           {/* Constant Top */}
           <div className="mb-12 max-w-3xl">
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
-              Real-time Job Tracking
+              {content.demoSections[1].heading}
             </h2>
             <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
-              Follow every job step-by-step. See exactly what materials were used and how much time it took at each workstation.
+              {content.demoSections[1].paragraph}
             </p>
             <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-              <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
+              <span className="text-[13px] font-medium">{content.demoHint}</span>
             </div>
           </div>
 
@@ -336,15 +333,10 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               transition={{ duration: 0.7, delay: 0.2 }}
               className="flex-1 w-full flex flex-col gap-6"
             >
-              {[
-                { title: 'See exactly what your operators are doing' },
-                { title: 'Track the exact materials used' },
-                { title: 'See which machines are running or stopped' },
-                { title: 'Compare expected time vs actual time taken' }
-              ].map((f, i) => (
+              {content.demoSections[1].features.map((f, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#F0F8FF] shrink-0" />
-                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f.title}</span>
+                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f}</span>
                 </div>
               ))}
             </motion.div>
@@ -356,14 +348,14 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
           {/* Constant Top */}
           <div className="mb-12 max-w-3xl">
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
-              Exact Product Costing
+              {content.demoSections[2].heading}
             </h2>
             <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
-              Create accurate Bills of Materials (BOMs). We calculate the exact cost of raw materials, labor, and scrap so you know your true profit margins.
+              {content.demoSections[2].paragraph}
             </p>
             <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-              <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
+              <span className="text-[13px] font-medium">{content.demoHint}</span>
             </div>
           </div>
 
@@ -388,15 +380,10 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               transition={{ duration: 0.7, delay: 0.2 }}
               className="flex-1 w-full flex flex-col gap-6"
             >
-              {[
-                { title: 'Easy multi-level parts lists' },
-                { title: 'Accurate cost calculations' },
-                { title: 'Track scrap and alternate materials' },
-                { title: 'Keep track of all changes and versions' }
-              ].map((f, i) => (
+              {content.demoSections[2].features.map((f, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#F0F8FF] shrink-0" />
-                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f.title}</span>
+                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f}</span>
                 </div>
               ))}
             </motion.div>
@@ -415,27 +402,20 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
               <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] bg-gradient-to-br from-[#F0F8FF] to-[#D35400] bg-clip-text text-transparent">
-                Integrated Modules
+                {content.modules.kicker}
               </span>
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
             </div>
             <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] text-neutral-900 dark:text-[#f5f5f5] tracking-tight mb-4">
-              Everything you need to grow your factory.
+              {content.modules.heading}
             </h2>
             <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa] max-w-2xl mx-auto">
-              Stop switching between different apps. Our ERP brings your entire manufacturing business into one place.
+              {content.modules.subheading}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-black/5 dark:bg-white/5">
-            {[
-              { icon: <Layers className="w-5 h-5" />, title: 'Bill of Materials (BOM)', items: ['Easy-to-build, multi-level Bills of Materials', 'Exact costs for both materials and labor', 'Track scrap and manage substitute parts'] },
-              { icon: <Factory className="w-5 h-5" />, title: 'Shop Floor Routing', items: ['Link every production step to a machine', 'Calculate exact hourly running costs', 'Ensure steps are done in the right order'] },
-              { icon: <Package className="w-5 h-5" />, title: 'Material Resource Planning', items: ['Automatically create purchase requests', 'Never run out of materials again', 'Track all your incoming shipments'] },
-              { icon: <ShieldCheck className="w-5 h-5" />, title: 'Quality Inspection', items: ['Mandatory quality checks at every step', 'Set your own quality rules and tests', 'Automatically block rejected items'] },
-              { icon: <ClipboardList className="w-5 h-5" />, title: 'Job Cards & Time Tracking', items: ['Track the exact time operators spend working', 'See if jobs took longer than expected', 'Log machine downtime easily'] },
-              { icon: <BarChart3 className="w-5 h-5" />, title: 'Capacity Planning', items: ['Find and fix busy bottlenecks', 'Smart scheduling around your working hours', "See your factory's workload in real time"] },
-            ].map((mod, i) => (
+            {content.modules.cards.map((mod, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -445,7 +425,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
                 className="bg-white dark:bg-[#111111] p-8 hover:bg-neutral-50 dark:hover:bg-white/[0.02] transition-colors"
               >
                 <div className="w-10 h-10 border border-black/10 dark:border-white/10 flex items-center justify-center text-[#F0F8FF] mb-6">
-                  {mod.icon}
+                  {moduleIcons[i]}
                 </div>
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">{mod.title}</h3>
                 <ul className="flex flex-col gap-2">
@@ -468,7 +448,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
             <div className="flex items-center justify-center gap-4">
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
               <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] bg-gradient-to-br from-[#F0F8FF] to-[#D35400] bg-clip-text text-transparent">
-                We don't just deploy
+                {content.training.kicker}
               </span>
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
             </div>
@@ -477,10 +457,10 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
           {/* Constant Top */}
           <div className="mb-12 max-w-3xl">
             <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] text-neutral-900 dark:text-[#f5f5f5] tracking-tight mb-4 text-balance">
-              Comprehensive Team Training
+              {content.training.heading}
             </h2>
             <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed">
-              We ensure your staff is fully equipped to leverage the ERP system from day one.
+              {content.training.subheading}
             </p>
           </div>
 
@@ -504,11 +484,11 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               className="flex-1 w-full flex flex-col gap-6"
             >
               <p className="text-[16px] text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                When we start, our team visits your factory and trains your operators, supervisors, and planners on the software. We do hands-on training to make sure everything runs smoothly with no downtime.
+                {content.training.paragraph}
               </p>
               <div className="mt-2">
                 <a href="/services/training" className="inline-flex items-center gap-2 text-[#F0F8FF] font-medium text-[15px] hover:underline group">
-                  Get in detail brief 
+                  {content.training.linkLabel}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </div>
@@ -526,7 +506,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 dark:text-white/95 mb-6"
             >
-              Ready to upgrade your factory?
+              {content.closing.heading}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0 }}
@@ -535,7 +515,7 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-lg md:text-xl text-neutral-600 dark:text-neutral-500 mb-12"
             >
-              Join smart manufacturers who have moved their entire factory onto our simple ERP.
+              {content.closing.subheading}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -544,11 +524,11 @@ export default function UseCaseManufacturing({ onContactOpen }: { onContactOpen:
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Requesting a Personalised Demo for ietech ERP"
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=${content.closing.ctaMailSubject}`}
                 className="group relative inline-flex items-center gap-3 overflow-hidden rounded-none bg-black text-white dark:bg-white dark:text-black px-8 py-4  font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:shadow-[0_14px_36px_rgba(250,250,250,0.2)]"
               >
                 <span className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-gradient-to-r from-transparent via-black/10 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />
-                <span className="relative uppercase text-xs font-bold tracking-[0.1em]">Get a Personalised Demo</span>
+                <span className="relative uppercase text-xs font-bold tracking-[0.1em]">{content.closing.ctaLabel}</span>
                 <ArrowRight className="w-4 h-4 relative group-hover:translate-x-1 transition-transform" />
               </a>
             </motion.div>

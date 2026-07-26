@@ -1,7 +1,7 @@
 {
   "hero": {
-    "headline": "The tech consultancy that optimises your operations with",
-    "headlineAccent": "tools built around your business.",
+    "headline": "End to End Tech solutions",
+    "headlineAccent": "for your specific needs.",
     "subheadline": "We begin as consultants, not vendors — mapping how your orders, materials, and money actually move each day. Then our engineers shape our ERP, CAD, and IoT suite into customised tools that fit those workflows exactly, deploy them alongside your team, and train your people until the system runs daily operations on its own.",
     "trustLine": "Trusted by leading manufacturers",
     "googleCta": "Connect Instantly with Google",
@@ -74,6 +74,303 @@
         "secondaryCtaHref": ""
       }
     ]
+  },
+  "useCases": {
+    "manufacturing": {
+      "hero": {
+        "kicker": "Manufacturing ERP Solution",
+        "headline": "Run your entire factory floor with",
+        "headlineAccent": "our Manufacturing ERP.",
+        "subheadline": "Bring your materials, work orders, shop floor, planning, and quality control into one easy-to-use platform. Get rid of bottlenecks and speed up your factory.",
+        "demoCta": "Request a Demo",
+        "demoMailSubject": "Requesting a Demo for ietech ERP",
+        "googleNote": "Share your email and we'll reach out within 24 hours",
+        "successMessage": "Inquiry received. We will contact soon."
+      },
+      "whatWeDo": {
+        "kicker": "What We Do",
+        "heading": "Everything you need to run your factory",
+        "paragraph": "Stop relying on messy spreadsheets, paper notes, and disconnected software. Our system brings your whole factory onto one simple platform to automate the hard work for you.",
+        "features": [
+          "Replace messy, disconnected legacy software",
+          "Perfect for factories with complex, multi-step production",
+          "Ditch the spreadsheets for live, accurate data",
+          "Find and fix delays to produce goods faster"
+        ],
+        "imageCaptions": [
+          "Shop Floor Control",
+          "Manufacturing ERP"
+        ]
+      },
+      "demosKicker": "Experience our ERP",
+      "demoHint": "Live demo — Try clicking the screen below",
+      "demoSections": [
+        {
+          "heading": "Command Center for Production",
+          "paragraph": "A single screen to see exactly what's happening on your shop floor. Instantly check live production numbers and ongoing work orders.",
+          "features": [
+            "Live production numbers and work tracking",
+            "One-click access to all your work orders",
+            "Easy material planning so you never run out",
+            "Simple settings and shop floor routing"
+          ]
+        },
+        {
+          "heading": "Real-time Job Tracking",
+          "paragraph": "Follow every job step-by-step. See exactly what materials were used and how much time it took at each workstation.",
+          "features": [
+            "See exactly what your operators are doing",
+            "Track the exact materials used",
+            "See which machines are running or stopped",
+            "Compare expected time vs actual time taken"
+          ]
+        },
+        {
+          "heading": "Exact Product Costing",
+          "paragraph": "Create accurate Bills of Materials (BOMs). We calculate the exact cost of raw materials, labor, and scrap so you know your true profit margins.",
+          "features": [
+            "Easy multi-level parts lists",
+            "Accurate cost calculations",
+            "Track scrap and alternate materials",
+            "Keep track of all changes and versions"
+          ]
+        }
+      ],
+      "beforeAfter": {
+        "heading": "Stop the chaos on the shop floor",
+        "subheading": "See how everyday headaches transform into a smooth-running factory.",
+        "rows": [
+          {
+            "before": "Messy spreadsheets to guess material needs",
+            "after": "System automatically tells you what to buy"
+          },
+          {
+            "before": "No idea what's happening on the shop floor",
+            "after": "Live tracking of every work order and job"
+          },
+          {
+            "before": "Quality checks lost on paper forms",
+            "after": "Digital quality checks that can't be skipped"
+          },
+          {
+            "before": "Guessing how much it costs to make a product",
+            "after": "Exact costs including materials, labor, and scrap"
+          }
+        ]
+      },
+      "modules": {
+        "kicker": "Integrated Modules",
+        "heading": "Everything you need to grow your factory.",
+        "subheading": "Stop switching between different apps. Our ERP brings your entire manufacturing business into one place.",
+        "cards": [
+          {
+            "title": "Bill of Materials (BOM)",
+            "items": [
+              "Easy-to-build, multi-level Bills of Materials",
+              "Exact costs for both materials and labor",
+              "Track scrap and manage substitute parts"
+            ]
+          },
+          {
+            "title": "Shop Floor Routing",
+            "items": [
+              "Link every production step to a machine",
+              "Calculate exact hourly running costs",
+              "Ensure steps are done in the right order"
+            ]
+          },
+          {
+            "title": "Material Resource Planning",
+            "items": [
+              "Automatically create purchase requests",
+              "Never run out of materials again",
+              "Track all your incoming shipments"
+            ]
+          },
+          {
+            "title": "Quality Inspection",
+            "items": [
+              "Mandatory quality checks at every step",
+              "Set your own quality rules and tests",
+              "Automatically block rejected items"
+            ]
+          },
+          {
+            "title": "Job Cards & Time Tracking",
+            "items": [
+              "Track the exact time operators spend working",
+              "See if jobs took longer than expected",
+              "Log machine downtime easily"
+            ]
+          },
+          {
+            "title": "Capacity Planning",
+            "items": [
+              "Find and fix busy bottlenecks",
+              "Smart scheduling around your working hours",
+              "See your factory's workload in real time"
+            ]
+          }
+        ]
+      },
+      "training": {
+        "kicker": "We don't just deploy",
+        "heading": "Comprehensive Team Training",
+        "subheading": "We ensure your staff is fully equipped to leverage the ERP system from day one.",
+        "paragraph": "When we start, our team visits your factory and trains your operators, supervisors, and planners on the software. We do hands-on training to make sure everything runs smoothly with no downtime.",
+        "linkLabel": "Get in detail brief"
+      },
+      "closing": {
+        "heading": "Ready to upgrade your factory?",
+        "subheading": "Join smart manufacturers who have moved their entire factory onto our simple ERP.",
+        "ctaLabel": "Get a Personalised Demo",
+        "ctaMailSubject": "Requesting a Personalised Demo for ietech ERP"
+      }
+    },
+    "restaurant": {
+      "hero": {
+        "kicker": "Hospitality ERP Solution",
+        "headline": "Operate your orders, inventory & sales with",
+        "headlineAccent": "our Restaurant ERP.",
+        "subheadline": "A fully integrated point-of-sale, kitchen management, and inventory tracking system built for restaurants, hotels, and multi-chain hospitality businesses. Manage real-time billing, track ingredient consumption, automate purchase orders, and control every outlet from a single dashboard.",
+        "demoCta": "Request a Demo",
+        "demoMailSubject": "Requesting a Demo for ietech ERP",
+        "googleNote": "Share your email and we'll reach out within 24 hours",
+        "successMessage": "Inquiry received. We will contact soon."
+      },
+      "whatWeDo": {
+        "kicker": "What We Do",
+        "heading": "The complete software to run your entire restaurant and hotel operations",
+        "paragraph": "Whether you are managing a bustling cafe, a busy bar, or a multi-location restaurant chain, fragmentation kills margins. Our ERP unifies your POS, kitchen displays, inventory tracking, and staff management into one intelligent platform.",
+        "features": [
+          "Real-time ingredient level deductions",
+          "Seamless Kitchen Display System (KDS) integration",
+          "Multi-location centralized reporting",
+          "Table-side ordering for staff"
+        ],
+        "imageCaptions": [
+          "Hotel & Resort",
+          "Hospitality & Dining"
+        ]
+      },
+      "demosKicker": "Experience our ERP",
+      "demoHint": "Live demo — Try clicking the screen below",
+      "demoSections": [
+        {
+          "heading": "Point of Sale",
+          "paragraph": "Watch a live order flow — from menu browsing to payment, all in one screen. The POS handles item groups, add-to-cart, discounts, walk-in customers, automatic subtotal calculation, and checkout.",
+          "features": [
+            "Multi-payment support",
+            "GST compliant invoicing",
+            "Real-time sales analytics",
+            "KOT printing directly to kitchen"
+          ]
+        },
+        {
+          "heading": "Restaurant Desk",
+          "paragraph": "Visual table management, instant reservation updates, and KOT generation directly from the desk. The board spans multiple outlets and seating areas across properties.",
+          "features": [
+            "Live table status tracking",
+            "Active order & elapsed time",
+            "Instant reservation management",
+            "Live revenue snapshot per outlet"
+          ]
+        },
+        {
+          "heading": "Hotel Front Desk",
+          "paragraph": "Track room occupancies, manage check-ins, and monitor housekeeping seamlessly. Guest data follows the guest across properties — preferences, stay history, and loyalty points build a unified profile.",
+          "features": [
+            "Visual room occupancy board",
+            "Simplified check-in/out flows",
+            "Real-time housekeeping status",
+            "Integrated guest profile management"
+          ]
+        }
+      ],
+      "beforeAfter": {
+        "heading": "Before vs. After",
+        "subheading": "See how every pain point transforms into a competitive advantage.",
+        "rows": [
+          {
+            "before": "Lost restaurant orders and delayed kitchen communication",
+            "after": "Instant digital KOTs directly to kitchen displays"
+          },
+          {
+            "before": "Double-booked hotel rooms and manual tracking",
+            "after": "Centralized visual room board with real-time sync"
+          },
+          {
+            "before": "Disconnect between front desk and housekeeping",
+            "after": "Instant room status updates on mobile devices"
+          },
+          {
+            "before": "End-of-day revenue reconciliation headaches",
+            "after": "Automated POS-to-accounting ledger entries"
+          }
+        ]
+      },
+      "modules": {
+        "kicker": "Integrated Modules",
+        "heading": "Six modules. One platform.",
+        "subheading": "Everything your restaurant needs — six tightly integrated modules that replace spreadsheets, sticky notes, and disconnected apps.",
+        "cards": [
+          {
+            "title": "Restaurant Operations",
+            "items": [
+              "Visual table management & reservations",
+              "Real-time Kitchen Order Tickets (KOT)",
+              "Multi-payment POS with split billing"
+            ]
+          },
+          {
+            "title": "Hotel Management",
+            "items": [
+              "Visual room board for occupancy tracking",
+              "Simplified check-in and check-out flows",
+              "Integrated folio management for billing"
+            ]
+          },
+          {
+            "title": "Guest Profiles",
+            "items": [
+              "Unified view of guest preferences",
+              "Track stay history and loyalty points",
+              "Personalized marketing opportunities"
+            ]
+          },
+          {
+            "title": "Housekeeping",
+            "items": [
+              "Real-time room status updates",
+              "Task assignment for cleaning staff",
+              "Maintenance request tracking"
+            ]
+          },
+          {
+            "title": "Financial Accounting",
+            "items": [
+              "Automated daily revenue reconciliation",
+              "Expense tracking and budgeting",
+              "Tax-compliant GST invoicing"
+            ]
+          },
+          {
+            "title": "Inventory Control",
+            "items": [
+              "Track minimum stock levels for ingredients",
+              "Automate purchase requests",
+              "Manage multiple storage locations"
+            ]
+          }
+        ]
+      },
+      "closing": {
+        "heading": "Ready to modernise your restaurant?",
+        "subheading": "Join restaurant chains across India that run their kitchens, staff, and finances on one platform.",
+        "ctaLabel": "Get a Personalised Demo",
+        "ctaMailSubject": "Requesting a Personalised Demo for ietech ERP"
+      }
+    }
   },
   "navbar": {
     "aboutItems": [

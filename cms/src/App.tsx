@@ -9,7 +9,7 @@ type Tab = 'blogs' | 'case-studies' | 'site' | 'publish';
 const TABS: { key: Tab; label: string }[] = [
   { key: 'blogs', label: 'Blogs' },
   { key: 'case-studies', label: 'Case Studies' },
-  { key: 'site', label: 'Site Text' },
+  { key: 'site', label: 'Website Text' },
   { key: 'publish', label: 'Publish' },
 ];
 

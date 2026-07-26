@@ -1,12 +1,24 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowDown, CheckCircle2, Loader2, CheckCircle, Users, Bed, ClipboardList, DollarSign, Package, UtensilsCrossed } from 'lucide-react';
 import { useGoogleInquiry } from '../hooks/useGoogleInquiry';
+import { site } from '../lib/content';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import RestaurantPOS from './animations/RestaurantPOS';
 import TableBoard from './animations/TableBoard';
 import HotelRoomBoard from './animations/HotelRoomBoard';
 import ScaledPreview from './ScaledPreview';
+
+const content = site.useCases.restaurant;
+
+const moduleIcons = [
+  <UtensilsCrossed className="w-5 h-5" />,
+  <Bed className="w-5 h-5" />,
+  <Users className="w-5 h-5" />,
+  <ClipboardList className="w-5 h-5" />,
+  <DollarSign className="w-5 h-5" />,
+  <Package className="w-5 h-5" />,
+];
 
 export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: () => void }) {
   const {
@@ -30,7 +42,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               className="mb-6"
             >
               <span className="text-[10px] md:text-xs font-semibold text-neutral-600 dark:text-neutral-500 uppercase tracking-[0.2em]">
-                Hospitality ERP Solution
+                {content.hero.kicker}
               </span>
             </motion.div>
 
@@ -40,9 +52,9 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-5xl md:text-6xl lg:text-[4rem] font-medium tracking-tight text-neutral-900 dark:text-white/95 max-w-4xl mx-auto leading-[1.1] text-balance transition-colors"
             >
-              Operate your orders, inventory & sales with
+              {content.hero.headline}
               <span className="block mt-2 font-semibold bg-gradient-to-br from-[#E67E22] to-[#D35400] bg-clip-text text-transparent">
-                our Restaurant ERP.
+                {content.hero.headlineAccent}
               </span>
             </motion.h1>
 
@@ -52,7 +64,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mt-6 text-base md:text-lg lg:text-xl text-neutral-600 dark:text-neutral-500 max-w-2xl mx-auto leading-relaxed transition-colors text-balance"
             >
-              A fully integrated point-of-sale, kitchen management, and inventory tracking system built for restaurants, hotels, and multi-chain hospitality businesses. Manage real-time billing, track ingredient consumption, automate purchase orders, and control every outlet from a single dashboard.
+              {content.hero.subheadline}
             </motion.p>
 
             <motion.div
@@ -65,13 +77,13 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
                 <div className="flex flex-col items-center gap-2 relative">
                   <div className="flex items-center gap-4">
                     <a
-                      href="https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Requesting a Demo for ietech ERP"
+                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=${content.hero.demoMailSubject}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative inline-flex items-center gap-3 overflow-hidden rounded-none bg-black text-white dark:bg-white dark:text-black px-7 py-3.5  font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:shadow-[0_14px_36px_rgba(250,250,250,0.2)]"
                     >
                       <span className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-gradient-to-r from-transparent via-black/10 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />
-                      <span className="relative uppercase text-xs font-bold tracking-[0.1em]">Request a Demo</span>
+                      <span className="relative uppercase text-xs font-bold tracking-[0.1em]">{content.hero.demoCta}</span>
                     </a>
                     <button
                       type="button"
@@ -102,7 +114,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
                     <p className="text-xs text-red-400 mt-1">{googleError}</p>
                   )}
                   <p className="text-xs text-neutral-600 dark:text-neutral-500 mt-3 font-medium">
-                    Share your email and we'll reach out within 24 hours
+                    {content.hero.googleNote}
                   </p>
                 </div>
               ) : (
@@ -111,7 +123,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
                     className="inline-flex items-center justify-center gap-3 rounded-none border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-6 py-3 text-sm font-semibold text-neutral-900 dark:text-neutral-200 backdrop-blur-sm transition-all cursor-default"
                   >
                     <CheckCircle className="h-4 w-4 text-neutral-900 dark:text-white" />
-                    Inquiry received. We will contact soon.
+                    {content.hero.successMessage}
                   </div>
                 </div>
               )}
@@ -125,7 +137,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
             <div className="flex items-center justify-center gap-4">
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
               <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#E67E22]">
-                What We Do
+                {content.whatWeDo.kicker}
               </span>
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
             </div>
@@ -140,18 +152,13 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               className="order-2 lg:order-1 flex flex-col justify-center max-w-[500px] mx-auto lg:mx-0"
             >
               <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] mb-6 text-neutral-900 dark:text-[#f5f5f5] tracking-tight text-balance">
-                The complete software to run your entire restaurant and hotel operations
+                {content.whatWeDo.heading}
               </h2>
               <p className="text-[17px] lg:text-[19px] text-neutral-600 dark:text-[#a1a1aa] mb-8 leading-relaxed text-balance">
-                Whether you are managing a bustling cafe, a busy bar, or a multi-location restaurant chain, fragmentation kills margins. Our ERP unifies your POS, kitchen displays, inventory tracking, and staff management into one intelligent platform.
+                {content.whatWeDo.paragraph}
               </p>
               <ul className="flex flex-col gap-4">
-                {[
-                  'Real-time ingredient level deductions',
-                  'Seamless Kitchen Display System (KDS) integration',
-                  'Multi-location centralized reporting',
-                  'Table-side ordering for staff'
-                ].map((feature, i) => (
+                {content.whatWeDo.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-3 text-neutral-600 dark:text-neutral-400">
                     <CheckCircle2 className="w-5 h-5 text-neutral-900 dark:text-white shrink-0 mt-0.5" />
                     <span className="text-sm md:text-base">{feature}</span>
@@ -172,7 +179,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10" />
                   <img src="/hotel-resort.png" alt="Hotel Resort" className="w-full h-full object-cover brightness-90" />
                   <div className="absolute bottom-4 left-4 z-20">
-                    <p className="text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">Hotel & Resort</p>
+                    <p className="text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">{content.whatWeDo.imageCaptions[0]}</p>
                   </div>
                 </motion.div>
                 <motion.div
@@ -185,7 +192,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10" />
                   <img src="/restaurant-erp-demo.jpg" alt="Restaurant Management" className="w-full h-full object-cover brightness-90" />
                   <div className="absolute bottom-4 left-4 z-20">
-                    <p className="text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">Hospitality & Dining</p>
+                    <p className="text-white font-medium text-xs sm:text-sm tracking-wide drop-shadow-lg whitespace-nowrap">{content.whatWeDo.imageCaptions[1]}</p>
                   </div>
                 </motion.div>
               </div>
@@ -200,7 +207,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
             <div className="flex items-center justify-center gap-4">
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
               <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#E67E22]">
-                Experience our ERP
+                {content.demosKicker}
               </span>
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
             </div>
@@ -209,14 +216,14 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
           {/* Constant Top */}
           <div className="mb-12 max-w-3xl">
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
-              Point of Sale
+              {content.demoSections[0].heading}
             </h2>
             <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
-              Watch a live order flow — from menu browsing to payment, all in one screen. The POS handles item groups, add-to-cart, discounts, walk-in customers, automatic subtotal calculation, and checkout.
+              {content.demoSections[0].paragraph}
             </p>
             <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-              <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
+              <span className="text-[13px] font-medium">{content.demoHint}</span>
             </div>
           </div>
 
@@ -241,15 +248,10 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               transition={{ duration: 0.7, delay: 0.2 }}
               className="flex-1 w-full flex flex-col gap-6"
             >
-              {[
-                { title: 'Multi-payment support' },
-                { title: 'GST compliant invoicing' },
-                { title: 'Real-time sales analytics' },
-                { title: 'KOT printing directly to kitchen' }
-              ].map((f, i) => (
+              {content.demoSections[0].features.map((f, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-1.5 h-1.5 rounded-full bg-neutral-900 dark:bg-white shrink-0" />
-                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f.title}</span>
+                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f}</span>
                 </div>
               ))}
             </motion.div>
@@ -266,18 +268,13 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] text-neutral-900 dark:text-[#f5f5f5] tracking-tight mb-4">
-              Before vs. After
+              {content.beforeAfter.heading}
             </h2>
-            <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa]">See how every pain point transforms into a competitive advantage.</p>
+            <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa]">{content.beforeAfter.subheading}</p>
           </motion.div>
 
           <div className="flex flex-col gap-px">
-            {[
-              { before: 'Lost restaurant orders and delayed kitchen communication', after: 'Instant digital KOTs directly to kitchen displays' },
-              { before: 'Double-booked hotel rooms and manual tracking', after: 'Centralized visual room board with real-time sync' },
-              { before: 'Disconnect between front desk and housekeeping', after: 'Instant room status updates on mobile devices' },
-              { before: 'End-of-day revenue reconciliation headaches', after: 'Automated POS-to-accounting ledger entries' },
-            ].map((row, i) => (
+            {content.beforeAfter.rows.map((row, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 10 }}
@@ -304,14 +301,14 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
           {/* Constant Top */}
           <div className="mb-12 max-w-3xl">
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
-              Restaurant Desk
+              {content.demoSections[1].heading}
             </h2>
             <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
-              Visual table management, instant reservation updates, and KOT generation directly from the desk. The board spans multiple outlets and seating areas across properties.
+              {content.demoSections[1].paragraph}
             </p>
             <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-              <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
+              <span className="text-[13px] font-medium">{content.demoHint}</span>
             </div>
           </div>
 
@@ -336,15 +333,10 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               transition={{ duration: 0.7, delay: 0.2 }}
               className="flex-1 w-full flex flex-col gap-6"
             >
-              {[
-                { title: 'Live table status tracking' },
-                { title: 'Active order & elapsed time' },
-                { title: 'Instant reservation management' },
-                { title: 'Live revenue snapshot per outlet' }
-              ].map((f, i) => (
+              {content.demoSections[1].features.map((f, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-1.5 h-1.5 rounded-full bg-neutral-900 dark:bg-white shrink-0" />
-                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f.title}</span>
+                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f}</span>
                 </div>
               ))}
             </motion.div>
@@ -356,14 +348,14 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
           {/* Constant Top */}
           <div className="mb-12 max-w-3xl">
             <h2 className="text-[18px] md:text-[20px] font-semibold text-neutral-900 dark:text-[#f5f5f5] tracking-wide mb-3">
-              Hotel Front Desk
+              {content.demoSections[2].heading}
             </h2>
             <p className="text-[15px] text-neutral-600 dark:text-[#a1a1aa] leading-relaxed mb-4">
-              Track room occupancies, manage check-ins, and monitor housekeeping seamlessly. Guest data follows the guest across properties — preferences, stay history, and loyalty points build a unified profile.
+              {content.demoSections[2].paragraph}
             </p>
             <div className="flex items-center gap-2 text-neutral-600 dark:text-[#a1a1aa]">
               <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-              <span className="text-[13px] font-medium">Live demo — Try clicking the screen below</span>
+              <span className="text-[13px] font-medium">{content.demoHint}</span>
             </div>
           </div>
 
@@ -388,15 +380,10 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               transition={{ duration: 0.7, delay: 0.2 }}
               className="flex-1 w-full flex flex-col gap-6"
             >
-              {[
-                { title: 'Visual room occupancy board' },
-                { title: 'Simplified check-in/out flows' },
-                { title: 'Real-time housekeeping status' },
-                { title: 'Integrated guest profile management' }
-              ].map((f, i) => (
+              {content.demoSections[2].features.map((f, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-1.5 h-1.5 rounded-full bg-neutral-900 dark:bg-white shrink-0" />
-                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f.title}</span>
+                  <span className="text-[16px] text-neutral-900 dark:text-neutral-200">{f}</span>
                 </div>
               ))}
             </motion.div>
@@ -415,27 +402,20 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
               <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-[#E67E22]">
-                Integrated Modules
+                {content.modules.kicker}
               </span>
               <div className="h-[1px] w-12 md:w-20 bg-neutral-800" />
             </div>
             <h2 className="text-4xl lg:text-[44px] font-bold leading-[1.15] text-neutral-900 dark:text-[#f5f5f5] tracking-tight mb-4">
-              Six modules. One platform.
+              {content.modules.heading}
             </h2>
             <p className="text-[17px] text-neutral-600 dark:text-[#a1a1aa] max-w-2xl mx-auto">
-              Everything your restaurant needs — six tightly integrated modules that replace spreadsheets, sticky notes, and disconnected apps.
+              {content.modules.subheading}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-black/5 dark:bg-white/5">
-            {[
-              { icon: <UtensilsCrossed className="w-5 h-5" />, title: 'Restaurant Operations', items: ['Visual table management & reservations', 'Real-time Kitchen Order Tickets (KOT)', 'Multi-payment POS with split billing'] },
-              { icon: <Bed className="w-5 h-5" />, title: 'Hotel Management', items: ['Visual room board for occupancy tracking', 'Simplified check-in and check-out flows', 'Integrated folio management for billing'] },
-              { icon: <Users className="w-5 h-5" />, title: 'Guest Profiles', items: ['Unified view of guest preferences', 'Track stay history and loyalty points', 'Personalized marketing opportunities'] },
-              { icon: <ClipboardList className="w-5 h-5" />, title: 'Housekeeping', items: ['Real-time room status updates', 'Task assignment for cleaning staff', 'Maintenance request tracking'] },
-              { icon: <DollarSign className="w-5 h-5" />, title: 'Financial Accounting', items: ['Automated daily revenue reconciliation', 'Expense tracking and budgeting', 'Tax-compliant GST invoicing'] },
-              { icon: <Package className="w-5 h-5" />, title: 'Inventory Control', items: ['Track minimum stock levels for ingredients', 'Automate purchase requests', 'Manage multiple storage locations'] },
-            ].map((mod, i) => (
+            {content.modules.cards.map((mod, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -445,7 +425,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
                 className="bg-white dark:bg-[#111111] p-8 hover:bg-neutral-50 dark:hover:bg-white/[0.02] transition-colors"
               >
                 <div className="w-10 h-10 border border-black/10 dark:border-white/10 flex items-center justify-center text-neutral-600 dark:text-neutral-500 mb-6">
-                  {mod.icon}
+                  {moduleIcons[i]}
                 </div>
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">{mod.title}</h3>
                 <ul className="flex flex-col gap-2">
@@ -473,7 +453,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-4xl md:text-5xl font-medium tracking-tight text-neutral-900 dark:text-white/95 mb-6"
             >
-              Ready to modernise your restaurant?
+              {content.closing.heading}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0 }}
@@ -482,7 +462,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-lg md:text-xl text-neutral-600 dark:text-neutral-500 mb-12"
             >
-              Join restaurant chains across India that run their kitchens, staff, and finances on one platform.
+              {content.closing.subheading}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -491,11 +471,11 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=Requesting a Personalised Demo for ietech ERP"
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=${content.closing.ctaMailSubject}`}
                 className="group relative inline-flex items-center gap-3 overflow-hidden rounded-none bg-black text-white dark:bg-white dark:text-black px-8 py-4  font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:shadow-[0_14px_36px_rgba(250,250,250,0.2)]"
               >
                 <span className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-gradient-to-r from-transparent via-black/10 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />
-                <span className="relative uppercase text-xs font-bold tracking-[0.1em]">Get a Personalised Demo</span>
+                <span className="relative uppercase text-xs font-bold tracking-[0.1em]">{content.closing.ctaLabel}</span>
                 <ArrowRight className="w-4 h-4 relative group-hover:translate-x-1 transition-transform" />
               </a>
             </motion.div>

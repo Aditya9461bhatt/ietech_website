@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 import { promises as fs } from 'fs';
 import { existsSync } from 'fs';
 import { spawn, execFile } from 'child_process';
+import net from 'net';
 
 const ROOT = path.resolve(__dirname, '..');
 const CONTENT = path.join(ROOT, 'content');
@@ -56,10 +57,28 @@ function git(args: string[]): Promise<{ code: number; out: string }> {
   });
 }
 
+/** Live preview needs the real site dev server — start one if none is running. */
+function ensurePreviewServer() {
+  const sock = net.connect(5173, '127.0.0.1');
+  sock.once('connect', () => sock.destroy());
+  sock.once('error', () => {
+    console.log('[cms] starting site preview server on http://localhost:5173 …');
+    const child = spawn('npx', ['vite', '--port', '5173', '--strictPort'], {
+      cwd: ROOT,
+      stdio: 'ignore',
+    });
+    const stop = () => { try { child.kill(); } catch { /* gone */ } };
+    process.on('exit', stop);
+    process.on('SIGINT', stop);
+    process.on('SIGTERM', stop);
+  });
+}
+
 function cmsApi(): Plugin {
   return {
     name: 'cms-api',
     configureServer(server: ViteDevServer) {
+      ensurePreviewServer();
       server.middlewares.use('/api', async (req, res) => {
         const url = new URL(req.url || '/', 'http://localhost');
         const send = (status: number, data: unknown) => {

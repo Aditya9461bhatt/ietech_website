@@ -47,6 +47,62 @@ export interface ShowcaseTabContent {
   secondaryCtaHref: string;
 }
 
+export interface UseCaseHero {
+  kicker: string;
+  headline: string;
+  headlineAccent: string;
+  subheadline: string;
+  demoCta: string;
+  demoMailSubject: string;
+  googleNote: string;
+  successMessage: string;
+}
+
+export interface UseCaseWhatWeDo {
+  kicker: string;
+  heading: string;
+  paragraph: string;
+  features: string[];
+  imageCaptions: string[];
+}
+
+export interface UseCaseDemoSection {
+  heading: string;
+  paragraph: string;
+  features: string[];
+}
+
+export interface BeforeAfterRow {
+  before: string;
+  after: string;
+}
+
+export interface UseCaseModuleCard {
+  title: string;
+  items: string[];
+}
+
+export interface UseCaseContent {
+  hero: UseCaseHero;
+  whatWeDo: UseCaseWhatWeDo;
+  demosKicker: string;
+  demoHint: string;
+  demoSections: UseCaseDemoSection[];
+  beforeAfter: { heading: string; subheading: string; rows: BeforeAfterRow[] };
+  modules: { kicker: string; heading: string; subheading: string; cards: UseCaseModuleCard[] };
+  closing: { heading: string; subheading: string; ctaLabel: string; ctaMailSubject: string };
+}
+
+export interface ManufacturingUseCaseContent extends UseCaseContent {
+  training: {
+    kicker: string;
+    heading: string;
+    subheading: string;
+    paragraph: string;
+    linkLabel: string;
+  };
+}
+
 export interface SiteContent {
   hero: {
     headline: string;
@@ -59,6 +115,10 @@ export interface SiteContent {
   };
   contacts: Contact[];
   products: { tabs: ShowcaseTabContent[] };
+  useCases: {
+    manufacturing: ManufacturingUseCaseContent;
+    restaurant: UseCaseContent;
+  };
   navbar: {
     aboutItems: NavItem[];
     servicesItems: NavItem[];
