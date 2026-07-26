@@ -29,7 +29,8 @@
     (() => {
       try {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        
+        const stored = localStorage.getItem('theme');
+
         const applyTheme = (isDark) => {
           if (isDark) {
             document.documentElement.classList.add('dark');
@@ -42,11 +43,13 @@
           }
         };
 
-        applyTheme(mediaQuery.matches);
+        // A manual choice (theme toggle in the navbar) wins over the
+        // browser/OS preference — some browsers report their own theme,
+        // not the system's.
+        applyTheme(stored ? stored === 'dark' : mediaQuery.matches);
 
-        // Listen for OS theme changes
         mediaQuery.addEventListener('change', (e) => {
-          applyTheme(e.matches);
+          if (!localStorage.getItem('theme')) applyTheme(e.matches);
         });
       } catch {
         // No-op

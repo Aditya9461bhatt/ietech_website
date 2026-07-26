@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Phone, MessageCircle, ChevronDown, BookOpen, Target, History, Users, Utensils, Factory, GraduationCap, ArrowRight, Menu, X } from 'lucide-react';
+import { Mail, Phone, MessageCircle, ChevronDown, BookOpen, Target, History, Users, Utensils, Factory, GraduationCap, ArrowRight, Menu, X, Sun, Moon } from 'lucide-react';
 import Logo from './Logo';
 import { useContact } from '../context/ContactContext';
+import { useTheme } from '../hooks/useTheme';
 import { site } from '../lib/content';
 
 // Icons stay in code (matched by position); all text comes from content/site.json.
@@ -32,6 +33,7 @@ export default function Navbar() {
   const contactDropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { openContact } = useContact();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     if (!activeMenu) return;
@@ -78,6 +80,14 @@ export default function Navbar() {
 
       {/* Mobile Menu Toggle (Right side) */}
       <div className="flex md:hidden items-center gap-4">
+        <button
+          type="button"
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          onClick={toggleTheme}
+          className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+        >
+          {theme === 'dark' ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+        </button>
         <button 
           type="button"
           aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -250,6 +260,14 @@ export default function Navbar() {
       </div>
 
       <div className="hidden md:flex items-center gap-3">
+        <button
+          type="button"
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          onClick={toggleTheme}
+          className="grid h-9 w-9 place-items-center text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+        >
+          {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+        </button>
         {/* Contact Dropdown */}
         <div className="relative" ref={contactDropdownRef}>
           <motion.button

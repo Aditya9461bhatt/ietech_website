@@ -50,8 +50,6 @@ export default function Hero() {
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-4 sm:gap-x-10 opacity-60 hover:opacity-100 transition-opacity duration-500">
             <img src="/logos/clients/tirupatiforge.png" alt="Tirupati Forge" className="h-[40px] md:h-[52px] w-auto object-contain grayscale dark:mix-blend-screen dark:invert" />
             <img src="/logos/clients/gautamcasting.png" alt="Gautam Casting" className="h-[46px] md:h-[60px] w-auto object-contain grayscale dark:mix-blend-screen dark:invert" />
-            <div className="bg-black text-white dark:bg-white dark:text-black  font-bold tracking-widest px-2 py-0.5 rounded-sm text-[10px] md:text-xs uppercase">SANSIDHI CASTING</div>
-            <span className="text-sm md:text-base font-bold tracking-[0.2em] text-neutral-900 dark:text-white uppercase mt-1">INVESTCO CASTING</span>
             <span className="text-xl md:text-2xl font-serif italic font-bold text-neutral-900 dark:text-white tracking-tight mt-1">PARV METALS</span>
           </div>
         </motion.div>
