@@ -159,13 +159,13 @@ function cmsApi(): Plugin {
             const push = await git(['push']);
             log(push.code === 0 ? '▸ Pushed to git remote.' : `▸ Git push skipped/failed (${push.out.split('\n')[0]}) — your partner can still pull after you push manually.`);
 
-            log('▸ Building and deploying to Cloud Run (this takes a few minutes)…');
-            const child = spawn('bash', ['scripts/deploy_gcp.sh'], { cwd: ROOT, env: process.env });
+            log('▸ Building and deploying…');
+            const child = spawn('bash', ['scripts/publish.sh'], { cwd: ROOT, env: process.env });
             child.stdout.on('data', (d) => res.write(d));
             child.stderr.on('data', (d) => res.write(d));
             child.on('close', (code) => {
               log(code === 0
-                ? '✔ Published. Cloudflare serves the new version within ~5 minutes.'
+                ? '✔ Published — the live site is updated.'
                 : `✖ Deploy failed (exit ${code}). The site was NOT updated.`);
               res.end();
             });

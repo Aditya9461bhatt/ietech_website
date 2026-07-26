@@ -25,9 +25,20 @@ only when you press **🚀 Publish to Live**, which:
 
 1. commits your content changes to git (and pushes, so your partner can pull),
 2. rebuilds the static site (`npm run build:static`),
-3. deploys it to Cloud Run via `scripts/deploy_gcp.sh`.
+3. deploys it — by default to **Cloudflare Pages** (free, takes seconds).
 
-Cloudflare (which fronts ietech.ai) serves the new version within ~5 minutes.
+One-time setup per machine for publishing:
+
+```bash
+npx wrangler login                                  # sign in to Cloudflare
+npx wrangler pages project create ietech-website    # once per account
+```
+
+Then point the `ietech.ai` custom domain at the Pages project in the
+Cloudflare dashboard (Pages → ietech-website → Custom domains). After that,
+the old Cloud Run service, load balancer, and proxy worker can be shut down.
+Until you switch the domain, the legacy path still works:
+`PUBLISH_TARGET=gcp ./scripts/publish.sh`.
 
 ## Setting up your business partner
 
@@ -37,7 +48,7 @@ On their machine, once:
 git clone <this repo>
 cd ietech_website
 npm install
-gcloud auth login          # needed only for the Publish button
+npx wrangler login         # needed only for the Publish button
 npm run cms
 ```
 
