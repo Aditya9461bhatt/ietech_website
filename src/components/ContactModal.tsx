@@ -20,6 +20,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     const {
         isLoading: isGoogleLoading,
         error: googleError,
+        notice: googleNotice,
         submit: submitGoogle,
         reset: resetGoogle,
     } = useGoogleInquiry();
@@ -270,9 +271,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                             </p>
                                         ) : null}
 
-                                        {notice ? (
+                                        {notice || googleNotice ? (
                                             <p className="rounded-sm bg-emerald-50 px-3 py-2 text-[13px] text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
-                                                {notice}
+                                                {notice || googleNotice}
                                             </p>
                                         ) : null}
 

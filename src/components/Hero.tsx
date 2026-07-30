@@ -10,6 +10,7 @@ export default function Hero() {
   const {
     isLoading: isGoogleLoading,
     error: googleError,
+    notice: googleNotice,
     submitted,
     submit: handleGoogleSignIn,
   } = useGoogleInquiry();
@@ -110,6 +111,9 @@ export default function Hero() {
               {googleError && (
                 <p className="text-xs text-red-400 mt-1">{googleError}</p>
               )}
+{googleNotice && (
+  <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-1 max-w-xs text-center">{googleNotice}</p>
+)}
               <p className="text-xs text-neutral-600 dark:text-neutral-500 mt-3 font-medium">
                 {site.hero.googleNote}
               </p>
