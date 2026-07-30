@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Malani;Rishi;;;
+FN:Rishi Malani
+ORG:i.e. tech
+TITLE:Team Member
+TEL;TYPE=CELL,VOICE:+61410267559
+EMAIL;TYPE=PREF,INTERNET:ossrishi@ietech.ai
+URL:https://ietech.ai
+NOTE:Team member at i.e. tech.
+END:VCARD

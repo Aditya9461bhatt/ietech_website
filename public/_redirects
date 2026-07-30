@@ -1,0 +1,6 @@
+# /case-studies is a client-side alias for /projects; make it work as a direct hit too.
+/case-studies /projects 301
+
+# Legacy business-card URLs (misspelling used on old printed/shared links).
+/buisnesscard /businesscard/ 301
+/buisnesscard/* /businesscard/:splat 301

@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Bhatt;Aditya;;;
+FN:Aditya Bhatt
+ORG:i.e. tech
+TITLE:Chief Technology Officer
+TEL;TYPE=CELL,VOICE:+919313523728
+EMAIL;TYPE=PREF,INTERNET:ctoaditya@ietech.ai
+URL:https://ietech.ai
+NOTE:Co-Founder and CTO of i.e. tech. Focus: Software Architecture\, CAD Automation\, Database Engines.
+END:VCARD
