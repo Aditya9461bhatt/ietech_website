@@ -26,11 +26,10 @@ export default function ScaledPreview({ children, width, height }: ScaledPreview
       className="w-full relative overflow-hidden rounded-sm shadow-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-[#0a0a0a]" 
       style={{ height: `${height * scale}px` }}
     >
-      <div 
-        className="origin-top-left absolute top-0 left-0 transition-transform duration-300 ease-out" 
+      {/* Interactive on purpose — the pages invite visitors to click the demo. */}
+      <div
+        className="origin-top-left absolute top-0 left-0 transition-transform duration-300 ease-out"
         style={{ width: `${width}px`, height: `${height}px`, transform: `scale(${scale})` }}
-        aria-hidden="true"
-        inert
       >
         {children}
       </div>

@@ -31,7 +31,7 @@ export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
 
   const imageAbs = post.image
     ? (post.image.startsWith('http') ? post.image : `${SITE_URL}${post.image}`)
-    : `${SITE_URL}/logo.svg`;
+    : `${SITE_URL}/og-default.png`;
   const description = (post.content || '')
     .replace(/[#*_>`[\]]/g, '')
     .replace(/\s+/g, ' ')
@@ -48,7 +48,7 @@ export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
     publisher: {
       '@type': 'Organization',
       name: 'i.e tech',
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.svg` },
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo-512.png` },
     },
     mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
   };

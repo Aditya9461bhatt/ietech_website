@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowDown, CheckCircle2, Loader2, CheckCircle, Users, Bed, ClipboardList, DollarSign, Package, UtensilsCrossed } from 'lucide-react';
 import { useGoogleInquiry } from '../hooks/useGoogleInquiry';
+import { leadsConfigured } from '../lib/leads';
 import { site } from '../lib/content';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -77,7 +78,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
                 <div className="flex flex-col items-center gap-2 relative">
                   <div className="flex items-center gap-4">
                     <a
-                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=${content.hero.demoMailSubject}`}
+                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=${encodeURIComponent(content.hero.demoMailSubject)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative inline-flex items-center gap-3 overflow-hidden rounded-none bg-black text-white dark:bg-white dark:text-black px-7 py-3.5  font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:shadow-[0_14px_36px_rgba(250,250,250,0.2)]"
@@ -85,6 +86,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
                       <span className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-gradient-to-r from-transparent via-black/10 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />
                       <span className="relative uppercase text-xs font-bold tracking-[0.1em]">{content.hero.demoCta}</span>
                     </a>
+                    {leadsConfigured && (
                     <button
                       type="button"
                       onClick={handleGoogleSignIn}
@@ -109,6 +111,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
                         </>
                       )}
                     </button>
+                    )}
                   </div>
                   {googleError && (
                     <p className="text-xs text-red-400 mt-1">{googleError}</p>
@@ -471,7 +474,7 @@ export default function UseCaseRestaurant({ onContactOpen }: { onContactOpen: ()
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <a
-                href={`https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=${content.closing.ctaMailSubject}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=ceojayraj@ietech.ai&su=${encodeURIComponent(content.closing.ctaMailSubject)}`}
                 className="group relative inline-flex items-center gap-3 overflow-hidden rounded-none bg-black text-white dark:bg-white dark:text-black px-8 py-4  font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:shadow-[0_14px_36px_rgba(250,250,250,0.2)]"
               >
                 <span className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-gradient-to-r from-transparent via-black/10 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, Mail, Phone, Loader2, CheckCircle, ArrowRight } from 'lucide-react';
 import { useGoogleInquiry } from '../hooks/useGoogleInquiry';
+import { leadsConfigured, openLeadEmailDraft } from '../lib/leads';
 import { site } from '../lib/content';
 
 interface ContactModalProps {
@@ -14,6 +15,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     const [phone, setPhone] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [notice, setNotice] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const {
         isLoading: isGoogleLoading,
@@ -45,18 +47,35 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             setPhone('');
         }
         setError('');
+        setNotice('');
         setSubmitted(false);
         setIsLoading(false);
         resetGoogle();
         onClose();
     };
 
+    // If the Firestore write is unavailable (not configured, or the backend is
+    // down), never drop the lead: open a prefilled draft in the visitor's own
+    // mail app instead and tell them what happened.
+    const fallbackToEmailDraft = () => {
+        openLeadEmailDraft({ email, phone });
+        setNotice(
+            'We opened a prefilled email to us in your mail app — press send and we will get back to you within 48 hours.',
+        );
+    };
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setError('');
+        setNotice('');
 
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             setError('Please enter a valid email address.');
+            return;
+        }
+
+        if (!leadsConfigured) {
+            fallbackToEmailDraft();
             return;
         }
 
@@ -72,7 +91,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             setSubmitted(true);
         } catch (err) {
             console.error(err);
-            setError('Something went wrong. Please try again.');
+            fallbackToEmailDraft();
         } finally {
             setIsLoading(false);
         }
@@ -148,7 +167,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                         </div>
                                     </div>
 
-                                    {/* Google button */}
+                                    {/* Google button (only when lead capture is configured) */}
+                                    {leadsConfigured && (
+                                    <>
                                     <button
                                         type="button"
                                         onClick={handleGoogle}
@@ -193,9 +214,11 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                         </span>
                                         <div className="h-px flex-1 bg-neutral-200 dark:bg-white/10" />
                                     </div>
+                                    </>
+                                    )}
 
                                     {/* Form */}
-                                    <form onSubmit={handleSubmit} className="space-y-4">
+                                    <form onSubmit={handleSubmit} className={leadsConfigured ? 'space-y-4' : 'mt-6 space-y-4'}>
                                         {/* Email */}
                                         <div>
                                             <label
@@ -244,6 +267,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                                         {error || googleError ? (
                                             <p className="rounded-sm bg-red-50 px-3 py-2 text-[13px] text-red-600 dark:bg-red-500/10 dark:text-red-400">
                                                 {error || googleError}
+                                            </p>
+                                        ) : null}
+
+                                        {notice ? (
+                                            <p className="rounded-sm bg-emerald-50 px-3 py-2 text-[13px] text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
+                                                {notice}
                                             </p>
                                         ) : null}
 

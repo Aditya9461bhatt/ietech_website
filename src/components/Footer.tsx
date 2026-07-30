@@ -69,6 +69,8 @@ export default function Footer({ onContactOpen }: { onContactOpen?: () => void }
               <div className="flex flex-col gap-3">
                 <a
                   href={`https://mail.google.com/mail/?view=cm&fs=1&to=${contact.email}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 text-xs font-medium text-neutral-400 transition-colors hover:text-white"
                 >
                   <Mail className="h-4 w-4 text-[#3F618C]" />

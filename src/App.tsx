@@ -31,7 +31,7 @@ const ORG_JSONLD = {
   '@type': 'Organization',
   name: SITE_NAME,
   url: `${SITE_URL}/`,
-  logo: `${SITE_URL}/logo.svg`,
+  logo: `${SITE_URL}/logo-512.png`,
   description: DEFAULT_DESCRIPTION,
   contactPoint: [
     { '@type': 'ContactPoint', email: 'ceojayraj@ietech.ai', telephone: '+91-9558525296', contactType: 'sales' },

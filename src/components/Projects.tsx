@@ -62,11 +62,19 @@ export default function Projects() {
                 >
                   {/* Visual Graphic Representation */}
                   <div className="w-full aspect-[4/3] bg-white dark:bg-[#0a0a0a] border-b border-black/10 dark:border-white/10 overflow-hidden relative">
-                    <img loading="lazy" decoding="async"
-                      src={project.image} 
-                      alt={`${project.client} Facility`}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                    {project.image ? (
+                      <img loading="lazy" decoding="async"
+                        src={project.image}
+                        alt={`${project.client} Facility`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full grid place-items-center bg-neutral-100 dark:bg-white/[0.04]">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-neutral-400 dark:text-neutral-600">
+                          {project.client}
+                        </span>
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
                   </div>
 

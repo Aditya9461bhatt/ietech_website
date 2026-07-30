@@ -31,7 +31,7 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
 
   const imageAbs = project.image
     ? (project.image.startsWith('http') ? project.image : `${SITE_URL}${project.image}`)
-    : `${SITE_URL}/logo.svg`;
+    : `${SITE_URL}/og-default.png`;
   const description = (project.content || '')
     .replace(/[#*_>`[\]]/g, '')
     .replace(/\s+/g, ' ')
@@ -47,7 +47,7 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
     publisher: {
       '@type': 'Organization',
       name: 'i.e tech',
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.svg` },
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo-512.png` },
     },
     about: project.industry,
   };
@@ -169,7 +169,13 @@ export default function ProjectDetail({ projectId, onBack }: { projectId: string
                 className="group block border border-neutral-800 bg-black overflow-hidden"
               >
                 <div className="aspect-[4/3] overflow-hidden bg-neutral-900 relative">
-                  <img loading="lazy" decoding="async" src={p.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={p.title} />
+                  {p.image ? (
+                    <img loading="lazy" decoding="async" src={p.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={p.title} />
+                  ) : (
+                    <div className="w-full h-full grid place-items-center">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-neutral-600">{p.client}</span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                 </div>
                 <div className="p-6">

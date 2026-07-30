@@ -144,7 +144,7 @@ export default function Navbar() {
                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F618C] mb-3">{site.navbar.aboutPromo.kicker}</p>
                    <Link to={site.navbar.aboutPromo.href} onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
                      <div className="aspect-[4/3] relative">
-                       <img src="/industry-cad-demo.jpg" alt={site.navbar.aboutPromo.title} className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.45] transition-all duration-700" />
+                       <img src="/manufacturing-erp-demo.png" alt={site.navbar.aboutPromo.title} className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.45] transition-all duration-700" />
                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                        <div className="absolute inset-0 flex flex-col justify-end p-5">
                          <h3 className="text-[15px] font-bold text-white leading-snug mb-1">{site.navbar.aboutPromo.title}</h3>
@@ -212,7 +212,7 @@ export default function Navbar() {
                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#3F618C] mb-3">{site.navbar.servicesPromo.kicker}</p>
                    <Link to={site.navbar.servicesPromo.href} onClick={() => setActiveMenu(null)} className="rounded-sm border border-black/10 dark:border-white/10 overflow-hidden relative group block">
                      <div className="aspect-[4/3] relative">
-                       <img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?q=80&w=1600&auto=format&fit=crop" alt={site.navbar.servicesPromo.title} className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.45] transition-all duration-700" />
+                       <img src="/industry-cad-demo.jpg" alt={site.navbar.servicesPromo.title} className="w-full h-full object-cover brightness-[0.6] group-hover:scale-105 group-hover:brightness-[0.45] transition-all duration-700" />
                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                        <div className="absolute inset-0 flex flex-col justify-end p-5">
                          <h3 className="text-[15px] font-bold text-white leading-snug mb-1">{site.navbar.servicesPromo.title}</h3>
@@ -328,7 +328,7 @@ export default function Navbar() {
                           {contact.phoneDisplay}
                         </a>
                         <a
-                          href={`https://wa.me/${contact.whatsapp}?text=Hi%20${contact.name},%20I'm%20interested%20in%20IETech's%20services.`}
+                          href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(`Hi ${contact.name}, I'm interested in i.e tech's services.`)}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-3 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"

@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
 import { Loader2, CheckCircle } from 'lucide-react';
 import { useGoogleInquiry } from '../hooks/useGoogleInquiry';
+import { useContact } from '../context/ContactContext';
+import { leadsConfigured } from '../lib/leads';
 import { site } from '../lib/content';
 
 export default function Hero() {
+  const { openContact } = useContact();
   const {
     isLoading: isGoogleLoading,
     error: googleError,
@@ -61,8 +64,23 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-12 md:mt-16 flex flex-col items-center justify-center"
         >
-          {/* Google Sign-In CTA */}
-          {!submitted ? (
+          {/* Lead CTA: Google popup when Firebase is configured, contact modal otherwise */}
+          {!leadsConfigured ? (
+            <div className="flex flex-col items-center gap-2 relative">
+              <span className="pointer-events-none absolute inset-0 -z-10 rounded-none bg-black/10 dark:bg-white/10 blur-xl" />
+              <button
+                type="button"
+                onClick={openContact}
+                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-none bg-black text-white dark:bg-white dark:text-black px-7 py-3.5 font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:bg-neutral-800 dark:hover:bg-neutral-200 hover:shadow-[0_14px_36px_rgba(250,250,250,0.2)]"
+              >
+                <span className="pointer-events-none absolute inset-0 -translate-x-[120%] bg-gradient-to-r from-transparent via-black/10 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />
+                <span className="relative">{site.contactModal.heading}</span>
+              </button>
+              <p className="text-xs text-neutral-600 dark:text-neutral-500 mt-3 font-medium">
+                {site.hero.googleNote}
+              </p>
+            </div>
+          ) : !submitted ? (
             <div className="flex flex-col items-center gap-2 relative">
               <span className="pointer-events-none absolute inset-0 -z-10 rounded-none bg-black/10 dark:bg-white/10 blur-xl" />
               <button

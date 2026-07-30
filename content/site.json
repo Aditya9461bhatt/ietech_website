@@ -413,11 +413,11 @@
       }
     ],
     "aboutPromo": {
-      "kicker": "Featured Case Study",
-      "title": "How We Digitised a Steel Manufacturing Plant",
-      "description": "End-to-end ERP automation deployed on the shop floor.",
-      "linkText": "View our case studies",
-      "href": "/projects"
+      "kicker": "Our Platform",
+      "title": "AI ERP, Configured Around Your Plant",
+      "description": "Planning, production, stores, and dispatch — one connected system on your shop floor.",
+      "linkText": "See the manufacturing ERP",
+      "href": "/use-cases/manufacturing"
     },
     "servicesPromo": {
       "kicker": "Latest from the Blog",
