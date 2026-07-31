@@ -24,7 +24,10 @@ let dbInstance: Firestore | undefined;
 if (isFirebaseConfigured) {
   app = initializeApp(firebaseConfig);
   authInstance = getAuth(app);
-  dbInstance = getFirestore(app);
+  // This project's Firestore is the NAMED database "default" (Enterprise
+  // edition, freeTier: true) — the implicit "(default)" database does not
+  // exist, and targeting it surfaces as a bogus "requires billing" error.
+  dbInstance = getFirestore(app, 'default');
   // Local sandbox: `VITE_FIREBASE_EMULATOR=true npm run dev` after
   // `firebase emulators:start` — dev-only, never active in production builds.
   if (import.meta.env.DEV && import.meta.env.VITE_FIREBASE_EMULATOR === 'true') {
