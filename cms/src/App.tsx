@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import PostList from './PostList';
 import SiteTextEditor from './SiteTextEditor';
+import CardsPanel from './CardsPanel';
 import PublishPanel from './PublishPanel';
 
 export type PostType = 'blogs' | 'case-studies';
-type Tab = 'blogs' | 'case-studies' | 'site' | 'publish';
+type Tab = 'blogs' | 'case-studies' | 'site' | 'cards' | 'publish';
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'blogs', label: 'Blogs' },
   { key: 'case-studies', label: 'Case Studies' },
   { key: 'site', label: 'Website Text' },
+  { key: 'cards', label: 'Business Cards' },
   { key: 'publish', label: 'Publish' },
 ];
 
@@ -66,6 +68,7 @@ export default function App() {
         {tab === 'blogs' && <PostList type="blogs" onChanged={refreshStatus} />}
         {tab === 'case-studies' && <PostList type="case-studies" onChanged={refreshStatus} />}
         {tab === 'site' && <SiteTextEditor onChanged={refreshStatus} />}
+        {tab === 'cards' && <CardsPanel onChanged={refreshStatus} />}
         {tab === 'publish' && <PublishPanel />}
       </main>
     </div>

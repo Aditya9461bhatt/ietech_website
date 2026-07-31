@@ -4,3 +4,12 @@
 # Legacy business-card URLs (misspelling used on old printed/shared links).
 /buisnesscard /businesscard/ 301
 /buisnesscard/* /businesscard/:splat 301
+
+# --- vcard-shortcuts (managed by the CMS Business Cards panel — do not edit by hand) ---
+/businesscard_aditya /businesscard/contacts/aditya.vcf 302
+/buisnesscard_aditya /businesscard/contacts/aditya.vcf 302
+/businesscard_jayraj /businesscard/contacts/jayraj.vcf 302
+/buisnesscard_jayraj /businesscard/contacts/jayraj.vcf 302
+/businesscard_rishi /businesscard/contacts/rishi.vcf 302
+/buisnesscard_rishi /businesscard/contacts/rishi.vcf 302
+# --- end vcard-shortcuts ---
