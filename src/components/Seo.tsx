@@ -12,6 +12,9 @@ interface SeoProps {
   path: string;
   image?: string;
   type?: 'website' | 'article';
+  /** ISO 8601 dates for article social metadata. */
+  datePublished?: string;
+  dateModified?: string;
   /** Optional JSON-LD object injected as <script type="application/ld+json">. */
   jsonLd?: Record<string, unknown>;
   /** Set true on pages that must never be indexed (e.g. admin). */
@@ -34,6 +37,8 @@ export default function Seo({
   path,
   image = DEFAULT_IMAGE,
   type = 'website',
+  datePublished,
+  dateModified,
   jsonLd,
   noindex = false,
 }: SeoProps) {
@@ -57,6 +62,8 @@ export default function Seo({
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={image} />
+      {type === 'article' && datePublished && <meta property="article:published_time" content={datePublished} />}
+      {type === 'article' && dateModified && <meta property="article:modified_time" content={dateModified} />}
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />

@@ -32,25 +32,34 @@ export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
   const imageAbs = post.image
     ? (post.image.startsWith('http') ? post.image : `${SITE_URL}${post.image}`)
     : `${SITE_URL}/og-default.png`;
-  const description = (post.content || '')
+  const description = post.excerpt || (post.content || '')
     .replace(/[#*_>`[\]]/g, '')
     .replace(/\s+/g, ' ')
     .trim()
     .slice(0, 155) || `${post.title} — insights from i.e tech.`;
+  const publishedAt = post.dateISO || new Date(post.date).toISOString();
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
-    image: imageAbs,
-    datePublished: post.date,
+    description,
+    image: [imageAbs],
+    datePublished: publishedAt,
+    dateModified: publishedAt,
     articleSection: post.category,
-    author: { '@type': post.authorName ? 'Person' : 'Organization', name: post.authorName || 'i.e tech' },
+    inLanguage: 'en',
+    author: {
+      '@type': post.authorName ? 'Person' : 'Organization',
+      name: post.authorName || 'i.e tech',
+      ...(post.authorUrl ? { url: post.authorUrl, sameAs: [post.authorUrl] } : {}),
+    },
     publisher: {
       '@type': 'Organization',
       name: 'i.e tech',
       logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo-512.png` },
     },
-    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}` },
+    ...(post.originalUrl ? { isBasedOn: post.originalUrl } : {}),
   };
 
   return (
@@ -61,6 +70,8 @@ export default function BlogDetail({ slug, onBack }: BlogDetailProps) {
         description={description}
         image={imageAbs}
         type="article"
+        datePublished={publishedAt}
+        dateModified={publishedAt}
         jsonLd={jsonLd}
       />
       {/* Navbar spacer */}

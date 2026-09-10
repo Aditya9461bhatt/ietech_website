@@ -7,6 +7,8 @@ excerpt: "Why i.e. Quotient exists: the engineering reasoning behind faster, mor
 image: /uploads/quotient-manufacturing-drawing.png
 authorName: Jayraj Parmar
 authorEmail: ceojayraj@ietech.ai
+authorUrl: https://medium.com/@ceojayraj
+originalUrl: https://medium.com/@ceojayraj/why-does-it-still-take-an-engineer-hours-to-quote-a-manufacturing-drawing-35ec444d828d
 status: published
 ---
 

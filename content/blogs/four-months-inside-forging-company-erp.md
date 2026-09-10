@@ -7,6 +7,8 @@ excerpt: What implementing ERP at Tirupati Forge taught us about adoption, stock
 image: /uploads/forging-erp-implementation.png
 authorName: Jayraj Parmar
 authorEmail: ceojayraj@ietech.ai
+authorUrl: https://medium.com/@ceojayraj
+originalUrl: https://medium.com/@ceojayraj/four-months-inside-a-forging-company-changed-how-i-think-about-erp-0417aa8893c6
 status: published
 ---
 

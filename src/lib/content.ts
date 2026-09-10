@@ -164,6 +164,8 @@ export interface Post {
   image?: string;
   authorName?: string;
   authorEmail?: string;
+  authorUrl?: string;
+  originalUrl?: string;
   client?: string;
   industry?: string;
   shortDescription?: string;
@@ -207,6 +209,8 @@ function loadPosts(files: Record<string, string>): Post[] {
       image: meta.image,
       authorName: meta.authorName,
       authorEmail: meta.authorEmail,
+      authorUrl: meta.authorUrl,
+      originalUrl: meta.originalUrl,
       client: meta.client,
       industry: meta.industry,
       shortDescription: meta.shortDescription,
